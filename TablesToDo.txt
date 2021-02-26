@@ -1,0 +1,114 @@
+Les tables:
+
+
+- Info_client:
+
+Id clé primaire AUTO INC
+Nom VARCHAR 80
+Prénom VARCHAR 80
+Date de naissance DATE
+Id_Adresse  INT 
+Mail VARCHAR 255
+Tel INT
+===>Info_client.id = Connexion_User.id
+
+
+
+- Connexion_User:
+Id clé primaire AUTO INC
+Login VARCHAR 255
+Password VARCHAR 255
+===>Info_client.Id = Connexion_User.Id
+
+
+
+- Adresse:
+Id clé primaire AUTO INC
+Adresse 1 VARCHAR 255
+Code postal INT 
+Ville TXT
+Adresse 2 VARCHAR 255
+Ville TXT 
+===>Info_client.Id_Adresse = Adresse.Id
+
+
+
+- Catégories:
+Id clé primaire AUTO INC
+Nom VARCHAR 255
+
+
+
+- Sous_Catégories:
+Id clé primaire AUTO INC
+Nom VARCHAR 255
+Id_Catégorie INT
+===>Sous_Catégories.Id_Catégorie = Catégories.id
+
+
+
+- FAQ:
+Id clé primaire AUTO INC
+Id_utilisateurQ INT
+Question VARCHAR 255
+DateQ TIMESTAMP
+Id_utilisateurR INT
+Réponse VARCHAR 255
+DateR  TIMESTAMP
+===>Id_utilisateurQ = Info_client.id
+===>Id_utilisateurR = Info_client.id
+
+
+
+- Produits:
+Id clé primaire AUTO INC
+Nom VARCHAR 255
+Prix INT
+Description TEXT
+Id_Catégorie INT
+ID_Sous_catégorie
+Stock INT
+Dimensions??? Poids???? INT 
+Images #######????? 
+
+
+
+- Commentaires:
+Id clé primaire AUTO INC
+Commentaire
+Date
+Id_utilisateur
+Id_produits
+Note (ETOILES)####  Optionnel
+===>Commentaires.Id = Id_produits
+
+
+
+- Historique_achat:
+Id clé primaire AUTO INC
+Id_utilisateur
+Id_produits
+Quantités
+Total
+
+
+
+- Code Promo:
+Id clé primaire AUTO INC
+Code VARCHAR 50
+Valeur code VARCHAR 25
+==>Si code promo entrée et code promo en Bdd MATCH 
+dans ce cas application du code promo et modification de la valeur TOTAL du panier 
+
+
+
+
+
+
+
+
+
+
+
+
+
