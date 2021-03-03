@@ -9,11 +9,10 @@ class modprofil extends bdd{
             $id = $_SESSION['user']['id'];
             $log = $_SESSION['user']['login'];
             $con = $this->connectDb();
-            $stmt = $con->prepare("SELECT * FROM utilisateurs WHERE login = :log ");
+            $stmt = $con->prepare("SELECT * FROM info_client WHERE login = :log ");
             $stmt->bindValue('log', $log, PDO::PARAM_STR);
             $stmt->execute();
             $fetch = $stmt->fetch(PDO::FETCH_ASSOC);
-            $userName = htmlspecialchars($_POST['username']);
             $login = htmlspecialchars($_POST['login']);
             $mdp = htmlspecialchars($_POST['password']);
             $conf =  htmlspecialchars($_POST['confpass']);
@@ -21,17 +20,8 @@ class modprofil extends bdd{
             $options = ['cost' => 12,];
             $hash = password_hash($mdp, PASSWORD_BCRYPT, $options);
 
-            if (isset($_POST['username']) && !empty($_POST['username'])){
-                $sql = $con->prepare("UPDATE utilisateurs SET username= :userName WHERE id = :id ");
-                $sql->bindValue('userName', $userName, PDO::PARAM_STR);
-                $sql->bindValue('id', $id, PDO::PARAM_INT);
-                $sql->execute();
-                $_SESSION['username'] = $userName;
-                echo '<br /><p class="modif_profil"> Nom d\'utilisateur modifié </p>';
-            }
-
             if (isset($_POST['login']) && !empty($_POST['login'])) {
-                $sql = $con->prepare("UPDATE utilisateurs SET login= :login WHERE id = :id ");
+                $sql = $con->prepare("UPDATE info_client SET login= :login WHERE id = :id ");
                 $sql->bindValue('login', $login, PDO::PARAM_STR);
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
@@ -43,7 +33,7 @@ class modprofil extends bdd{
                 return false;
             } elseif (isset($_POST['password']) || isset($_POST['confpass']) && !empty($_POST['password']) && !empty($_POST['confpass'])) {
 
-                $sql = $con->prepare("UPDATE utilisateurs SET password= :hash WHERE id = :id ");
+                $sql = $con->prepare("UPDATE info_client SET password= :hash WHERE id = :id ");
                 $sql->bindValue('hash', $hash, PDO::PARAM_STR);
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
@@ -53,7 +43,7 @@ class modprofil extends bdd{
             }
             if(isset($_POST['email']) && !empty($_POST['email'])){
 
-                $sql = $con->prepare("UPDATE utilisateurs SET email= :email WHERE id = :id ");
+                $sql = $con->prepare("UPDATE info_client SET email= :email WHERE id = :id ");
                 $sql->bindValue('email', $email, PDO::PARAM_STR);
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
