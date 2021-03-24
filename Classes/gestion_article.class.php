@@ -59,13 +59,21 @@ class GestionProduit extends bdd{
         $req->bindValue("fileSize", $fileSize, PDO::PARAM_INT);
         $req->bindValue("fileType", $fileType, PDO::PARAM_STR);
         $req->bindValue("fileTmpName", $fileTmpName, PDO::PARAM_LOB);
-
         $req->execute();
+    }
+
+    public function viewAllProduits()
+    {
+        $con = $this->connectDb();
+        $request = $con->prepare("SELECT * FROM produits");
+        $request->execute();
+        $result = $request -> fetchAll(PDO::FETCH_ASSOC);
+
+        foreach($result as $resultat){
+            echo '<img src="data:image/jpg;base64{'.$resultat['bin_image_produit'].'}" />';
+        }
 
 
-        // , 
-        // , ?, ?, ?, ?
-        // 
     }
 
 }

@@ -20,7 +20,7 @@ $pageGestion = new GestionProduit;
         <p>Prix de vente :</p>
             <input type="text" name="prix_produit" placeholder="Prix du Produit"><br />
         <p>Description du produit :</p>
-            <input type="textarea" name="description_produit" placeholder="Décrivez le Produit"><br /><br />
+            <textarea name="description_produit" placeholder="Décrivez le Produit" rows="4" cols="50"></textarea><br /><br />
             <!-- CREER LISTE DEROULANTE POUR CHOISIR LA CATEGORIE ET SOUS CATEGORIE DU PRODUIT -->
             <label>Catégorie du produit :</label><br /><br />
             <select name="Categorie">
@@ -41,6 +41,8 @@ $pageGestion = new GestionProduit;
         $pageGestion->ajoutProduitBdd();
     }
     ?>
+
+    <?php $pageGestion->viewAllProduits();?>
     </main>
 </body>
 </html>

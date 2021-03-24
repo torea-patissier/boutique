@@ -7,7 +7,7 @@
 <---Déploiement sur PLESK--->
 
 
-CATEGORIES:
+CATEGORIES: !!!!!!FAIT!!!!!!!
 
 Tondeuse
 
@@ -17,7 +17,7 @@ Barber growth roller
 
 ----
 
-SOUS-CATEGORIES:
+SOUS-CATEGORIES: !!!!!!!!FAIT!!!!!!!
 
 Tondeuse:
 Pièces détachés
@@ -41,7 +41,7 @@ Trouve quelque chose selon le mot clé entrée et selon les ########
 
 ----
 
-- Contact:
+- Contact: 
 Adresse
 Mail
 Tel
@@ -54,7 +54,7 @@ TEXTE HISTOIRE DE LA PETITE BOUTIQUE
 
 ----
 
-- FAQ:
+- FAQ: !!!!!EN COURS!!!!!
 Formulaire pour poser une question contenant aussi la réponse
 
 ----
@@ -66,6 +66,7 @@ Afficher TOUS LES PRODUITS EXISTANTS PAR ORDRE DECROISSANT
 ----
 
 - Produit:
+
 Nom
 Image (intégrer une image en Bdd selon le format jpg, png etc)
 Prix
@@ -76,6 +77,7 @@ Contient un formulaire qui permet d'ajouter un commentaire
 ----
 
 - Admin:
+
 Gestion des produits avec Back Office
 Gestion des utilisateurs
 Gestion des codes promos #Optionnel
@@ -85,7 +87,8 @@ Gestion des catégories / Sous catégories
 
 Coté client:
 
-- Inscription:
+- Inscription: !!!!!OKKKK!!!!!!
+
 Nom
 Prénom
 Date de naissance
@@ -100,15 +103,16 @@ Captcha
 
 ----
 
-- Connexion:
-Login
+- Connexion: !!!!!OKKK!!!!!!!
+
+Login 
 Password (Restriction MDP REGEX)
 MDP oublié -> #Si on à le temps           Envoi d'un nouveau mot de passe par Email 
 ====> Vous n'avez pas de compte ==> Redirection Inscription
 
 ----
 
-- Profil:
+- Profil: !!!!!!A TERMINER!!!!!!
 Modification des infos de l'utilisateur en Bdd
 Historique des commandes passés par l'utilisateur
 Adresse de livraison/Facturation
