@@ -6,7 +6,7 @@
 
 <---Déploiement sur PLESK--->
 
-
+////////////////////////OK///////////////////////
 CATEGORIES:
 
 Tondeuse
@@ -16,7 +16,7 @@ Crèmes
 Barber growth roller
 
 ----
-
+////////////////////////OK///////////////////////
 SOUS-CATEGORIES:
 
 Tondeuse:
@@ -84,7 +84,7 @@ Gestion des catégories / Sous catégories
 ----
 
 Coté client:
-
+////////////////////////OK///////////////////////
 - Inscription:
 Nom
 Prénom
@@ -99,7 +99,7 @@ Captcha
 ====> Vous avez déjà un compte ==> Redirection Connexion
 
 ----
-
+////////////////////////OK///////////////////////
 - Connexion:
 Login
 Password (Restriction MDP REGEX)
@@ -107,7 +107,7 @@ MDP oublié -> #Si on à le temps           Envoi d'un nouveau mot de passe par 
 ====> Vous n'avez pas de compte ==> Redirection Inscription
 
 ----
-
+////////////////////////OK///////////////////////
 - Profil:
 Modification des infos de l'utilisateur en Bdd
 Historique des commandes passés par l'utilisateur

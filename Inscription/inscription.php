@@ -1,11 +1,10 @@
 <?php 
-    session_start();
-
+session_start();
+require_once('../html_partials/header.php');
 include '../autoloader.php';
 
 $pageInscription = new inscription;
 ?>
-<div class="imgBack">
 <main class="main_inscription">
 <section class="formulaire_inscription">
 <h2 class="h2_inscription">Inscription</h2>
@@ -33,5 +32,5 @@ $pageInscription = new inscription;
         $pageInscription->register();
     }
 ?>
-</div>
 </main>
+<?php require_once('../html_partials/footer.php');?>

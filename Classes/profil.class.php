@@ -36,6 +36,7 @@ class profil extends bdd{
                 $_SESSION['nom'] = $nom;
                 echo '<br/><p class="modif_profil"> Nom modifié </p>';
                 var_dump($nom);
+                header("Refresh:0");
             }
 
 //Modification du Prénom en Bdd

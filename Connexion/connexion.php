@@ -1,5 +1,6 @@
 <?php 
-    session_start();
+session_start();
+require_once('../html_partials/header.php');
 include '../autoloader.php';
 $pageConnexion = new connexion();
 ?>
@@ -22,4 +23,5 @@ $pageConnexion = new connexion();
         $pageConnexion->connect();
         
     }
+    require_once('../html_partials/footer.php');
 ?>

@@ -1,8 +1,11 @@
 <?php
 session_start();
+require_once('../html_partials/header.php');
 include '../autoloader.php';
 $pageProfil = new profil();
+echo'<pre>';
 var_dump($_SESSION['user']);
+echo'</pre>';
 
 ?>
 <div class="imgBack">
@@ -53,3 +56,4 @@ var_dump($_SESSION['user']);
         ?>
 </div>
 </main>
+<?php require_once('../html_partials/header.php');?>
