@@ -43,22 +43,17 @@ class GestionProduit extends bdd{
         $idCategorie = htmlspecialchars($_POST['Categorie']);
         $idSCategorie = htmlspecialchars($_POST['SCategorie']);
         $stockProduit = htmlspecialchars($_POST['stock_produit']);
-        $fileName = $_FILES["img"]["name"];
-        $fileSize = $_FILES["img"]["size"];
-        $fileType = $_FILES["img"]["type"];
-        $fileTmpName = file_get_contents($_FILES["img"]["tmp_name"]);
+        $cheminImg = htmlspecialchars($_POST['cheminImg']);
         $con = $this->connectDb();
-        $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock, nom_image_produit, taille_image_produit, type_image_produit, bin_image_produit) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock, :fileName, :fileSize, :fileType, :fileTmpName)");
+        $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock, chemin_image) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock, :cheminImg)");
         $req->bindValue("nom", $nomProduit, PDO::PARAM_STR);
         $req->bindValue("prix", $prixProduit, PDO::PARAM_STR);
         $req->bindValue("description", $descriptionProduit, PDO::PARAM_STR);
         $req->bindValue("id_categorie", $idCategorie, PDO::PARAM_INT);
         $req->bindValue("id_sous_categorie", $idSCategorie, PDO::PARAM_INT);
         $req->bindValue("stock", $stockProduit, PDO::PARAM_INT);
-        $req->bindValue("fileName", $fileName, PDO::PARAM_STR);
-        $req->bindValue("fileSize", $fileSize, PDO::PARAM_INT);
-        $req->bindValue("fileType", $fileType, PDO::PARAM_STR);
-        $req->bindValue("fileTmpName", $fileTmpName, PDO::PARAM_LOB);
+        $req->bindValue("cheminImg", $cheminImg, PDO::PARAM_STR);
+        
         $req->execute();
     }
 
@@ -68,10 +63,6 @@ class GestionProduit extends bdd{
         $request = $con->prepare("SELECT * FROM produits");
         $request->execute();
         $result = $request -> fetchAll(PDO::FETCH_ASSOC);
-
-        foreach($result as $resultat){
-            echo '<img src="data:image/jpg;base64{'.$resultat['bin_image_produit'].'}" />';
-        }
 
 
     }

@@ -33,16 +33,20 @@ $pageGestion = new GestionProduit;
             </select><br /><br />
         <p>Qtt. Produits en Stock :</p>
             <input type="text" name="stock_produit" placeholder="En stock"><br /><br />
-            <input type="file" name="img"><br /><br />
+        <p>Chemin vers image du produit :</p>
+            <input type="text" name="cheminImg"><br /><br />
             <input type="submit" name="upload" value="Upload">
         </form>
     <!-- //Formulaire pour ajout d'image -->
-    <?php if(isset($_POST["upload"])){
+    <?php 
+        $image = "<img src='../IMG/Crème_Roulette_Cleanser.png'>";
+        echo "img src='../IMG/Crème_Roulette_Cleanser.png'>";
+    
+    if(isset($_POST["upload"])){
         $pageGestion->ajoutProduitBdd();
     }
     ?>
 
-    <?php $pageGestion->viewAllProduits();?>
     </main>
 </body>
 </html>

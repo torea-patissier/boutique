@@ -19,7 +19,7 @@ $pageAdmin = new gestion;
     </header>
     <main>
         <h1> BACK OFFICE ADMIN </h1>
-        <form action="admin.php" method="POST">    
+        <form action="" method="POST">    
             <input type="submit" name="articles" value="Gèrer Articles">
             <input type="submit" name="categories" value="Gèrer Categories">
             <input type="submit" name="utilisateurs" value="Gèrer Users">
@@ -28,20 +28,21 @@ $pageAdmin = new gestion;
 <?php 
 
     if(isset($_POST["articles"])){
-        $pageAdmin -> pageArticles();
+        header('Location: http://localhost/boutique/Gestion_article/gestion_article.php');
     }
 
     if(isset($_POST["categories"])){
-        $pageAdmin -> pageCategories();
+        header('Location: http://localhost/boutique/Gestion_categorie/gestion_categorie.php');
     }
 
     if(isset($_POST["utilisateurs"])){
-        $pageAdmin -> pageUtilisateurs();
+        header('Location: http://localhost/boutique/Gestion_utilisateur/gestion_utilisateur.php');
     }
 
     if(isset($_POST["codes"])){
-        $pageAdmin -> pageCodes();
+        header('Location: http://localhost/boutique/Codes_promo/codes_promo.php');
     }
+
 ?>
     </main>
     <footer>

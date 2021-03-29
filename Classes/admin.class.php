@@ -19,7 +19,7 @@ class gestion extends bdd {
 
     public function pageCodes()
     {
-        Header('Location : http://localhost/boutique/Gestion_code/gestion_code.php');
+        Header('Location : http://localhost/boutique/Codes_promo/codes_promo.php');
     }
 
 }

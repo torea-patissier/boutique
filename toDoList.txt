@@ -76,7 +76,7 @@ Contient un formulaire qui permet d'ajouter un commentaire
 
 ----
 
-- Admin:
+- Admin:  !!!!!!!!!!!!!!!!!!FAIT!!!!!!!!!!!!!!!!!!! MANQUE FACTURES ET COMMANDES PASSEES 
 
 Gestion des produits avec Back Office
 Gestion des utilisateurs
@@ -120,7 +120,8 @@ Consultation du panier
 
 ----
 
-- Page panier:
+- Page panier:!!!!!!!!!!!!!!!!!!!!!!!!!!A TESTER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 Permet de consulter le panier (prix,produits,quantités,total,frais d'expédition)
 Modifier/Supprimer les produits,quantités
 
