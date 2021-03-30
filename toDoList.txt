@@ -36,12 +36,12 @@ Vidéo Youtube explicative sur le produit
 
 ----
 
-- Barre de recherche: 
+- Barre de recherche: OOOOOOOOOKKKKKKKKKKKK
 Trouve quelque chose selon le mot clé entrée et selon les ########
 
 ----
 
-- Contact:
+- Contact:    /////////////////OK////////////////
 Adresse
 Mail
 Tel
@@ -49,12 +49,12 @@ MAP #Si on à le temps
 
 ----
 
-- Qui sommes nous
+- Qui sommes nous !!!!!!!!!!!!!!!RECUPERER LE TEXTE DU CMS SUR PC NUNO !!!!!!!!!!!!!!!!!!!!!!!
 TEXTE HISTOIRE DE LA PETITE BOUTIQUE
 
 ----
 
-- FAQ:
+- FAQ: !!!!!!!!!!!!!OK!!!!!!!!!!!!!!!!!!
 Formulaire pour poser une question contenant aussi la réponse
 
 ----
@@ -75,7 +75,7 @@ Contient un formulaire qui permet d'ajouter un commentaire
 
 ----
 
-- Admin:
+- Admin:  ---------MANQUE FACTURES------------
 Gestion des produits avec Back Office
 Gestion des utilisateurs
 Gestion des codes promos #Optionnel
@@ -116,14 +116,16 @@ Consultation du panier
 
 ----
 
-- Page panier:
+- Page panier: ////////////////A TESTER///////////////////
 Permet de consulter le panier (prix,produits,quantités,total,frais d'expédition)
 Modifier/Supprimer les produits,quantités
 
 ----
 
 - Validation commande:
-Ajout de code promo #Optionnel ===> Dans ce cas recalcul du montant à payer
+
+Ajout de code promo #Optionnel ===> Dans ce cas recalcul du montant à payer ////////////////////////OK///////////////////////
+
 Résumé de la commande
 Détail de la Facturation
 Possibilité d'ajouter une autre adresse d'expédition

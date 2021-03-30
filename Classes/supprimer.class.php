@@ -10,11 +10,10 @@ class supprimer extends bdd{
             
             $id = $_GET['id'];
 
-            $supp = $con->prepare("DELETE FROM adresse WHERE id = :id ");
-            $supp->bindValue('id', $id, PDO::PARAM_INT);
-            $supp->execute();
-            header("Refresh: 0;url=http://localhost:8888/boutique/adresse/adresse.php");
-
+            $supp00 = $con->prepare("DELETE FROM adresse WHERE id = :id ");
+            $supp00->bindValue('id', $id, PDO::PARAM_INT);
+            $supp00->execute();
+            header('location:http://localhost:8888/boutique/Adresse/adresse.php');
         }
         
     }
@@ -26,10 +25,10 @@ class supprimer extends bdd{
             
             $id = $_GET['id'];
 
-            $supp = $con->prepare("DELETE FROM adresse2 WHERE id2 = :id ");
-            $supp->bindValue('id', $id, PDO::PARAM_INT);
-            $supp->execute();
-            header("Refresh: 0;url=http://localhost:8888/boutique/adresse/adresse.php");
+            $supp11 = $con->prepare("DELETE FROM adresse2 WHERE id2 = :id ");
+            $supp11->bindValue('id', $id, PDO::PARAM_INT);
+            $supp11->execute();
+            header('location:http://localhost:8888/boutique/Adresse/adresse.php');
         }   
     }
 }

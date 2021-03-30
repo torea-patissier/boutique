@@ -38,7 +38,7 @@ echo'</pre>';
                 <input class="zonetxt_profil" type="password" name="confpass" placeholder="Confimation mdp"><br /><br />
 
                 <label>E-mail :</label><br />
-                <input class="zonetxt_profil" type="email" name="email" placeholder=<?= $_SESSION['user']['mail'] ?>><br /><br />
+                <input class="zonetxt_profil" type="email" name="email" placeholder=<?= $_SESSION['user']['email'] ?>><br /><br />
 
                 <input class="button-profil" type="submit" name="modifier"><br /><br />
                 <input class="button-profil2" type="submit" name="deco" value="Déconnexion">

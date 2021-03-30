@@ -3,8 +3,6 @@ require_once('bdd.class.php');
 
 class adresses extends bdd
 {
-
-
     // Afficher le formulaire Adresse principale
 
     public function ShowMainAdresse()
