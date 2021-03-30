@@ -34,7 +34,7 @@ $pageGestion = new GestionProduit;
         <p>Qtt. Produits en Stock :</p>
             <input type="text" name="stock_produit" placeholder="En stock"><br /><br />
         <p>Chemin vers image du produit :</p>
-            <input type="text" name="cheminImg"><br /><br />
+            <input type="file" name="Img"><br /><br />
             <input type="submit" name="upload" value="Upload">
         </form>
     <!-- //Formulaire pour ajout d'image -->

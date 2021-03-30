@@ -43,16 +43,79 @@ class GestionProduit extends bdd{
         $idCategorie = htmlspecialchars($_POST['Categorie']);
         $idSCategorie = htmlspecialchars($_POST['SCategorie']);
         $stockProduit = htmlspecialchars($_POST['stock_produit']);
-        $cheminImg = htmlspecialchars($_POST['cheminImg']);
+        
+        //Traitement de l'image
+        
+        $Img = $_FILES["Img"]["name"];
+        $img_Tmp = $_FILES["Img"]["tmp_name"];
+
+        if(!empty($img_Tmp)){
+
+            $img_Name = explode(".", $Img);
+            $img_Ext = end($img_Name);
+
+            if(in_array(strtolower($img_Ext),array("png", "jpg", "jpeg")) === false){
+
+                echo "L'image insérée doit avoir pour extension : .png, .jpg, .jpeg";
+
+            }else{
+
+                $img_Size = getimagesize($img_Tmp);
+
+                if($img_Size["mime"] == "image/jpeg"){
+
+                    $img_Src = imagecreatefromjpeg($img_Tmp);
+
+                }else if ($img_Size["mime"] == "image/png"){
+
+                    $img_Src = imagecreatefrompng($img_Tmp);
+
+                }else{
+
+                    $img_Src = false;
+                    echo "Veuillez rentrer une image valide";
+                }
+
+                if($img_Src !== false){
+
+                    $img_Width = 200;
+
+                    if($img_Size[0] == $img_Width){
+
+                        $img_Finale = $img_Src;
+
+                    }else{
+
+                        $new_Width[0] = $img_Width;
+
+                        $new_Height[1] = 200;
+
+                        $img_Finale = imagecreatetruecolor($new_Width[0], $new_Height[1]);
+
+                        imagecopyresampled($img_Finale, $img_Src, 0, 0, 0, 0 , $new_Width[0], $new_Height[1], $img_Size[0], $img_Size[1]);
+
+                    }
+
+                    imagejpeg($img_Finale, "../StockageImg/" .$nomProduit. ".jpg");
+                }
+            }
+
+        }else{
+            echo "Veuillez insérer une image à votre Produit.";
+        }
+        
+        //Fin du traitement de l'image
+
+        // <!-- POUR AFFICHER L'IMAGE ON A JUSTE A FAIRE DANS NOTRE BOUCLE D'AFFICHAGE <img src="../StockageImg/php echo $result->nomProduit; .jpg"/>
+
         $con = $this->connectDb();
-        $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock, chemin_image) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock, :cheminImg)");
+        $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock)");
         $req->bindValue("nom", $nomProduit, PDO::PARAM_STR);
         $req->bindValue("prix", $prixProduit, PDO::PARAM_STR);
         $req->bindValue("description", $descriptionProduit, PDO::PARAM_STR);
         $req->bindValue("id_categorie", $idCategorie, PDO::PARAM_INT);
         $req->bindValue("id_sous_categorie", $idSCategorie, PDO::PARAM_INT);
         $req->bindValue("stock", $stockProduit, PDO::PARAM_INT);
-        $req->bindValue("cheminImg", $cheminImg, PDO::PARAM_STR);
         
         $req->execute();
     }
