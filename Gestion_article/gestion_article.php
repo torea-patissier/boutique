@@ -10,6 +10,7 @@ $pageGestion = new GestionProduit;
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css"/>
     <title>Gestion Articles</title>
 </head>
 <body>
@@ -37,11 +38,11 @@ $pageGestion = new GestionProduit;
             <input type="file" name="Img"><br /><br />
             <input type="submit" name="upload" value="Upload">
         </form>
-    <!-- //Formulaire pour ajout d'image -->
+
     <?php 
-        $image = "<img src='../IMG/Crème_Roulette_Cleanser.png'>";
-        echo "img src='../IMG/Crème_Roulette_Cleanser.png'>";
-    
+        $pageGestion-> viewAllProduits();
+
+
     if(isset($_POST["upload"])){
         $pageGestion->ajoutProduitBdd();
     }

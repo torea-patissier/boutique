@@ -78,7 +78,7 @@ class GestionProduit extends bdd{
 
                 if($img_Src !== false){
 
-                    $img_Width = 200;
+                    $img_Width = 1000;
 
                     if($img_Size[0] == $img_Width){
 
@@ -88,15 +88,15 @@ class GestionProduit extends bdd{
 
                         $new_Width[0] = $img_Width;
 
-                        $new_Height[1] = 200;
+                        $new_Height[1] = 1000;
 
                         $img_Finale = imagecreatetruecolor($new_Width[0], $new_Height[1]);
 
-                        imagecopyresampled($img_Finale, $img_Src, 0, 0, 0, 0 , $new_Width[0], $new_Height[1], $img_Size[0], $img_Size[1]);
+                        imagecopyresampled($img_Finale, $img_Src, 0, 0, 0, 0, $new_Width[0], $new_Height[1], $img_Size[0], $img_Size[1]);
 
                     }
 
-                    imagejpeg($img_Finale, "../StockageImg/" .$nomProduit. ".jpg");
+                    imagejpeg($img_Finale, "../StockageImg/" .addslashes($nomProduit). ".jpg");
                 }
             }
 
@@ -125,9 +125,38 @@ class GestionProduit extends bdd{
         $con = $this->connectDb();
         $request = $con->prepare("SELECT * FROM produits");
         $request->execute();
-        $result = $request -> fetchAll(PDO::FETCH_ASSOC);
+        $result = $request -> fetchAll();
 
+        echo "<table><thead>";
+        echo "<th>Image Produit</th>";
+        echo "<th>Id Produit</th>";
+        echo "<th>Nom Produit</th>";
+        echo "<th>Prix Produit</th>";
+        echo "<th>Description Produit</th>";
+        echo "<th>Id Catégorie</th>";
+        echo "<th>Id Sous Catégorie</th>";
+        echo "<th>N° en Stock</th>";
+        echo "</thead><tbody>";
+        foreach($result as $resultat){
+        
+        
+            echo "<tr>";
+            echo "<td><img src='../StockageImg/" . addslashes($resultat['nom']) .".jpg' width='100px' height='100px'/></td>";
+            echo "<td>" . $resultat["id"] . "</td>";
+            echo "<td>" . $resultat["nom"] . "</td>";
+            echo "<td>" . $resultat["prix"] . "</td>";
+            echo "<td>" . $resultat["description"] . "</td>";
+            echo "<td>" . $resultat["id_categorie"] . "</td>";
+            echo "<td>" . $resultat["id_sous_categorie"] . "</td>";
+            echo "<td>" . $resultat["stock"] . "</td>";
+            echo "<td><a href=''>Modifier Prdt.</a></td>";
+            echo "<td><a href=''>Supprimer Prdt.</a></td>";
+            echo "</tr>";
+        }
+        echo "</tbody></table>";
 
     }
 
 }
+
+?>

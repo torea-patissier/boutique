@@ -20,6 +20,7 @@ class ModifUser extends bdd
         echo '<th class="table_admin"> E-MAIL </th>';
         echo '<th class="table_admin"> TEL </th>';
         echo '<th class="table_admin"> ID DROITS </th>';
+        echo '</thead>';
         echo '<tbody>';
         foreach ($result as $value) {
         ?>

@@ -7,6 +7,8 @@ Prix : 15
 
 "<img src='../IMG/Crème_Barbe1/NettoyantRoulette2.png'>"
 
+Accessoires - Nettoyants
+
 ---------------------------------------
 L'activateur
 
@@ -15,6 +17,8 @@ Vilain de nature. Croissance stimulante. Boostez la croissance de la barbe avec 
 Prix: 39
 
 "<img src='../IMG/Crème_Barbe2/Activator_Barbe2.png'>"
+
+Soins - Soins
 
 ------------------------------------------
 Le kit de croissance de la barbe
@@ -25,6 +29,8 @@ Prix: 79
 
 "<img src='../IMG/PackRoulette+Produits/CoffretKitBarbe.png'>"
 
+Kit - Kits
+
 ------------------------------------------
 Le peigne porte-clés
 
@@ -33,6 +39,8 @@ Durable. Indispensable. Pratique comme l'enfer.
 Prix: 12
 
 "<img src='../IMG/PeigneBarbe/PeigneBarbe.png'>"
+
+Acessories - Peigne
 
 -------------------------------------------
 Le rouleau à barbe
@@ -43,22 +51,104 @@ Prix : 49
 
 "<img src='../IMG/Roulette/RouleauBarbe1.png'>"
 
+Accessoire - Rouleau
+
 ------------------------------------
+Les ciseaux à barbe
+
+Avec une technologie de pointe, nous avons créé des ciseaux à barbe qui coupent chaque pointe de cheveux avec une coupe droite évitant les pointes fourchues. 
+
+Prix : 44
 
 "<img src='../IMG/CiseauxBarbe/ciseaux.png'>"
 
+Accessoire - Ciseaux
+
+
+-------------------------------------
+Le Greenkeeper
+
+Combattez la peau sèche, squameuse et irritée. Le Greenkeeper hydrate et apaise votre peau.
+
+Prix : 27
+
 "<img src='../IMG/Greenkeeper/greenkeeper.png'>"
+
+Soins - Soins
+
+-----------------------------------------
+Le héros de la barbe
+
+Hydratant et nourrissant. Le sérum à l'huile de barbe qui donne à toute barbe une apparence plus complète et plus saine.
+
+Prix : 34
 
 "<img src='../IMG/HerosBarbe/herosbarbe.png'>"
 
+Soins -Soins
+
+-----------------------------------------
+Le kit de soin de la barbe
+
+Dans le jeu du soin et du coiffage de la barbe - n'abandonnez pas, engagez-vous! Obtenez la boîte à outils avec tous les produits de soin et de coiffage de la barbe dont vous aurez besoin.
+
+Prix : 67
+
 "<img src='../IMG/KitSoinBarbe/KitSoin.png'>"
+
+Kit - Kit
+
+--------------------------------------------
+L'Offzite
+
+Combattez efficacement les boutons et les poils incarnés tout en faisant pousser la barbe.
+
+Prix : 24
 
 "<img src='../IMG/Offzite/Offzite.png'>"
 
+Soins - Soins
+
+------------------------------------------
+Le régulateur de vitesse
+
+Le baume à barbe parfait pour coiffer et redresser votre barbe frisée et inégale.
+
+Prix : 27
+
 "<img src='../IMG/Regulateurvitesse/regulateur.png'>"
+
+Soins - Soins
+
+--------------------------------------------
+Le sac de vol
+
+Apportez tous vos essentiels pour la barbe avec vous, peu importe où vous allez. 
+
+Prix : 12
 
 "<img src='../IMG/SacVol/sacvol.png'>"
 
+Accessoires - Trousse
+
+-------------------------------------------------
+Le SideKick
+
+Soutenez la croissance de vos cheveux et de votre barbe de l'intérieur avec The SideKick pour votre voyage barbe.
+
+Prix : 33
+
 "<img src='../IMG/Sidekick/sidekick.png'>"
 
+Soins - Soins
+
+----------------------------------------------
+Le Splash de 8h
+
+Un nettoyant pour barbe conçu pour éliminer la saleté et la saleté tout en laissant les huiles naturelles de votre barbe. 
+
+Prix : 24
+
 "<img src='../IMG/Splash/splash.png'>"
+
+Soins - Soins
