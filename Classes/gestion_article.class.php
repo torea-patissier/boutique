@@ -125,7 +125,7 @@ class GestionProduit extends bdd{
         $con = $this->connectDb();
         $request = $con->prepare("SELECT * FROM produits");
         $request->execute();
-        $result = $request -> fetchAll();
+        // $result = $request -> fetchAll();
 
         echo "<table><thead>";
         echo "<th>Image Produit</th>";
@@ -137,26 +137,107 @@ class GestionProduit extends bdd{
         echo "<th>Id Sous Catégorie</th>";
         echo "<th>N° en Stock</th>";
         echo "</thead><tbody>";
-        foreach($result as $resultat){
+        while($r = $request->fetch(PDO::FETCH_OBJ)){
         
         
             echo "<tr>";
-            echo "<td><img src='../StockageImg/" . addslashes($resultat['nom']) .".jpg' width='100px' height='100px'/></td>";
-            echo "<td>" . $resultat["id"] . "</td>";
-            echo "<td>" . $resultat["nom"] . "</td>";
-            echo "<td>" . $resultat["prix"] . "</td>";
-            echo "<td>" . $resultat["description"] . "</td>";
-            echo "<td>" . $resultat["id_categorie"] . "</td>";
-            echo "<td>" . $resultat["id_sous_categorie"] . "</td>";
-            echo "<td>" . $resultat["stock"] . "</td>";
-            echo "<td><a href=''>Modifier Prdt.</a></td>";
-            echo "<td><a href=''>Supprimer Prdt.</a></td>";
+            echo "<td><img src='../StockageImg/" . addslashes($r->nom) .".jpg' width='100px' height='100px'/></td>";
+            echo "<td>" . $r->id . "</td>";
+            echo "<td>" . $r->nom . "</td>";
+            echo "<td>" . $r->prix . "€</td>";
+            echo "<td>" . $r->description . "</td>";
+            echo "<td>" . $r->id_categorie . "</td>";
+            echo "<td>" . $r->id_sous_categorie . "</td>";
+            echo "<td>" . $r->stock . "</td>";
+            echo "<td><a href='?action=modify&amp;id=" . $r->id . "'>Modifier Prdt.</a></td>";
+            echo "<td><a href='?action=delete&amp;id=" . $r->id . "'>Supprimer Prdt.</a></td>";
             echo "</tr>";
         }
         echo "</tbody></table>";
+
+        // Supprimer un article de la Bdd
+        if(isset($_GET['action'])&&($_GET['action']== 'delete')){
+            $id = htmlspecialchars($_GET['id']);
+            $req = $con->prepare("DELETE FROM produits WHERE id = :id ");
+            $req->bindValue("id", $id, PDO::PARAM_INT);
+            $req->execute();
+            // header("Location:http://localhost/boutique/Gestion_article/gestion_article.php");
+
+            //REFRESH / HEADER LOCATION AVEC JAVASCRIPT
+            echo '<script language="Javascript"> document.location.replace("gestion_article.php"); </script>';
+        }
+
+        // Modifier un article en Bdd si on appuie sur le bouton modifier
+        if(isset($_GET['action'])&&($_GET['action']== 'modify')){
+
+            $id = htmlspecialchars($_GET['id']);
+            // Si on appuie sur modifier
+            if(isset($_POST['envoyer'])){
+                
+                $nom = htmlspecialchars(addslashes($_POST['nom']));
+                $description = htmlspecialchars(addslashes($_POST['description']));
+                $prix = htmlspecialchars($_POST['prix']);
+                $id_categorie = htmlspecialchars($_POST['id_categorie']);
+                $id_sous_categorie = htmlspecialchars($_POST['id_sous_categorie']);
+                $stock = htmlspecialchars($_POST['stock']);
+
+                // Requête de modification
+                //UPDATE produits SET nom = 'coco', prix = 10, description = 'Oui', id_categorie = 21, id_sous_categorie = 22, stock = 23, chemin_image = 0 WHERE id = 36
+
+                $update = $con->prepare("UPDATE produits SET nom = :nom, prix = :prix, description = :description, id_categorie = :id_categorie,
+                 id_sous_categorie = :id_sous_categorie, stock = :stock WHERE id = :id ");
+                $update->bindValue("nom", $nom, PDO::PARAM_STR);
+                $update->bindValue("prix", $prix, PDO::PARAM_INT);
+                $update->bindValue("description", $description, PDO::PARAM_STR);
+                $update->bindValue("id_categorie", $id_categorie, PDO::PARAM_INT);
+                $update->bindValue("id_sous_categorie", $id_sous_categorie, PDO::PARAM_INT);
+                $update->bindValue("stock", $stock, PDO::PARAM_INT);
+                $update->bindValue("id", $id, PDO::PARAM_INT);
+                $update->execute();
+                // header("Location:http://localhost/boutique/Gestion_article/gestion_article.php");
+
+                //REFRESH / HEADER LOCATION AVEC JAVASCRIPT
+                echo '<script language="Javascript"> document.location.replace("http://localhost/boutique/Gestion_article/gestion_article.php"); </script>';
+
+
+            }
+            // Afficher le formulaire de modification avec les valeurs de la Bdd en VALUE
+            $select = $con->prepare("SELECT * FROM produits WHERE id = :id ");
+            $select->bindValue("id", $id, PDO::PARAM_INT);
+            $select->execute();
+
+            $data = $select->fetch(PDO::FETCH_OBJ); 
+
+            ?>
+            
+            <form action="" method="post">
+                <label>Titre :</label><br/><br />
+                <input type="text" name="nom" value="<?php echo $data->nom;?>"><br/><br />
+
+                <label>Description :</label><br/><br />
+                <textarea name="description" rows="4" cols="50"><?php echo $data->description;?></textarea><br/><br />
+
+                <label>Prix :</label><br/><br />
+                <input type="text" name="prix" value="<?php echo $data->prix;?>"><br/><br />
+
+                <label>ID Categorie :</label><br/><br />
+                <input type="text" name="id_categorie" value="<?php echo $data->id_categorie;?>"><br/><br />
+
+                <label>ID Sous-catégorie :</label><br/><br />
+                <input type="text" name="id_sous_categorie" value="<?php echo $data->id_sous_categorie;?>"><br/><br />
+
+                <label>Stock :</label><br/><br />
+                <input type="text" name="stock" value="<?php echo $data->stock;?>"><br/><br />
+
+                <input type="submit" name="envoyer" value="Modifier"><br/><br />
+            </form>
+
+        <?php
+        }
 
     }
 
 }
 
 ?>
+
