@@ -3,6 +3,12 @@ session_start();
 require_once('../html_partials/header.php');
 include '../autoloader.php';
 $pageGestionCategorie = new gestion_categorie;
+
+if ($id_droits != 2) {
+    header('location:http://localhost:8888/boutique/index.php');
+    exit();
+}
+
 ?>
     <main>
     <?php 

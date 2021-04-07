@@ -2,21 +2,68 @@
 require_once('../Classes/bdd.class.php');
 class produits extends bdd
 {
-
+    // Montrer les articles stocké en Bdd avec la possibilité d'en selectionner un pour en afficher QU'UN SEUL
     public function showArticles()
     {
         $con = $this->connectDb();
         $request = $con->prepare("SELECT * FROM produits");
         $request->execute();
+        // ICI ON VERRA CE QUE CONTIENT UNE SEUL ARTICLE
+        // Si on appuie sur show
+        if(isset($_GET['show'])){
 
-        while ($r = $request->fetch(PDO::FETCH_OBJ)) {
+            $product = $_GET['show'];             // GET stocké dans une variable
+            $request = $con->prepare("SELECT * FROM produits WHERE nom = '" . $product . "' "); // Requête SQL
+            $request->execute(); // On execute
 
-?>
-            <h2>Nom: <?php echo $r->nom; ?> </h2>
-            <h3>Description: <?php echo $r->description; ?> </h3>
-            <h4>Prix: <?php echo $r->prix; ?>€</h4>
-            <hr>
-        <?php
+            $s = $request->fetch(PDO::FETCH_OBJ);  // Résultat stocké dans la $S
+
+            ?>
+            <img src="../Images/<?php echo $s->nom;?>.jpg"/>
+            <h1>Nom : <?php echo $s->nom;?>  </h1>
+            <h2>Description : <?php echo $s->description;?></h2>
+            <h3> Prix :<?php echo $s->prix;?>€</h3>
+            <h4> Stock :<?php echo $s->stock;?></h4>
+
+            <?php if($s->stock != 0){ // Si le stock == 0 on affiche la rupture de stock
+                    ?> 
+                    <!-- l=titre // q=1 par défaut car on ajoute 1 quantité au panier // p=prix -->
+                    <a href="panier.php?action=ajout&amp;l=<?php echo $s->nom;?>&amp;q=1&amp;p=<?php echo $s->prix;?>">Ajouter au panier</a>
+                    <!-- Dans ce href TOUT doit être collé -->
+                    <hr>
+                    <?php
+                }else{
+                    echo ' <h3> Produit en rupture de stock </h3>';
+                }
+
+        }else{
+            // ICI ON VERRA TOUS LES ARTICLES STOCKE EN BDD
+
+            while ($r = $request->fetch(PDO::FETCH_OBJ)) { // Boucle while pour récup les éléments de produits
+
+                
+                $lenght = 50;// Cette $ pour limiter a 50 caractères le nb de lettres affiché pour la description
+                $description = $r->description; // On stock dans une var 
+                $new_description = substr($description,0,$lenght).'...';
+                $descriptionFinale = wordwrap($new_description,100,'<br />',false); // ICI à chaque 100 caractères on revient à la ligne
+
+            ?>
+                <!-- On récupère l'ID d'un article pour l'ajouter à show -->
+                <a href="?show=<?php echo $r->nom;?>"> <img src="../Images/<?php echo $r->nom;?>.jpg"/></a><br />
+                <a href="?show=<?php echo $r->nom;?>"> <h2><?php echo $r->nom; ?></h2></a>
+                <h4> <?php echo $descriptionFinale; ?> </h4>
+                <h5> <?php echo $r->prix; ?>€</h5>
+                <!-- HREF pour ajouter un produit au panier + redirection sur panier.php IL FAUT PRENDRE EN COMPTE QU'IL N Y A PAS D ESPACE -->
+            
+                <?php if($r->stock != 0){ // Si le stock == 0 on affiche la rupture de stock
+                    ?>
+                    <a href="panier.php?action=ajout&amp;l=<?php echo $r->nom;?>&amp;q=1&amp;p=<?php echo $r->prix;?>">Ajouter au panier</a>
+                    <hr>
+                    <?php
+                }else{
+                    echo ' <h3> Produit en rupture de stock </h3>';
+                }
+            }
         }
     }
 
@@ -29,21 +76,18 @@ class produits extends bdd
         $request->execute();
         ?>
         <div class="sidebar">
-            <h3>Derniers articles :</h3>
+            <h1>Derniers articles :</h1>
             <?php
             while ($r = $request->fetch(PDO::FETCH_OBJ)) {
-                echo $r->nom;
-                echo $r->description;
-                echo $r->prix;
-
             ?>
+                <img src="../Images/<?php echo $r->nom;?>.jpg"/><br />
                 <h2> <?php echo $r->nom; ?> </h2>
                 <h4> <?php echo $r->description; ?> </h4>
-                <h5> <?php echo $r->prix; ?> </h5>
+                <h5> <?php echo $r->prix; ?>€</h5>
             <?php
             } ?>
         </div>
 <?php
-    }
+    } 
 }
 ?>

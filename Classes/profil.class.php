@@ -128,7 +128,7 @@ class profil extends bdd{
     public function Deconnexion()
     {
         session_destroy();
-        header("location:http://localhost:8888/boutique/Connexion/connexion.php");
+        header("location:http://localhost:8888/boutique/index.php");
     }
 
 

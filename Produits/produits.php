@@ -5,6 +5,6 @@ include '../autoloader.php';
 $produits = new produits;
 $produits->showArticles();
 echo'<hr>';
-$produits->newArticles();
+// $produits->newArticles();
 require_once('../html_partials/footer.php');
 ?>

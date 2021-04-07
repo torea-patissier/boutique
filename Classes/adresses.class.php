@@ -133,42 +133,63 @@ class adresses extends bdd
         $req->execute();
         $result = $req->fetchAll();
         foreach ($result as $resultat) {
+
             $id = $resultat['id'];
             $adresse = $resultat['adresse'];
             $code_postal = $resultat['code_postal'];
             $ville = $resultat['ville'];
             // echo $id;
             echo $adresse . ' ' . '<br />' . $code_postal . ' , ' . $ville . '<br />' . '<br />';
+            ?>
+            <td class="table_admin" name="id">
+                <?php echo '<a class="href_admin" href="adresse.php?id=' . $id . '">' . 'Supprimer' . '</a>'; ?>
+            </td>
+            <br /><br /><?php
+        }
+        // Avec le GET_ID on supprime l'adresse de la Bdd
+        if(isset($_GET['id']) AND !empty($_GET['id'])){ 
+
+            $id = $_GET['id'];
+            $supp00 = $con->prepare("DELETE FROM adresse WHERE id = :id ");
+            $supp00->bindValue('id', $id, PDO::PARAM_INT);
+            $supp00->execute();
+            header('location:http://localhost:8888/boutique/Adresse/adresse.php');
+        }
+
+    }
+
+    // Récupérer et afficher une adresse secondaire en Bdd
+
+    public function ShowAndDeleteAdress2()
+    {
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM adresse2 WHERE adresse2.id_client2 =  '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $result = $req->fetchAll();
+
+        foreach ($result as $resultat){
+
+            $id = $resultat['id2'];
+            $adresse = $resultat['adresse2'];
+            $code_postal = $resultat['code_postal2'];
+            $ville = $resultat['ville2'];
+            echo $adresse . ' ' . '<br />' . $code_postal . ' , ' . $ville . '<br />' . '<br />';
+            ?>
+            <td class="table_admin" name="id">
+                <?php echo '<a class="href_admin" href="adresse.php?id=' . $id . '">' . 'Supprimer' . '</a>'; ?>
+            </td>
+            <br /><br /><?php
+        }
+        // Avec le GET_ID on supprime l'adresse de la Bdd
+        if(isset($_GET['id']) AND !empty($_GET['id'])){
+
+            $con = $this->connectDb();                      
+            $id = $_GET['id'];
+            $supp11 = $con->prepare("DELETE FROM adresse2 WHERE id2 = :id ");
+            $supp11->bindValue('id', $id, PDO::PARAM_INT);
+            $supp11->execute();
+            header('location:http://localhost:8888/boutique/Adresse/adresse.php');
+        }   
+    }
+}
 ?>
-            <td class="table_admin" name="id">
-                <?php echo '<a class="href_admin" href="../Supprimer/supprimer.php?id=' . $id . '">' . 'Supprimer' . '</a>'; ?>
-            </td>
-            <br /><br /><?php
-                    }
-                }
-
-                // Récupérer et afficher une adresse secondaire en Bdd
-
-                public function ShowAndDeleteAdress2()
-                {
-                    $con = $this->connectDb();
-                    $req = $con->prepare("SELECT * FROM adresse2 WHERE adresse2.id_client2 =  '" . $_SESSION['user']['id'] . "' ");
-                    $req->execute();
-                    $result = $req->fetchAll();
-
-                    foreach ($result as $resultat) {
-                        $id = $resultat['id2'];
-                        $adresse = $resultat['adresse2'];
-                        $code_postal = $resultat['code_postal2'];
-                        $ville = $resultat['ville2'];
-                        // echo $id;
-                        echo $adresse . ' ' . '<br />' . $code_postal . ' , ' . $ville . '<br />' . '<br />';
-                        ?>
-            <td class="table_admin" name="id">
-                <?php echo '<a class="href_admin" href="../Supprimer/supprimer.php?id=' . $id . '">' . 'Supprimer' . '</a>'; ?>
-            </td>
-            <br /><br /><?php
-                    }
-                }
-            }
-                        ?>

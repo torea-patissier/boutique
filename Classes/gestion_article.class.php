@@ -36,27 +36,95 @@ class gestion_article extends bdd{
         
         }
     }
-    // Ajouter un produit en Bdd
+    // Ajouter un produit en Bdd COMPREND LES IMAGES
     public function ajoutProduitBdd()
     {
-        $nomProduit = htmlspecialchars($_POST['nom_produit']);
-        $prixProduit = htmlspecialchars($_POST['prix_produit']);
-        $descriptionProduit = htmlspecialchars($_POST['description_produit']);
-        $idCategorie = htmlspecialchars($_POST['Categorie']);
-        $idSCategorie = htmlspecialchars($_POST['SCategorie']);
-        $stockProduit = htmlspecialchars($_POST['stock_produit']);
-        $con = $this->connectDb();
-        $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock)");
-        $req->bindValue("nom", $nomProduit, PDO::PARAM_STR);
-        $req->bindValue("prix", $prixProduit, PDO::PARAM_STR);
-        $req->bindValue("description", $descriptionProduit, PDO::PARAM_STR);
-        $req->bindValue("id_categorie", $idCategorie, PDO::PARAM_INT);
-        $req->bindValue("id_sous_categorie", $idSCategorie, PDO::PARAM_INT);
-        $req->bindValue("stock", $stockProduit, PDO::PARAM_INT);
-        
-        $req->execute();
-    
+            $nomProduit = htmlspecialchars($_POST['nom_produit']);
+            $prixProduit = htmlspecialchars($_POST['prix_produit']);
+            $descriptionProduit = htmlspecialchars($_POST['description_produit']);
+            $idCategorie = htmlspecialchars($_POST['Categorie']);
+            $idSCategorie = htmlspecialchars($_POST['SCategorie']);
+            $stockProduit = htmlspecialchars($_POST['stock_produit']);
+            //Insérer une image correspond au nom du produit dans le formulaire
+            $img = $_FILES['img']['name'];
+            // Image temporaire stocké 
+            $img_tmp = $_FILES['img']['tmp_name'];
+
+                if(!empty($img_tmp)){
+
+                    $con = $this->connectDb();
+                    $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock)");
+                    $req->bindValue("nom", $nomProduit, PDO::PARAM_STR);
+                    $req->bindValue("prix", $prixProduit, PDO::PARAM_STR);
+                    $req->bindValue("description", $descriptionProduit, PDO::PARAM_STR);
+                    $req->bindValue("id_categorie", $idCategorie, PDO::PARAM_INT);
+                    $req->bindValue("id_sous_categorie", $idSCategorie, PDO::PARAM_INT);
+                    $req->bindValue("stock", $stockProduit, PDO::PARAM_INT);
+                    $req->execute();
+                    //Crée un array avec $image[0] et $img[1] l'extension
+                    $image = explode('.',$img); 
+                    //Extension
+                    $image_ext = end($image);
+
+
+                    if(in_array(strtolower($image_ext),array('png','jpg','jpeg'))===false){
+                        echo 'Veuillez rentrer une image au format png, jpg, jpeg';
+                    }else{
+                        $image_size = getimagesize($img_tmp);
+                        // Le print_r renvoi Array ( [0] => 2400 [1] => 1600 [2] => 2 [3] => width="2400" height="1600" [bits] => 8 [channels] => 3 [mime] => image/jpeg )
+                        // print_r($image_size);
+
+                        // Si l'image est au format JPG ou JPEG
+                        if($image_size['mime'] == 'image/jpeg'){
+                            // On attribut à la $image_src le format JPEG
+                            $image_src = imagecreatefromjpeg($img_tmp);
+
+                        // Si l'image est au format PNG
+                        }elseif($image_size['mime'] == 'image/png'){
+
+                            // On attribut à la $image_src le format PNG
+                            $image_src = imagecreatefrompng($img_tmp);
+
+                        }else{
+                            // Si c'est un autre format on renvoi false;
+                            $image_src = false;
+                            echo'Veuillez rentrer une image valide';
+
+                        }
+
+                        // Redimension de l'image en 400x400
+                        if($image_src !== false){
+
+                            $image_width = 400;
+
+                            if($image_size[0] == $image_width){
+
+                                $image_finale = $image_src;
+
+                            }else{
+
+                                $new_width[0] = $image_width;
+
+                                $new_height[1] = 400;
+
+                                $image_finale = imagecreatetruecolor($new_width[0],$new_height[1]);
+
+                                imagecopyresampled($image_finale,$image_src,0,0,0,0,$new_width[0],$new_height[1],$image_size[0],$image_size[1]);
+                            }
+                        }
+                        imagejpeg($image_finale,'../Images/' . $nomProduit . '.jpg');
+
+                    }
+                
+                }else{
+
+                    echo 'Veuillez rentrer une image <br /> <br />';
+                    return false;
+                }
+
+
     }
+
     // Pour voir/ modifier/ supprimer un article en Bdd
     public function viewModifyDeleteArticle()
     {
@@ -82,8 +150,10 @@ class gestion_article extends bdd{
             $id = $_GET['id'];
             $req = $con->prepare("DELETE FROM produits WHERE id = '". $id ."' ");
             $req->execute();
-            header("location:gestion_article.php");
+            header("Location://localhost:8888/boutique/Gestion_article/gestion_article.php");
         }
+
+
         // Modifier un article en Bdd si on appuie sur le bouton modifier
         if(isset($_GET['action'])&&($_GET['action']== 'modify')){
 
@@ -107,6 +177,8 @@ class gestion_article extends bdd{
 
 
             }
+
+            
             // Afficher le formulaire de modification avec les valeurs de la Bdd en VALUE
             $select = $con->prepare("SELECT * FROM produits WHERE id = '" . $id . "' ");
             $select->execute();
