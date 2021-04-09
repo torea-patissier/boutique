@@ -1,8 +1,39 @@
+
+
+
+
+main{
+    text-align: center;
+}
+
+
 table {
     border-collapse: collapse;
     border: 2px solid black;
     }
-   td { 
+
+td { 
     border: 2px solid black;
     text-align: center;
     }
+ 
+.lastProducts{
+    text-align: center;
+    padding-top: 2cm;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 2cm;
+    padding-right: 2cm;
+}
+
+.h1Index{
+    padding-top: 2cm;
+    text-align: center;
+}
+
+.noLignes{
+    text-decoration: none;
+    color: black;
+}
+

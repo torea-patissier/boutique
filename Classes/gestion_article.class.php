@@ -149,12 +149,11 @@ class GestionProduit extends bdd{
             echo "<td>" . $r->id_categorie . "</td>";
             echo "<td>" . $r->id_sous_categorie . "</td>";
             echo "<td>" . $r->stock . "</td>";
-            echo "<td><a href='?action=modify&amp;id=" . $r->id . "'>Modifier Prdt.</a></td>";
+            echo "<td><a href='?show=" . $r->id . "'>Modifier Prdt.</a></td>";
             echo "<td><a href='?action=delete&amp;id=" . $r->id . "'>Supprimer Prdt.</a></td>";
             echo "</tr>";
         }
         echo "</tbody></table>";
-
         // Supprimer un article de la Bdd
         if(isset($_GET['action'])&&($_GET['action']== 'delete')){
             $id = htmlspecialchars($_GET['id']);
@@ -166,14 +165,51 @@ class GestionProduit extends bdd{
             //REFRESH / HEADER LOCATION AVEC JAVASCRIPT
             echo '<script language="Javascript"> document.location.replace("gestion_article.php"); </script>';
         }
+        
 
-        // Modifier un article en Bdd si on appuie sur le bouton modifier
-        if(isset($_GET['action'])&&($_GET['action']== 'modify')){
+    }
 
-            $id = htmlspecialchars($_GET['id']);
+    public function ModifierProduit()
+    {   
+            $id = $_GET["show"];
+            $con = $this->connectDb();
+            $product = htmlspecialchars($_GET['show']);
+            $request = $con->prepare("SELECT * FROM produits WHERE id = :id"); // Requête SQL
+            $request->bindValue("id", $id, PDO::PARAM_INT);
+            $request->execute(); // On execute
+
+            $s = $request->fetch(PDO::FETCH_OBJ);  // Résultat stocké dans la $S
+
+            ?>
+
+            <img src="../StockageImg/<?php echo $s->nom;?>.jpg"/>
+            <form id='modifierArticle' action="" method="post">
+                <label>Titre :</label><br/><br />
+                <input type="text" name="nom" value="<?php echo $s->nom;?>"><br/><br />
+
+                <label>Description :</label><br/><br />
+                <textarea name="description" rows="4" cols="50"><?php echo $s->description;?></textarea><br/><br />
+
+                <label>Prix :</label><br/><br />
+                <input type="text" name="prix" value="<?php echo $s->prix;?>"><br/><br />
+
+                <label>ID Categorie :</label><br/><br />
+                <input type="text" name="id_categorie" value="<?php echo $s->id_categorie;?>"><br/><br />
+
+                <label>ID Sous-catégorie :</label><br/><br />
+                <input type="text" name="id_sous_categorie" value="<?php echo $s->id_sous_categorie;?>"><br/><br />
+
+                <label>Stock :</label><br/><br />
+                <input type="text" name="stock" value="<?php echo $s->stock;?>"><br/><br />
+
+                <input type="submit" name="envoyer" value="Modifier"><br/><br />
+            </form>
+
+            <?php
             // Si on appuie sur modifier
             if(isset($_POST['envoyer'])){
                 
+
                 $nom = htmlspecialchars(addslashes($_POST['nom']));
                 $description = htmlspecialchars(addslashes($_POST['description']));
                 $prix = htmlspecialchars($_POST['prix']);
@@ -197,44 +233,14 @@ class GestionProduit extends bdd{
                 // header("Location:http://localhost/boutique/Gestion_article/gestion_article.php");
 
                 //REFRESH / HEADER LOCATION AVEC JAVASCRIPT
+                $pageGestion = new GestionProduit;
                 echo '<script language="Javascript"> document.location.replace("http://localhost/boutique/Gestion_article/gestion_article.php"); </script>';
+                $pageGestion -> viewAllProduits();
+
+
 
 
             }
-            // Afficher le formulaire de modification avec les valeurs de la Bdd en VALUE
-            $select = $con->prepare("SELECT * FROM produits WHERE id = :id ");
-            $select->bindValue("id", $id, PDO::PARAM_INT);
-            $select->execute();
-
-            $data = $select->fetch(PDO::FETCH_OBJ); 
-
-            ?>
-            
-            <form action="" method="post">
-                <label>Titre :</label><br/><br />
-                <input type="text" name="nom" value="<?php echo $data->nom;?>"><br/><br />
-
-                <label>Description :</label><br/><br />
-                <textarea name="description" rows="4" cols="50"><?php echo $data->description;?></textarea><br/><br />
-
-                <label>Prix :</label><br/><br />
-                <input type="text" name="prix" value="<?php echo $data->prix;?>"><br/><br />
-
-                <label>ID Categorie :</label><br/><br />
-                <input type="text" name="id_categorie" value="<?php echo $data->id_categorie;?>"><br/><br />
-
-                <label>ID Sous-catégorie :</label><br/><br />
-                <input type="text" name="id_sous_categorie" value="<?php echo $data->id_sous_categorie;?>"><br/><br />
-
-                <label>Stock :</label><br/><br />
-                <input type="text" name="stock" value="<?php echo $data->stock;?>"><br/><br />
-
-                <input type="submit" name="envoyer" value="Modifier"><br/><br />
-            </form>
-
-        <?php
-        }
-
     }
 
 }

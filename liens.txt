@@ -7,7 +7,7 @@ Prix : 15
 
 "<img src='../IMG/Crème_Barbe1/NettoyantRoulette2.png'>"
 
-Accessoires - Nettoyants
+Accessoires 11 - Nettoyants 14
 
 ---------------------------------------
 L'activateur
@@ -18,7 +18,7 @@ Prix: 39
 
 "<img src='../IMG/Crème_Barbe2/Activator_Barbe2.png'>"
 
-Soins - Soins
+Soins 10 - Soins 13
 
 ------------------------------------------
 Le kit de croissance de la barbe
