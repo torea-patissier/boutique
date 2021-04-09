@@ -3,9 +3,9 @@ require_once('../Classes/panier.class.php');
 ?>
 
 <div id="smart-button-container">
-    <div style="text-align: center"><label for="description"></label><input type="text" name="descriptionInput" id="description" maxlength="127" value="ok"></div>
-      <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description</p>
-    <div style="text-align: center"><label for="amount"></label><input name="amountInput" type="number" id="amount" value="<?php echo montantGlobal();?>" ><span> EUR</span></div>
+    <div style="text-align: center"><label for="description"></label><input type="text" name="descriptionInput" id="description" maxlength="15" placeholder="Entrez votre prénom"></div>
+      <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Veuillez inscrire votre prénom</p>
+    <div style="text-align: center"><label for="amount"></label><input name="amountInput" type="number" id="amount" value="<?php echo montantGlobal();?>" readonly ><span> EUR</span></div>
       <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
     <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input name="invoiceid" maxlength="127" type="text" id="invoiceid" value="" ></div>
       <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID</p>
@@ -13,6 +13,8 @@ require_once('../Classes/panier.class.php');
   </div>
   <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR" data-sdk-integration-source="button-factory"></script>
   <script>
+
+
   function initPayPalButton() {
     var description = document.querySelector('#smart-button-container #description');
     var amount = document.querySelector('#smart-button-container #amount');
@@ -42,7 +44,7 @@ require_once('../Classes/panier.class.php');
         shape: 'rect',
         label: 'paypal',
         layout: 'horizontal',
-        
+
       },
 
       onInit: function (data, actions) {
@@ -65,7 +67,7 @@ require_once('../Classes/panier.class.php');
       },
 
       onClick: function () {
-        if (description.value.length < 1) {
+        if (description.value.length != 'email') {
           descriptionError.style.visibility = "visible";
         } else {
           descriptionError.style.visibility = "hidden";
@@ -108,5 +110,14 @@ require_once('../Classes/panier.class.php');
       }
     }).render('#paypal-button-container');
   }
+
+ var ok = document.getElementById("paypal-button-container").onclick = function() {update()};
+
+function update() {
+  ok.innerHTML = alert('Coucou');
+}
+
+update();
+
   initPayPalButton();
   </script>

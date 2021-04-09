@@ -95,7 +95,7 @@ class gestion_article extends bdd{
                         // Redimension de l'image en 400x400
                         if($image_src !== false){
 
-                            $image_width = 400;
+                            $image_width = 200;
 
                             if($image_size[0] == $image_width){
 
@@ -105,7 +105,7 @@ class gestion_article extends bdd{
 
                                 $new_width[0] = $image_width;
 
-                                $new_height[1] = 400;
+                                $new_height[1] = 200;
 
                                 $image_finale = imagecreatetruecolor($new_width[0],$new_height[1]);
 

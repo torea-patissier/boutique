@@ -85,10 +85,6 @@ class faq extends bdd
         $req2->execute();
         $result1 = $req->fetchAll();
         $result2 = $req2->fetchAll();
-        // echo "<pre>";
-        // var_dump($result1);
-        // var_dump($result2);
-        // echo "</pre>";
 
         foreach ($result2 as $resultat) {
             

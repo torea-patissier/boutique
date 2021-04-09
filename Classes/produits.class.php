@@ -24,15 +24,19 @@ class produits extends bdd
             <h2>Description : <?php echo $s->description;?></h2>
             <h3> Prix :<?php echo $s->prix;?>€</h3>
             <h4> Stock :<?php echo $s->stock;?></h4>
-
-            <?php if($s->stock != 0){ // Si le stock == 0 on affiche la rupture de stock
-                    ?> 
+            
+            <?php
+                
+                if($s->stock > 10){ // Si le stock > 10 on affiche le produit, sinon on affiche la rupture de stock
+            
+                   ?> 
                     <!-- l=titre // q=1 par défaut car on ajoute 1 quantité au panier // p=prix -->
                     <a href="panier.php?action=ajout&amp;l=<?php echo $s->nom;?>&amp;q=1&amp;p=<?php echo $s->prix;?>">Ajouter au panier</a>
                     <!-- Dans ce href TOUT doit être collé -->
                     <hr>
                     <?php
-                }else{
+                    }else{
+                
                     echo ' <h3> Produit en rupture de stock </h3>';
                 }
 
@@ -55,7 +59,7 @@ class produits extends bdd
                 <h5> <?php echo $r->prix; ?>€</h5>
                 <!-- HREF pour ajouter un produit au panier + redirection sur panier.php IL FAUT PRENDRE EN COMPTE QU'IL N Y A PAS D ESPACE -->
             
-                <?php if($r->stock != 0){ // Si le stock == 0 on affiche la rupture de stock
+                <?php if($r->stock > 10){ // Si le stock > 10 on affiche le produit, sinon on affiche la rupture de stock
                     ?>
                     <a href="panier.php?action=ajout&amp;l=<?php echo $r->nom;?>&amp;q=1&amp;p=<?php echo $r->prix;?>">Ajouter au panier</a>
                     <hr>
@@ -87,7 +91,57 @@ class produits extends bdd
             <?php
             } ?>
         </div>
-<?php
+        <?php
     } 
+
+    public function envoyerCommande($nom_article,$qteProduit)
+    {   
+        $con = $this->connectDb();
+
+        $panier = $_SESSION['panier'];
+        $libelleProduit = $_SESSION['panier']['libelleProduit'];
+        $qteProduit = $_SESSION['panier']['qteProduit'];
+        $prixProduit = $_SESSION['panier']['prixProduit'];
+        $id = $_SESSION['user']['id'];
+        echo'<pre>';
+        // var_dump($panier['libelleProduit']);
+        echo'</pre>';
+
+        // foreach($libelleProduit as $x){
+
+        //     $nom_article = $x;
+        //     echo'<pre>';
+        //     var_dump($nom_article);
+        //     echo'</pre>';
+        // }
+
+        // foreach($qteProduit as $y){
+
+        //     $a = $y;     
+        //     echo'<pre>';
+        //     var_dump($a);
+        //     echo'</pre>';                        
+        // }
+
+
+        // for($i = 0; $i <= $panier; $i++){
+
+        //     var_dump($panier[$i]);
+
+        // }
+
+        $req = $con->prepare("INSERT INTO `historique_achat`(id_client, nom_article, quantite) VALUES ('$id','$nom_article', '$qteProduit')");
+        $req->execute();
+    }
+
+    public function insertcommande($id, $nom_article,$qteProduit)
+    {
+        $id = $_SESSION['user']['id'];
+
+
+        $con = $this->connectDb();
+        $req = $con->query("INSERT INTO historique_achat (id_client, nom_article, quantite) VALUE( ?, ?, ?)", [$id, $nom_article,$qteProduit]);
+
+    }
 }
 ?>

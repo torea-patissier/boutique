@@ -31,6 +31,8 @@
             <a class="navlink" href="FAQ/faq.php">FAQ</a>
             <a class="navlink" href="Profil/profil.php">Profil</a>
             <a class="navlink" href="Admin/admin.php">Admin</a>
+            <a class="navlink" href="Produits/panier.php">Panier</a>
+
 
         </nav>
     </header>
@@ -49,6 +51,8 @@
             <a class="navlink" href="Qui_sommes_nous/infos.php">Qui sommes nous</a>
             <a class="navlink" href="FAQ/faq.php">FAQ</a>
             <a class="navlink" href="Profil/profil.php">Profil</a>
+            <a class="navlink" href="Produits/panier.php">Panier</a>
+
         </nav>
     </header>
     <?php }?>

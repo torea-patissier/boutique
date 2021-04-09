@@ -2,14 +2,18 @@
 session_start();
 require_once('../html_partials/header.php');
 require_once('../Classes/panier.class.php');
-echo '<pre>';
-// var_dump($_SESSION['panier']['libelleProduit']);
-// var_dump($_SESSION['panier']['prixProduit']);
-// var_dump($_SESSION['panier']['qteProduit']);
-// var_dump($_SESSION['user']['id']);
-echo '</pre>';
-
+include '../autoloader.php';
+$product = new produits;
 $erreur = false;
+$id = $_SESSION['user']['id'];
+
+echo'<pre>';
+// var_dump($_SESSION['user']);
+// var_dump($_SESSION['panier']);
+// var_dump(date('Y-m-d'));
+$total = montantGlobal();
+// var_dump($total);
+echo'</pre>';
 
 //(?) = alors // (:) = sinon
 // Si $POST action existe alors il devient POST sinon et vice versa pour GET
@@ -123,16 +127,23 @@ if (!$erreur){
                   <td> <?php echo $_SESSION['panier']['libelleProduit'][$i];?> </td><br/>
 
                   <td> <?php echo $_SESSION['panier']['prixProduit'][$i];?>€</td><br/>
-
+                  
+                     <?php if($_SESSION['panier']['qteProduit'][$i] > 10){
+                          $_SESSION['panier']['qteProduit'][$i] = 10;
+                     }
+                     ?>
                   <td> <input name="q[]" value="<?php echo $_SESSION['panier']['qteProduit'][$i];?>"> </td><br/>
 
                   <td> <a href="panier.php?action=suppression&amp;l=<?php echo rawurlencode($_SESSION['panier']['libelleProduit'][$i]);?>">Supprimer</a> </td><br/>
                </tr>
                
                <?php
-               var_dump($_SESSION['panier']['libelleProduit'][$i]);
-               var_dump($_SESSION['panier']['qteProduit'][$i]);
-            }     ?> 
+                  $nom_article =  $_SESSION['panier']['libelleProduit'][$i];
+                  $qteProduit = $_SESSION['panier']['qteProduit'][$i];
+                  // $c = $_SESSION['panier']['prixProduit'][$i];                   
+            }
+
+            ?> 
 
                <tr>
                   <td> <p> Total : <?php echo montantGlobal();?> € </p> </td><br />
@@ -148,7 +159,13 @@ if (!$erreur){
                      <a href="?deletepanier=true">Supprimer le panier</a>
                   </td>
                   <td>
+                     <form action="panier.php" method="post">
+                     <input type="submit" name="envoyerCommande">
+                     
+                        
+                     </form>
                      <a href="../Paiement/paiement.php">Payer</a>
+
                   </td>
                </tr>
             <?php
@@ -160,4 +177,13 @@ if (!$erreur){
 </form>
 </main>
 
-<?php require_once('../html_partials/footer.php'); ?>
+
+<?php
+
+if(isset($_POST['envoyerCommande'])){
+
+   $product->insertcommande($id,$nom_article,$qteProduit);
+
+}
+
+ require_once('../html_partials/footer.php'); ?>

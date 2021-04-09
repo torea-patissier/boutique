@@ -191,5 +191,23 @@ class adresses extends bdd
             header('location:http://localhost:8888/boutique/Adresse/adresse.php');
         }   
     }
+
+    public function voirAdressePrincipal(){
+
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM adresse where id_client = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $resultat = $req->fetchAll();
+
+        foreach($resultat as $res){
+            $adresse = $res['adresse'];
+            $code_postal = $res['code_postal'];
+            $ville = $res['ville'];
+            echo $adresse . '<br />';
+            echo $code_postal . ' ' . $ville . '<br />' . '<br />';
+
+        }
+
+    }
 }
 ?>

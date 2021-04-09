@@ -35,7 +35,9 @@ function ajouterProduit($libelleProduit,$qteProduit,$prixProduit){
          if ($positionProduit !== false)
          {
             // On incrémente la quantité
-            $_SESSION['panier']['qteProduit'][$positionProduit] += $qteProduit ;
+
+               $_SESSION['panier']['qteProduit'][$positionProduit] += $qteProduit ;
+
          }
          else
          {
@@ -61,10 +63,9 @@ function modifierQteProduit($libelleProduit,$qteProduit){
    //Si le panier existe et qu'il n'est pas verrouillé 
    if (creationPanier() && !isVerrouille())
    {
-         //Si la quantité est positive on la  modifie sinon on supprime l'article
          if ($qteProduit > 0 && $qteProduit > 10)
          {
-            echo 'Vous pouvez commander au maximum 10 fois le même article';
+            echo 'Vous pouvez commander au max 10 fois le même article';
 
          }if($qteProduit > 0 && $qteProduit <= 10){
 

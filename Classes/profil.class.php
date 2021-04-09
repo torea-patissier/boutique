@@ -131,6 +131,26 @@ class profil extends bdd{
         header("location:http://localhost:8888/boutique/index.php");
     }
 
+    public function voirInfosProfil()
+    {
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM info_client where id = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $result = $req->fetchAll();
+
+        foreach($result as $resultat){
+            $nom = $resultat['nom'];
+            $prenom = $resultat['prenom'];
+            $date_de_naissance = $resultat['date_de_naissance'];
+            $email = $resultat['email'];
+            $tel = $resultat['tel'];
+            echo 'Mr,Mme : ' . $nom . ' ' . $prenom . '<br />' . '<br />';
+            echo 'Tel : ' . $tel . '<br />' . '<br />';
+            echo 'Email : ' . $tel . '<br />' . '<br />';
+        }
+
+    }
+
 
 
 }
