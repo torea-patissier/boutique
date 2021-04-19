@@ -10,6 +10,7 @@ function creationPanier(){
       $_SESSION['panier']['libelleProduit'] = array();
       $_SESSION['panier']['qteProduit'] = array();
       $_SESSION['panier']['prixProduit'] = array();
+      $_SESSION['panier']['idProduit'] = array();
       $_SESSION['panier']['verrou'] = false;
    }
    return true;
@@ -23,7 +24,7 @@ function creationPanier(){
  * @param float $prixProduit
  * @return void
  */
-function ajouterProduit($libelleProduit,$qteProduit,$prixProduit){
+function ajouterProduit($libelleProduit,$qteProduit,$prixProduit,$idProduit){
 
    //Si le panier existe
    if (creationPanier() && !isVerrouille())
@@ -45,6 +46,7 @@ function ajouterProduit($libelleProduit,$qteProduit,$prixProduit){
             array_push( $_SESSION['panier']['libelleProduit'],$libelleProduit);
             array_push( $_SESSION['panier']['qteProduit'],$qteProduit);
             array_push( $_SESSION['panier']['prixProduit'],$prixProduit);
+            array_push( $_SESSION['panier']['idProduit'],$idProduit);
          }
    }else{
       echo "Un problème est survenu veuillez contacter l'administrateur du site.";
@@ -107,6 +109,7 @@ function supprimerProduit($libelleProduit){
       $tmp['libelleProduit'] = array();
       $tmp['qteProduit'] = array();
       $tmp['prixProduit'] = array();
+      $tmp['idProduit'] = array();
       $tmp['verrou'] = $_SESSION['panier']['verrou'];
 
       for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++)
@@ -116,6 +119,7 @@ function supprimerProduit($libelleProduit){
                array_push($tmp['libelleProduit'],$_SESSION['panier']['libelleProduit'][$i]);
                array_push($tmp['qteProduit'],$_SESSION['panier']['qteProduit'][$i]);
                array_push($tmp['prixProduit'],$_SESSION['panier']['prixProduit'][$i]);
+               array_push($tmp['idProduit'],$_SESSION['panier']['idProduit'][$i]);
             }
       }
       //On remplace le panier en session par notre panier temporaire à jour

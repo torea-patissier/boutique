@@ -31,7 +31,7 @@ class produits extends bdd
             
                    ?> 
                     <!-- l=titre // q=1 par défaut car on ajoute 1 quantité au panier // p=prix -->
-                    <a href="panier.php?action=ajout&amp;l=<?php echo $s->nom;?>&amp;q=1&amp;p=<?php echo $s->prix;?>">Ajouter au panier</a>
+                    <a href="panier.php?action=ajout&amp;l=<?php echo $s->nom;?>&amp;q=1&amp;p=<?php echo $s->prix;?>&amp;i=<?php echo $s->id?>">Ajouter au panier</a>
                     <!-- Dans ce href TOUT doit être collé -->
                     <hr>
                     <?php
@@ -61,7 +61,7 @@ class produits extends bdd
             
                 <?php if($r->stock > 10){ // Si le stock > 10 on affiche le produit, sinon on affiche la rupture de stock
                     ?>
-                    <a href="panier.php?action=ajout&amp;l=<?php echo $r->nom;?>&amp;q=1&amp;p=<?php echo $r->prix;?>">Ajouter au panier</a>
+                    <a href="panier.php?action=ajout&amp;l=<?php echo $r->nom;?>&amp;q=1&amp;p=<?php echo $r->prix;?>&amp;i=<?php echo $r->id?>">Ajouter au panier</a>
                     <hr>
                     <?php
                 }else{
@@ -92,56 +92,80 @@ class produits extends bdd
             } ?>
         </div>
         <?php
-    } 
-
-    public function envoyerCommande($nom_article,$qteProduit)
-    {   
+    }
+    
+    // Fonction pour envoyer la commande en Bdd
+    public function envoyerCommande($rand)
+    { 
         $con = $this->connectDb();
+        $id_client = $_SESSION['user']['id'];
+        $date = date('Y-m-d H:i:s'); 
 
-        $panier = $_SESSION['panier'];
-        $libelleProduit = $_SESSION['panier']['libelleProduit'];
-        $qteProduit = $_SESSION['panier']['qteProduit'];
-        $prixProduit = $_SESSION['panier']['prixProduit'];
-        $id = $_SESSION['user']['id'];
-        echo'<pre>';
-        // var_dump($panier['libelleProduit']);
-        echo'</pre>';
+        // Dans ce foreach on va envoyer l'id de l'article dans l'historique, pour pouvoir récupérer par la suite, nom et prix de l'article
+        foreach($_SESSION['panier']['idProduit'] as $valIdProduit){
 
-        // foreach($libelleProduit as $x){
+            $req = $con->prepare("INSERT INTO commande(id_article, date, n_commande, id_client2) 
+            VALUES ('$valIdProduit','$date','$rand','$id_client')");
+            $req->execute();
 
-        //     $nom_article = $x;
-        //     echo'<pre>';
-        //     var_dump($nom_article);
-        //     echo'</pre>';
-        // }
+        }
+        // Dans celui-ci on va envoyer la quantité, l'id de quantité s'incrémente en  même temps que celui de id_article
+        // On va pouvoir utiliser l'id pour récupérer la quantité et savoir quel quantité == quel article
+        foreach($_SESSION['panier']['qteProduit'] as  $valqteProduit){
+    
+                $req = $con->prepare("INSERT INTO quantite(id_client, quantité, n_commande_qte)
+                VALUES ('$id_client','$valqteProduit','$rand')");
+                $req->execute();
+        }
+        
+    }
+              
+    
+    // Fonction pour envoyer le total de la commande en Bdd
+    public function envoyerTotal($total,$rand){
 
-        // foreach($qteProduit as $y){
-
-        //     $a = $y;     
-        //     echo'<pre>';
-        //     var_dump($a);
-        //     echo'</pre>';                        
-        // }
-
-
-        // for($i = 0; $i <= $panier; $i++){
-
-        //     var_dump($panier[$i]);
-
-        // }
-
-        $req = $con->prepare("INSERT INTO `historique_achat`(id_client, nom_article, quantite) VALUES ('$id','$nom_article', '$qteProduit')");
+        $id_client = $_SESSION['user']['id'];
+        $date = date('Y-m-d H:i:s'); 
+        $con = $this->connectDb();
+        $req = $con->prepare("INSERT INTO total(id_client, total, date, n_commande) VALUES 
+        ('$id_client','$total','$date','$rand')");
         $req->execute();
+
     }
 
-    public function insertcommande($id, $nom_article,$qteProduit)
+    public function afficherCommande()
     {
-        $id = $_SESSION['user']['id'];
-
-
         $con = $this->connectDb();
-        $req = $con->query("INSERT INTO historique_achat (id_client, nom_article, quantite) VALUE( ?, ?, ?)", [$id, $nom_article,$qteProduit]);
 
+        $req = $con->prepare("SELECT * FROM commande INNER JOIN produits INNER JOIN
+        quantite ON commande.id_article = produits.id AND
+        quantite.id2 = commande.id1 WHERE id_client2 = '" . $_SESSION['user']['id'] . "' ");
+        $req0 = $con->prepare("SELECT * FROM total WHERE id_client = '" . $_SESSION['user']['id'] . "' ");
+
+        $req->execute();
+        $req0->execute();
+
+        $x = $req0->fetchAll();
+        $r = $req->fetchAll();
+
+        foreach($x as $resultat0){
+            echo ' <br /> <table> <th> Commandé le ' . ' '  . $resultat0['date'] . ' | <br /> </th> 
+            <th> Réf n º: ' . $resultat0['n_commande'] . ' |</th>';
+            echo '<th>Total : ' . $resultat0['total'] . '€ </th> ';
+            echo '<tr>';
+
+            foreach($r as $resultat){
+                if($resultat['n_commande'] == $resultat0['n_commande']){
+                    echo '<td>' . $resultat['nom'] . ' x ' . $resultat['quantité'] .  '</td>  <br />';
+                    echo ' <td><br />' . $resultat['prix'] .  '  € <br /> <br /> </td> ' ;
+                ?>
+                <td><img src="../Images/<?php echo $resultat['nom'] ;?>.jpg"/><br /><br /></td></tr>
+                    <?php
+               }
+           }
+           echo '</table>';
+        }
     }
 }
+
 ?>

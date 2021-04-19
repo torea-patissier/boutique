@@ -36,46 +36,6 @@ class adresses extends bdd
         }
     }
 
-
-
-    // Afficher le formulaire Adresse secondaire
-
-    public function ShowSecondaryAdress()
-    {
-        $id_client = $_SESSION['user']['id'];
-        $con = $this->connectDb();
-        $req = "SELECT * FROM adresse2 WHERE id_client2 = :id_client";
-        $stmt = $con->prepare($req);
-        $stmt->bindValue('id_client', $id_client, PDO::PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        $count = count($result);
-
-        if ($count < 1) {
-
-            echo '
-    <h3>Ajouter une adresse secondaire</h3>
-    <form action="adresse.php" method="POST">
-    
-    <label>Adresse :</label><br />
-    <input class="zonetxt_profil" type="text" name="adresse2" required><br /><br />
-    
-    <label>Code Postal :</label><br />
-    <input class="zonetxt_profil" type="number" name="code_postal2" required><br /><br />
-    
-    <label>Ville :</label><br />
-    <input class="zonetxt_profil" type="text" name="ville2"required><br /><br />
-    
-    <input class="button-profil2" type="submit" name="envoyer2" value="Ajouter mon adresse">
-    
-    </form>';
-        } else {
-            echo 'Vous avez droit à une seule adresse secondaire';
-            return false;
-        }
-    }
-
-
     //Ajouter une adresse en Bdd
 
     public function AddAdress()
@@ -99,31 +59,6 @@ class adresses extends bdd
             return FALSE;
         }
     }
-
-
-    //Ajouter une adresse2 en Bdd
-    public function AddAdress2()
-    {
-        if (isset($_POST['envoyer2']) && !empty('envoyer2')) {
-            $con = $this->connectDb();
-            $adresse = htmlspecialchars($_POST['adresse2']);
-            $code_postal = htmlspecialchars($_POST['code_postal2']);
-            $ville = htmlspecialchars($_POST['ville2']);
-            $id_client = $_SESSION['user']['id'];
-
-            $infoAdress = $con->prepare("INSERT INTO adresse2 (adresse2, code_postal2, ville2, id_client2) VALUES (:adresse, :code_postal, :ville, :id_client)");
-            $infoAdress->bindValue('adresse', $adresse, PDO::PARAM_STR);
-            $infoAdress->bindValue('code_postal', $code_postal, PDO::PARAM_INT);
-            $infoAdress->bindValue('ville', $ville, PDO::PARAM_STR);
-            $infoAdress->bindValue('id_client', $id_client, PDO::PARAM_INT);
-            $infoAdress->execute();
-            header("Refresh:0;");
-        } else {
-            echo 'Erreur';
-            return FALSE;
-        }
-    }
-
 
     // Récupérer et afficher une adresse en Bdd 
     public function ShowAndDeleteAdress()
@@ -157,41 +92,6 @@ class adresses extends bdd
         }
 
     }
-
-    // Récupérer et afficher une adresse secondaire en Bdd
-
-    public function ShowAndDeleteAdress2()
-    {
-        $con = $this->connectDb();
-        $req = $con->prepare("SELECT * FROM adresse2 WHERE adresse2.id_client2 =  '" . $_SESSION['user']['id'] . "' ");
-        $req->execute();
-        $result = $req->fetchAll();
-
-        foreach ($result as $resultat){
-
-            $id = $resultat['id2'];
-            $adresse = $resultat['adresse2'];
-            $code_postal = $resultat['code_postal2'];
-            $ville = $resultat['ville2'];
-            echo $adresse . ' ' . '<br />' . $code_postal . ' , ' . $ville . '<br />' . '<br />';
-            ?>
-            <td class="table_admin" name="id">
-                <?php echo '<a class="href_admin" href="adresse.php?id=' . $id . '">' . 'Supprimer' . '</a>'; ?>
-            </td>
-            <br /><br /><?php
-        }
-        // Avec le GET_ID on supprime l'adresse de la Bdd
-        if(isset($_GET['id']) AND !empty($_GET['id'])){
-
-            $con = $this->connectDb();                      
-            $id = $_GET['id'];
-            $supp11 = $con->prepare("DELETE FROM adresse2 WHERE id2 = :id ");
-            $supp11->bindValue('id', $id, PDO::PARAM_INT);
-            $supp11->execute();
-            header('location:http://localhost:8888/boutique/Adresse/adresse.php');
-        }   
-    }
-
     public function voirAdressePrincipal(){
 
         $con = $this->connectDb();
@@ -209,5 +109,20 @@ class adresses extends bdd
         }
 
     }
+
+    // Vérifier si l'utilisateur à une adresse lors de la commande
+    public function checkAdress(){
+
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM adresse where id_client = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $resultat = $req->fetchAll();
+        if($resultat == false){
+            
+            header('location:http://localhost:8888/boutique/Adresse/adresse.php');
+            exit();
+        }
+    }
 }
+
 ?>

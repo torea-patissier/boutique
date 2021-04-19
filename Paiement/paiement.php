@@ -8,10 +8,18 @@ $voirProfil = new profil;
 
 
 if (!isset($_SESSION['user'])) {
+    
     // A REFAIRE
+
     header('location:http://localhost:8888/boutique/Connexion/connexion.php');
+
     exit();
+}else{
+
+    $voirAdresse->checkAdress();
+
 }
+
 $nbProduits = count($_SESSION['panier']['libelleProduit']);
 
 

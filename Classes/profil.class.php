@@ -12,8 +12,6 @@ class profil extends bdd{
             $stmt = $con->prepare("SELECT * FROM info_client WHERE login = :log ");
             $stmt->bindValue('log', $log, PDO::PARAM_STR);
             $stmt->execute();
-            $fetch = $stmt->fetch(PDO::FETCH_ASSOC);
-
             $nom = htmlspecialchars($_POST['nom']);
             $prenom = htmlspecialchars($_POST['prenom']);
             $date_de_naissance = htmlspecialchars($_POST['date_naissance']);
@@ -147,11 +145,7 @@ class profil extends bdd{
             echo 'Mr,Mme : ' . $nom . ' ' . $prenom . '<br />' . '<br />';
             echo 'Tel : ' . $tel . '<br />' . '<br />';
             echo 'Email : ' . $tel . '<br />' . '<br />';
-        }
-
+        } 
     }
-
-
-
 }
 ?>

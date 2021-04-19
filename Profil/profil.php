@@ -43,7 +43,8 @@ $pageProfil = new profil();
             </form>
         </section>
 
-        <a href="http://localhost:8888/boutique/Adresse/adresse.php">Voir | ajouter une adresse</a>
+        <a href="http://localhost:8888/boutique/Adresse/adresse.php">Voir | ajouter une adresse</a><br /><br />
+        <a href="http://localhost:8888/boutique/Historique_commande/historique_commande.php">Voir l'historique des commandes</a>
 
         <?php $pageProfil->Seeprofil(); ?>
         <?php
@@ -53,4 +54,4 @@ $pageProfil = new profil();
         ?>
 </div>
 </main>
-<?php require_once('../html_partials/header.php');?>
+<?php require_once('../html_partials/footer.php');?>

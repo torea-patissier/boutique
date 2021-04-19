@@ -5,16 +5,8 @@ require_once('../Classes/panier.class.php');
 include '../autoloader.php';
 $product = new produits;
 $erreur = false;
-$id = $_SESSION['user']['id'];
 
-echo'<pre>';
-// var_dump($_SESSION['user']);
-// var_dump($_SESSION['panier']);
-// var_dump(date('Y-m-d'));
-$total = montantGlobal();
-// var_dump($total);
-echo'</pre>';
-
+$rand = rand(0,1000000);
 //(?) = alors // (:) = sinon
 // Si $POST action existe alors il devient POST sinon et vice versa pour GET
 $action = (isset($_POST['action'])? $_POST['action']:(isset($_GET['action'])? $_GET['action']:null )) ;
@@ -30,9 +22,11 @@ if($action !== null)
    $l = (isset($_POST['l'])? $_POST['l']:  (isset($_GET['l'])? $_GET['l']:null )) ;
    $q = (isset($_POST['q'])? $_POST['q']:  (isset($_GET['q'])? $_GET['q']:null )) ;
    $p = (isset($_POST['p'])? $_POST['p']:  (isset($_GET['p'])? $_GET['p']:null )) ;
+   $idA = (isset($_POST['i'])? $_POST['i']:  (isset($_GET['i'])? $_GET['i']:null )) ;
 
    //Suppression des espaces verticaux
    $l = preg_replace('#\v#', '',$l);
+   $idA = preg_replace('#\v#', '',$idA);
 
    //On vérifie que $p est un float (chiffre entier ou décimal)
    $p = floatval($p);
@@ -63,7 +57,7 @@ if (!$erreur){
 
       Case "ajout":
 
-         ajouterProduit($l,$q,$p);// Nom, quantité, prix du produit
+         ajouterProduit($l,$q,$p,$idA);// Nom, quantité, prix du produit
          break;
 
       Case "suppression":
@@ -138,9 +132,7 @@ if (!$erreur){
                </tr>
                
                <?php
-                  $nom_article =  $_SESSION['panier']['libelleProduit'][$i];
-                  $qteProduit = $_SESSION['panier']['qteProduit'][$i];
-                  // $c = $_SESSION['panier']['prixProduit'][$i];                   
+                 
             }
 
             ?> 
@@ -160,16 +152,12 @@ if (!$erreur){
                   </td>
                   <td>
                      <form action="panier.php" method="post">
-                     <input type="submit" name="envoyerCommande">
-                     
-                        
+                     <input type="submit" name="envoyerCommande">                                             
                      </form>
                      <a href="../Paiement/paiement.php">Payer</a>
-
                   </td>
                </tr>
-            <?php
-         
+            <?php         
       }
    }
     ?>
@@ -180,10 +168,11 @@ if (!$erreur){
 
 <?php
 
+$total = montantGlobal();
 if(isset($_POST['envoyerCommande'])){
 
-   $product->insertcommande($id,$nom_article,$qteProduit);
-
+   $product->envoyerCommande($rand);
+   $product->envoyerTotal($total,$rand);
 }
-
- require_once('../html_partials/footer.php'); ?>
+ require_once('../html_partials/footer.php'); 
+ ?>
