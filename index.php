@@ -6,36 +6,9 @@ include 'Classes/search_bar.class.php';
 $pageIndex = new index;
 $pageIndex->Recherche();
 
+require_once("html_partials/header.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style2.css"/>
-    <title>Welcome</title>
-</head>
-<body>
-    <header>
-        <div class="btn-navigation">
-            <div class="barre"></div>
-            <div class="barre"></div>
-            <div class="barre"></div>
-        </div>
-        <div class="navigation">
-            <ul>
-                    <li><a class="navlink" href="index.php">Accueil</a></li>
-                    <li><a class="navlink" href="Produit/produit.php">Produits</a></li>
-                    <li><a class="navlink" href="Contact/contact.php">Contact</a></li>
-                    <li><a class="navlink" href="Qui_sommes_nous/infos.php">Qui sommes nous</a></li>
-                    <li><a class="navlink" href="FAQ/faq.php">FAQ</a></li>
-                    <li><a class="navlink" href="Inscription/inscription.php">Inscription</a></li>
-                    <li><a class="navlink" href="Connexion/connexion.php">Connexion</a></li>
-            </ul>
-        </div>
-    </header>
 <main>
 
     <h1>Welcome to La Petite Boutique</h1>
@@ -82,5 +55,3 @@ $pageIndex->Recherche();
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script type="text/javascript" src="app.js"></script>
-</body>
-</html>

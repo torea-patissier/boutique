@@ -37,3 +37,37 @@ td {
     color: black;
 }
 
+.img404{
+    z-index: 0;
+}
+
+.text404{
+    position: absolute;
+    z-index: 1;
+    color: white;
+    margin-top: 2cm;
+    margin-left: 5cm;
+}
+
+h1,h2,h3{
+    text-shadow: 1px 1px 1px black;
+}
+
+.button404{
+    background: unset;
+    border: unset;
+    font-size: 30px;
+    
+}
+
+.a404{
+    text-decoration-line: none;
+    color: grey;
+    text-shadow: 1px 1px 1px black;
+}
+
+.a404:hover{
+    text-decoration-line: underline;
+    color: red;
+    text-shadow: 1px 1px 1px black;
+}
