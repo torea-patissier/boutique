@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
 
+body{
+    font-family: 'Nunito Sans', sans-serif;
+}
 
 
 
@@ -70,4 +74,9 @@ h1,h2,h3{
     text-decoration-line: underline;
     color: red;
     text-shadow: 1px 1px 1px black;
+}
+
+.zonetxt_inscription{
+    color: black;
+    border-color: red;
 }
