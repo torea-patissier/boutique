@@ -1,0 +1,43 @@
+main{
+    min-height: 450px;
+}
+/* Profil */
+    
+a {
+    color: black;
+}
+
+.labelProfil, .labelAdress{
+    color: black;
+    font-size:17px;
+    align-items:center;
+    text-align: center;
+}
+
+.zonetxt_profil::placeholder{
+    color: grey;
+}
+
+.material-icons{
+    font-size:2.2rem;
+}
+
+footer{
+    position: 0px;
+}
+
+input{
+    color: black;
+}
+
+/* Footer */
+
+footer{
+    bottom: 0;
+}
+
+/* FAQ */
+textarea.txtareaFaq{
+    height: 10%;
+    resize: none;
+}

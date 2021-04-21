@@ -2,7 +2,7 @@
 require_once('bdd.class.php');
 class profil extends bdd{
     
-    public function Seeprofil()
+    public function modifierProfil()
     {
 
         if (isset($_POST['modifier'])) {
@@ -23,6 +23,9 @@ class profil extends bdd{
             $options = ['cost' => 12,];
             $hash = password_hash($mdp, PASSWORD_BCRYPT, $options);
             $testpwd = preg_match("#[A-Z]#", $mdp) + preg_match("#[a-z]#", $mdp) + preg_match("#[0-9]#", $mdp) + preg_match("#[^a-zA-Z0-9]#", $mdp);
+            header("location:http://localhost:8888/boutique/profil/profil.php");
+
+
 
 //Modification du Nom en Bdd
 
@@ -34,7 +37,6 @@ class profil extends bdd{
                 $_SESSION['nom'] = $nom;
                 echo '<br/><p class="modif_profil"> Nom modifié </p>';
                 var_dump($nom);
-                header("Refresh:0");
             }
 
 //Modification du Prénom en Bdd
@@ -87,21 +89,26 @@ class profil extends bdd{
 
 //Modification du Mot de passe en Bdd
 
-            if($testpwd < 4){
+            if(isset($mdp) && !empty($conf)){
 
-                echo '<br />' . '<p class="erreur_inscription">Rappel : Votre mot de passe doit contenir au minimum 7 caractères, incluant une Majuscule, un chifre et un caractère spécial.</p>';
-            }else { // Si oui on créer le compte en Db
-            if ($mdp != $conf) {
-                echo ('<br/><p class="erreur_profil"> Mot de passe incorrect </p>');
-                return false;
-            } elseif (isset($hash) || isset($conf) && !empty($hash) && !empty($conf)) {
-                $sql = $con->prepare("UPDATE info_client SET password= :hash WHERE id = :id ");
-                $sql->bindValue('hash', $hash, PDO::PARAM_STR);
-                $sql->bindValue('id', $id, PDO::PARAM_INT);
-                $sql->execute();
-                $_SESSION['password'] = $hash;
-                echo '<br/><p class="modif_profil"> Mot de passe modifié </p>';
-                var_dump($hash);
+                if($testpwd < 4){
+
+                    echo '<br />' . '<p class="erreur_inscription">Rappel : Votre mot de passe doit contenir au minimum 7 caractères, incluant une Majuscule, un chifre et un caractère spécial.</p>';
+                }else { // Si oui on créer le compte en Db
+
+                    if ($mdp != $conf) {
+                        echo ('<br/><p class="erreur_profil"> Mot de passe incorrect </p>');
+                        return false;
+
+                        } elseif (isset($hash) || isset($conf) && !empty($hash) && !empty($conf)) {
+                            $sql = $con->prepare("UPDATE info_client SET password= :hash WHERE id = :id ");
+                            $sql->bindValue('hash', $hash, PDO::PARAM_STR);
+                            $sql->bindValue('id', $id, PDO::PARAM_INT);
+                            $sql->execute();
+                            $_SESSION['password'] = $hash;
+                            echo '<br/><p class="modif_profil"> Mot de passe modifié </p>';
+                            var_dump($hash);
+                        }
             }
         }
         
@@ -109,14 +116,12 @@ class profil extends bdd{
 
             if(isset($email) && !empty($email)){
 
-                $sql = $con->prepare("UPDATE info_client SET mail= :mail WHERE id = :id ");
-                $sql->bindValue('mail', $email, PDO::PARAM_STR);
+                $sql = $con->prepare("UPDATE info_client SET email= :email WHERE id = :id ");
+                $sql->bindValue('email', $email, PDO::PARAM_STR);
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
-                $_SESSION['mail'] = $email;
+                $_SESSION['email'] = $email;
                 echo '<br/><p class="modif_profil"> E-mail modifié </p>';
-
-
 
             }
         }
@@ -139,13 +144,89 @@ class profil extends bdd{
         foreach($result as $resultat){
             $nom = $resultat['nom'];
             $prenom = $resultat['prenom'];
-            $date_de_naissance = $resultat['date_de_naissance'];
-            $email = $resultat['email'];
             $tel = $resultat['tel'];
             echo 'Mr,Mme : ' . $nom . ' ' . $prenom . '<br />' . '<br />';
             echo 'Tel : ' . $tel . '<br />' . '<br />';
             echo 'Email : ' . $tel . '<br />' . '<br />';
         } 
+    }
+    // LES CLASSES CI DESSOUS POUR LES PLACEHOLDER DE PROFIL
+    public function voirPrenom()
+    {
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM info_client where id = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $result = $req->fetchAll();
+
+        foreach($result as $resultat){
+            $prenom = $resultat['prenom'];
+        }
+        echo $prenom;
+    }
+
+    public function voirNom()
+    {
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM info_client where id = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $result = $req->fetchAll();
+
+        foreach($result as $resultat){
+            $nom = $resultat['nom'];
+        }
+        echo $nom;
+    }
+
+    public function voirLogin()
+    {
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM info_client where id = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $result = $req->fetchAll();
+
+        foreach($result as $resultat){
+            $login = $resultat['login'];
+        }
+        echo $login;
+    }
+
+    public function voirDate()
+    {
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM info_client where id = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $result = $req->fetchAll();
+
+        foreach($result as $resultat){
+            $date = $resultat['date_de_naissance'];
+        }
+        echo $date;
+    }
+
+    public function voirEmail()
+    {
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM info_client where id = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $result = $req->fetchAll();
+
+        foreach($result as $resultat){
+            $email = $resultat['email'];
+        }
+        echo $email;
+    }
+
+    public function voirTel()
+    {
+        $con = $this->connectDb();
+        $req = $con->prepare("SELECT * FROM info_client where id = '" . $_SESSION['user']['id'] . "' ");
+        $req->execute();
+        $result = $req->fetchAll();
+
+        foreach($result as $resultat){
+            $tel = $resultat['tel'];
+        }
+        echo $tel;
     }
 }
 ?>

@@ -15,23 +15,22 @@ class adresses extends bdd
         $stmt->execute();
         $result = $stmt->fetchAll();
         if ($result != null) {
-            echo 'Pour modifier votre adresse principale actuelle vous devez supprimer l\'ancienne';
+            echo '<i>Pour modifier votre adresse actuelle vous devez supprimer l\'ancienne</i>';
             return false;
         } else {
 
             echo '
-    <h3>Ajouter une adresse principale</h3>
     <form action="adresse.php" method="POST">
     
-    <label>Adresse :</label><br />
+    <label class="labelAdress">Adresse :</label><br />
     <input class="zonetxt_profil" type="text" name="adresse" required><br /><br />
     
-    <label>Code Postal :</label><br />
+    <labelclass="labelAdress">Code Postal :</label><br />
     <input class="zonetxt_profil" type="number" name="code_postal" required><br /><br />
     
-    <label>Ville :</label><br />
+    <labelclass="labelAdress">Ville :</label><br />
     <input class="zonetxt_profil" type="text" name="ville"required><br /><br />
-    <input class="button-profil2" type="submit" name="envoyer" value="Ajouter mon adresse">
+    <input class="btn black" type="submit" name="envoyer" value="Ajouter mon adresse">
     </form>';
         }
     }
@@ -73,11 +72,10 @@ class adresses extends bdd
             $adresse = $resultat['adresse'];
             $code_postal = $resultat['code_postal'];
             $ville = $resultat['ville'];
-            // echo $id;
             echo $adresse . ' ' . '<br />' . $code_postal . ' , ' . $ville . '<br />' . '<br />';
             ?>
             <td class="table_admin" name="id">
-                <?php echo '<a class="href_admin" href="adresse.php?id=' . $id . '">' . 'Supprimer' . '</a>'; ?>
+                <?php echo '<b><a class="href_admin" href="adresse.php?id=' . $id . '">' . 'Supprimer' . '</a></b>'; ?>
             </td>
             <br /><br /><?php
         }

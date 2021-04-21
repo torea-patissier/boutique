@@ -23,7 +23,6 @@ class faq extends bdd
         header("Refresh: 0;url=http://localhost:8888/boutique/faq/faq.php");
     }
 
-
     // Sélectionner la sous catégorie pour la question posés
     function selectSousCategory()
     {
@@ -35,8 +34,7 @@ class faq extends bdd
         foreach ($result as $resultat) {
             $categorie = $resultat["nom"];
             $idCategorie = $resultat["id"];
-
-            echo "<option value='$idCategorie'>$categorie</option>";
+            echo "<option class='col s12 m6 l6' value='$idCategorie'>$categorie</option>";
         }
     }
 
@@ -59,7 +57,7 @@ class faq extends bdd
 
             $id_categorie = $resultat0['id'];
             $categorie = $resultat0['nom'];
-            echo '<hr />' . 'Catégorie : ' . $categorie . '<br />' . '<br />' . '<br />';
+            echo '<hr />' . '<b>Catégorie : ' . $categorie . '</b><br />' . '<br />' . '<br />';
 
             //Boucle pour afficher les sous catégories
             foreach ($result2 as $resultat) {
@@ -69,7 +67,7 @@ class faq extends bdd
                 $nom = $resultat['nom'];
 
                 if ($id_categorie == $id_categoriee) {
-                    echo 'Sous-catégorie : ' . '<a class="href_admin" href="../faq/faq02.php?id=' . $id_sous_categorie . '">' . $nom . '</a>' . '<br />' . '<br />';
+                    echo 'Sous catégorie : ' . '<a class="href_admin" href="../faq/faq02.php?id=' . $id_sous_categorie . '"><b>' . $nom . '</b></a>' . '<br />' . '<br />';
                 }
             }
         }

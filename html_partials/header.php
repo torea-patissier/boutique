@@ -4,16 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/materialize.min.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+
     <title>Boutique en ligne</title>
 </head>
 <?php
-
     if(!isset($_SESSION['user'])){
         $id_droits = 0;
     }else{
-        $id_droits = $_SESSION['user']['id_droits'];
-    }
 
+        $id_droits = $_SESSION['user']['id_droits'];
+
+    }
 ?>
 <body>
 
@@ -22,7 +26,7 @@
     if($id_droits == 2){
     ?>
     <header>
-        <nav class="navbar">
+        <nav class="navbar black">
             <a class="navlink" href="../index.php">Accueil</a>
             <a class="navlink" href="../Produit/produit.php">Produit</a>
             <a class="navlink" href="../Produits/produits.php">Produits</a>
@@ -42,7 +46,7 @@
     if($id_droits == 1){
     ?>
     <header>
-        <nav class="navbar">
+        <nav class="navbar black">
             <a class="navlink" href="../index.php">Accueil</a>
             <a class="navlink" href="../Produit/produit.php">Produit</a>
             <a class="navlink" href="../Produits/produits.php">Produits</a>
@@ -62,7 +66,7 @@
     if($id_droits == 0){
     ?>
     <header>
-        <nav class="navbar">
+        <nav class="navbar black">
             <a class="navlink" href="../index.php">Accueil</a>
             <a class="navlink" href="../Produit/produit.php">Produit</a>
             <a class="navlink" href="../Produits/produits.php">Produits</a>
@@ -73,6 +77,7 @@
         </nav>
     </header>
     <?php }?>
+
 
 
 

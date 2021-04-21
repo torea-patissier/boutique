@@ -11,10 +11,9 @@ $pageInscription = new inscription;
 <p>Veuillez compléter les champs ci dessous</p>
 <form action="inscription.php" method="POST">
 
-    <!-- Informations Connexion -->
+    <!-- Informations Connexion -->    
     <input class="zonetxt_inscription" type="text" name="login" placeholder="Login" required><br /><br />
-    <input class="zonetxt_inscription" type="password" name="password" placeholder="Mot de passe" required><br /><br />
-    <input class="zonetxt_inscription" type="password" name="confpassword" placeholder="Conf. Mot de passe" required><br /><br />
+     <input class="zonetxt_inscription" type="password" name="confpassword" placeholder="Conf. Mot de passe" required><br /><br />
     <input class="zonetxt_inscription" type="email" name="email" placeholder="E-mail" required><br /><br />
     <!-- Informations Personnelles -->
     <input class="zonetxt_inscription" type="text" name="prenom" placeholder="Prénom" required><br /><br />
