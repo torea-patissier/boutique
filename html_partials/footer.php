@@ -9,8 +9,8 @@
                 <h5 class="white-text">Plus d'informations ici</h5>
                 <ul>
                     <div class="row">
-                    <li ><a class="grey-text text-lighten-3 col 6" href="../Contact/contact.php"><i class="material-icons">contact_mail</i> <br /> Contact</a></li>
-                    <li><a class="grey-text text-lighten-3 col 6" href="../FAQ/faq.php"><i class="material-icons">contact_support</i> <br /> FAQ</a></li>
+                        <li><a class="grey-text text-lighten-3 col 6" href="../Contact/contact.php"><i class="material-icons">contact_mail</i> <br /> Contact</a></li>
+                        <li><a class="grey-text text-lighten-3 col 6" href="../FAQ/faq.php"><i class="material-icons">contact_support</i> <br /> FAQ</a></li>
                     </div>
                     <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
                     <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
@@ -25,8 +25,8 @@
         </div>
     </div>
 </footer>
+</body>
 <script src="../js/materialize.min.js" type="text/javascript"></script><br />
 <script src="../js/script.js" type="text/javascript"></script>
-</body>
 
 </html>

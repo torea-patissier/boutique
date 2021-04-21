@@ -49,8 +49,8 @@ if (!isset($_SESSION['user'])) {
         </div>
 
         <div class="center-align" >
-            <a class="waves-effect waves-light btn black"> <input class="white-text text-darken-1" type="submit" value="Modifier" name="modifier"></a>
-            <a class="waves-effect waves-light btn black"> <input class="white-text text-darken-1" type="submit" value=" Déconnexion" name="deco"> </a>
+            <a> <input class="btn black" type="submit" value="Modifier" name="modifier"></a>
+            <a> <input class="btn black" type="submit" value=" Déconnexion" name="deco"> </a>
         </div>
 
     </form>

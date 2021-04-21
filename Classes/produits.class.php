@@ -147,9 +147,12 @@ class produits extends bdd
 
         $x = $req0->fetchAll();
         $r = $req->fetchAll();
-
         foreach($x as $resultat0){
-            echo ' <br /> <table> <th> Commandé le ' . ' '  . $resultat0['date'] . ' | <br /> </th> 
+            echo'<div class="container">';
+            echo'<div class="tableCommande">';
+            echo'<div class="row">';
+            echo'<div class="col s12">';
+            echo '<table class="striped"> <th> Commandé le ' . ' '  . $resultat0['date'] . ' | </th> 
             <th> Réf n º: ' . $resultat0['n_commande'] . ' |</th>';
             echo '<th>Total : ' . $resultat0['total'] . '€ </th> ';
             echo '<tr>';
@@ -164,6 +167,10 @@ class produits extends bdd
                }
            }
            echo '</table>';
+           echo "</div>";
+           echo "</div>";
+           echo "</div>";
+           echo "</div><br />";
         }
     }
 }

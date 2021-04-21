@@ -1,9 +1,14 @@
-main{
-    min-height: 450px;
+/* Historique_commande */
+.tableCommande{
+    border-style: solid;
+    border-color:black;
+    border-width:0.5px; 
+
 }
+
 /* Profil */
     
-a {
+a, .zonetxt_inscription::placeholder{
     color: black;
 }
 
@@ -22,22 +27,15 @@ a {
     font-size:2.2rem;
 }
 
-footer{
-    position: 0px;
-}
-
 input{
     color: black;
 }
 
-/* Footer */
-
-footer{
-    bottom: 0;
-}
 
 /* FAQ */
 textarea.txtareaFaq{
     height: 10%;
     resize: none;
 }
+
+/* Footer */
