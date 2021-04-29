@@ -126,8 +126,9 @@ class GestionProduit extends bdd{
         $request = $con->prepare("SELECT * FROM produits");
         $request->execute();
         // $result = $request -> fetchAll();
-
-        echo "<table><thead>";
+        echo "<br /><br /><br />";
+        echo "<div class='container'>";
+        echo "<table class='responsive-table' ><thead>";
         echo "<th>Image Produit</th>";
         echo "<th>Id Produit</th>";
         echo "<th>Nom Produit</th>";
@@ -153,7 +154,7 @@ class GestionProduit extends bdd{
             echo "<td><a href='?action=delete&amp;id=" . $r->id . "'>Supprimer Prdt.</a></td>";
             echo "</tr>";
         }
-        echo "</tbody></table>";
+        echo "</tbody></table></div>";
         // Supprimer un article de la Bdd
         if(isset($_GET['action'])&&($_GET['action']== 'delete')){
             $id = htmlspecialchars($_GET['id']);
@@ -180,30 +181,45 @@ class GestionProduit extends bdd{
 
             $s = $request->fetch(PDO::FETCH_OBJ);  // Résultat stocké dans la $S
 
-            ?>
-
+            ?> 
+            <br /><br /><br />
             <img src="../StockageImg/<?php echo $s->nom;?>.jpg"/>
-            <form id='modifierArticle' action="" method="post">
-                <label>Titre :</label><br/><br />
-                <input type="text" name="nom" value="<?php echo $s->nom;?>"><br/><br />
-
+            <div class="container">
+            <div class="row">
+            <form id='modifierArticle' class="col s12" action="" method="post">
+                <div class="input-field col s4 m4 l4">
+                    <label>Titre :</label><br/><br />
+                    <input type="text" name="nom" value="<?php echo $s->nom;?>"><br/><br />
+                </div>
+                <div class="input-field col s4 m4 l4">
                 <label>Description :</label><br/><br />
                 <textarea name="description" rows="4" cols="50"><?php echo $s->description;?></textarea><br/><br />
+                </div>
 
+                <div class="input-field col s4 m4 l4">
                 <label>Prix :</label><br/><br />
                 <input type="text" name="prix" value="<?php echo $s->prix;?>"><br/><br />
+                </div>
 
+                <div class="input-field col s4 m4 l4">
                 <label>ID Categorie :</label><br/><br />
                 <input type="text" name="id_categorie" value="<?php echo $s->id_categorie;?>"><br/><br />
+                </div>
 
+                <div class="input-field col s4 m4 l4">
                 <label>ID Sous-catégorie :</label><br/><br />
                 <input type="text" name="id_sous_categorie" value="<?php echo $s->id_sous_categorie;?>"><br/><br />
+                </div>
 
+                <div class="input-field col s4 m4 l4">
                 <label>Stock :</label><br/><br />
                 <input type="text" name="stock" value="<?php echo $s->stock;?>"><br/><br />
+                </div>
 
-                <input type="submit" name="envoyer" value="Modifier"><br/><br />
+                <input class="btn black" type="submit" name="envoyer" value="Modifier"><br/><br />
             </form>
+            </div>
+            </div>
 
             <?php
             // Si on appuie sur modifier

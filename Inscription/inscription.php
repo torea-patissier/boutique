@@ -48,8 +48,9 @@ $pageInscription = new inscription;
                 <input class="zonetxt_inscription" type="text" name="telephone" placeholder="Numéro de téléphone" required><br /><br />
             </div>
         </div>
+         <input class="btn black" type="submit" name="inscription" value="Valider">
     </form>
-    <input class="waves-effect waves-light btn-small darken-4" type="submit" name="inscription" value="Valider">
+   
     <br /><br />
     <p class="dejauncompte_inscription">Vous avez déjà un compte chez nous ? <a class="href_inscription" href="../Connexion/connexion.php"><br />Connectez vous</a>.</p>
 

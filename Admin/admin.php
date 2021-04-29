@@ -1,30 +1,22 @@
 <?php session_start(); 
 
+require_once('../html_partials/header.php');
 include "../Classes/admin.class.php"; 
 
 $pageAdmin = new gestion;
 ?>
 
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BACK OFFICE ADMIN</title>
-</head>
-<body>
-    <header>
-    </header>
     <main>
         <h1> BACK OFFICE ADMIN </h1>
+        <div class="container">
         <form action="" method="POST">    
-            <input type="submit" name="articles" value="Gèrer Articles">
-            <input type="submit" name="categories" value="Gèrer Categories">
-            <input type="submit" name="utilisateurs" value="Gèrer Users">
-            <input type="submit" name="codes" value="Gèrer CodesP">
+            <input class="btn black" type="submit" name="articles" value="Gèrer Articles">
+            <input class="btn black" type="submit" name="categories" value="Gèrer Categories">
+            <input class="btn black" type="submit" name="utilisateurs" value="Gèrer Users">
+            <input class="btn black" type="submit" name="codes" value="Gèrer CodesP">
         </form>
+        </div>
 <?php 
 
     if(isset($_POST["articles"])){
@@ -45,7 +37,4 @@ $pageAdmin = new gestion;
 
 ?>
     </main>
-    <footer>
-    </footer>
-</body>
-</html>
+<?php require_once('../html_partials/footer.php'); ?>

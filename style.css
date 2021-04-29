@@ -80,3 +80,66 @@ h1,h2,h3{
     color: black;
     border-color: red;
 }
+
+/* PRODUITS */
+.p_nom{
+
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 75px;
+    text-align: center;
+}  
+
+.p_description{
+    
+    margin-top: -5;
+    font-size: 25px;
+}
+
+.p_prix{
+
+    margin-top: 0;
+    font-size: 25px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.produit_s{
+    text-align: center;
+}
+
+/* .produits_ajoutPanier{
+
+    background-color: black;
+    height: 30px;
+    width: 100px;
+    color: white;
+    border-radius: 1em;
+} */
+
+/* PRODUIT */
+
+.pdt_nom_href{
+    font-size: 25px;
+    color: black;
+}
+
+.produit_s{
+    
+}
+
+.margintop{
+    background-color: gray;
+}
+
+.nom_href{
+    color: Black;
+    text-decoration: none;
+}
+
+.pdts_prix{
+
+    margin-top: 0;
+    font-size: 25px;
+    font-weight: 400;
+}

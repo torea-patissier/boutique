@@ -5,6 +5,7 @@ class inscription extends bdd {
         public function register()
         {
             if (isset($_POST['inscription'])&& !empty($_POST['inscription'])) {
+
                 //Connexion Db
                 $con = $this->connectDb();
                 //HTMLSPECHARS
@@ -22,48 +23,44 @@ class inscription extends bdd {
                 $options = ['cost' => 12,];
                 $hash = password_hash($password, PASSWORD_BCRYPT, $options);
                 //Vérifier si un login est déjà existant
-                $stmt = $con->prepare("SELECT * FROM connexion_user WHERE login =?");
-                $stmt->execute([$login]);
-                $user = $stmt->fetch();
-                if ($user) {
+                $stmt = $con->prepare("SELECT login FROM info_client");
+                $stmt->execute();
+                echo'<pre>';
+                $user = $stmt->fetchAll();
+                echo'</pre>';
+
+                if($user == $login){
+
                     // Si il existe déjà echo message d'erreur
                     echo '<br/> <p class="erreur_inscription">Identifiant déjà existant.</p>';
-                    return $user;
-                    // Vérifier si les MDP sont les mêmes
-                }
-                if ([$password] != [$confpassword]) {
-                    echo '<br />' . '<p class="erreur_inscription">Les mots de passe ne correspondent pas.</p>';
-                    return $password;
-                } 
-                
-                if($testpwd < 4){
-                    echo '<br />' . '<p class="erreur_inscription">Rappel : Votre mot de passe doit contenir au minimum 7 caractères, incluant une Majuscule, un chifre et un caractère spécial.</p>';
-                }else { // Si oui on créer le compte en Db
-                   
+                    return false;
 
-                    $infoUser = $con->prepare("INSERT INTO info_client (nom, prenom, login, password, date_de_naissance, mail, tel, id_droits) VALUES (:nom, :prenom, :login, :hash, :date_de_naissance, :mail, :tel, :droits)");
+                    // Vérifier si les MDP sont les mêmes
+                }elseif($testpwd < 4){
+
+                    echo '<br />' . '<p class="erreur_inscription">Rappel : Votre mot de passe doit contenir au minimum 7 caractères, incluant une Majuscule, un chifre et un caractère spécial.</p>';
+                    return false;
+
+                }elseif([$password] != [$confpassword]) {
+
+                    echo '<br />' . '<p class="erreur_inscription">Les mots de passe ne correspondent pas.</p>';
+                    return false;
+
+                }else{ // Si oui on créer le compte en Db
+                   
+                    $infoUser = $con->prepare("INSERT INTO info_client (nom, prenom, login, password, date_de_naissance, email, tel, id_droits)
+                     VALUES (:nom, :prenom, :login, :hash, :date_de_naissance, :mail, :tel, :droits)");
                     $infoUser->bindValue('nom', $nom, PDO::PARAM_STR);
                     $infoUser->bindValue('prenom', $prenom, PDO::PARAM_STR);
                     $infoUser->bindValue('login', $login, PDO::PARAM_STR);
                     $infoUser->bindValue('hash', $hash, PDO::PARAM_STR);
-                    $infoUser->bindValue('droits', $chiffre, PDO::PARAM_INT);
                     $infoUser->bindValue('date_de_naissance', $date_de_naissance, PDO::PARAM_STR);
                     $infoUser->bindValue('mail', $mail, PDO::PARAM_STR);
                     $infoUser->bindValue('tel', $tel, PDO::PARAM_INT);
+                    $infoUser->bindValue('droits', $chiffre, PDO::PARAM_INT);
                     $infoUser ->execute();
-                    $infoUser->CloseCursor();
 
-        
-                    // $adressUser = $con->prepare("INSERT INTO adresse (adresse, code_postal, ville) VALUES (:adresse, :code_postal, :ville)");
-                    // $adressUser->bindValue('adresse', $adresse, PDO::PARAM_STR);
-                    // $adressUser->bindValue('code_postal', $code_postal, PDO::PARAM_INT);
-                    // $adressUser->bindValue('ville', $ville, PDO::PARAM_STR);
-                    
-                    // $adressUser ->execute();
-                    // $adressUser->CloseCursor();
-                    // $infoUser -> execute();
-                    // $adresseUser -> execute();
-                    
+                    header("connexion.php");
                 }
             }
         }
