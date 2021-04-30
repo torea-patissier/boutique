@@ -3,32 +3,31 @@ session_start();
 require_once('../html_partials/header.php');
 ?>
 
-<main>
-    <h1>Nous Contacter</h1>
+<body id="contactMain">
+    <main>
+        <div class="container">
+            <h1 class="right-align">Nous Contacter</h1>
+            <h6 class="right-align">
+                Chez la petite boutique le client est roi et votre satisfaction est cruciale.<br />
+                Nous restons donc à votre disposition pour toutes questions concernant nos produits.<br /><br />
 
-    <p>
-        Chez la petite boutique le client est Roi et votre satisfaction est cruciale.<br />
-        Nous restons donc à votre disposition pour toutes questions concernant nos produits.<br /><br />
-        
-        Nous restons joignables :<br /><br />
+                Dans la rubrique <a href="http://localhost:8888/boutique/faq/faq.php">FAQ</a> , un membre de notre équipe chargé du service client <br /> vous répondra dans les meilleurs délais.<br /><br />
 
-        Dans la rubrique <a href="http://localhost:8888/boutique/faq/faq.php">FAQ</a> ou un membre de notre staff chargé du service client vous repondra dans les meilleurs délais.<br /><br />
-        
-        Par téléphone : <a href="">09.69.09.69.69.</a><br /><br />
-        
-        Par E-Mail : <a href="">lapetiteboutique@contact.fr.</a><br /><br />
+                Nous restons joignables :<br /><br />
 
-        Par Courrier : <br /><br />
-        La Petite Boutique,<br />
-        5 Rue du Pasteur Heuzé<br />
-        13003, Marseille, France<br /><br />
+                <i class="material-icons">phone</i><br /> Par téléphone :<a href=""> 06.78.30.29.59</a><br /><br />
 
-        La Petite Boutique vous remercie de votre confiance. A bientot !
+                <i class="material-icons">mail</i><br />Par E-Mail : <a href="">lapetiteboutique@contact.fr</a><br /><br />
 
+                <i class="material-icons">home</i><br /><b>La Petite Boutique,<br />
+                5 Rue du Pasteur Heuzé<br />
+                13003, Marseille, France</b><br /><br />
 
-
-    </p>
-</main>
+                La Petite Boutique vous remercie de votre confiance. A bientot !
+            </h6>
+        </div>
+    </main>
+</body>
 <?php
 require_once('../html_partials/footer.php');
 ?>

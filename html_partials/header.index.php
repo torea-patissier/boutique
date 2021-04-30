@@ -10,74 +10,71 @@
     <title>Boutique en ligne</title>
 </head>
 <?php
-    if(!isset($_SESSION['user'])){
-        $id_droits = 0;
-    }else{
-        $id_droits = $_SESSION['user']['id_droits'];
-    }
+if (!isset($_SESSION['user'])) {
+    $id_droits = 0;
+} else {
+    $id_droits = $_SESSION['user']['id_droits'];
+}
 
 ?>
-<body>
 
-     <!-- Navbar pour un utilisateur qui est connecté et est un ADMIN-->
+<body>
+    <!-- Navbar pour un utilisateur qui est connecté et est un ADMIN-->
     <?php
-    if($id_droits == 2){
+    if ($id_droits == 2 ) {
     ?>
-    <header>
-        <nav class="navbar black">
-            <a class="navlink" href="index.php">Accueil</a>
-            <a class="navlink" href="Produit/produit.php">Produit</a>
-            <a class="navlink" href="Produits/produits.php">Produits</a>
-            <a class="navlink" href="Contact/contact.php">Contact</a>
-            <a class="navlink" href="Qui_sommes_nous/infos.php">Qui sommes nous</a>
-            <a class="navlink" href="FAQ/faq.php">FAQ</a>
-            <a class="navlink" href="Profil/profil.php">Profil</a>
-            <a class="navlink" href="Admin/admin.php">Admin</a>
-            <a class="navlink" href="Produits/panier.php">Panier</a>
-        </nav>
-    </header>
-    <?php }?>
+        <header>
+            <!-- Sidenav à mettre en navbar si écran mobile -->
+            <ul id="slide-out" class="sidenav">
+                <li><a class="waves-effect" href="index.php"><i class="material-icons">home</i>Accueil</a></li><br />
+                <li><a class="waves-effect" href="Produits/produits.php"><i class="material-icons">star_outline</i>Produits</a></li><br />
+                <li><a class="waves-effect" href="Contact/contact.php"><i class="material-icons">contact_page</i>Contact</a></li><br />
+                <li><a class="waves-effect" href="FAQ/faq.php"><i class="material-icons">contact_support</i>FAQ</a></li><br />
+                <li><a class="waves-effect" href="Profil/profil.php"><i class="material-icons">person</i>Profil</a></li><br />
+                <li><a class="waves-effect" href="Admin/admin.php"><i class="material-icons">settings</i>Admin</a></li><br />
+                <li><a class="waves-effect" href="Produits/panier.php"><i class="material-icons">shopping_cart</i>Panier</a></li><br />
+            </ul>
+            <a data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </header>
+    <?php }
+    ?>
 
     <!-- Navbar pour un utilisateur qui est connecté-->
     <?php
-    if($id_droits == 1){
+    if ($id_droits == 1) {
     ?>
-    <header>
-        <nav class="navbar black">
-            <a class="navlink" href="index.php">Accueil</a>
-            <a class="navlink" href="Produit/produit.php">Produit</a>
-            <a class="navlink" href="Produits/produits.php">Produits</a>
-            <a class="navlink" href="Contact/contact.php">Contact</a>
-            <a class="navlink" href="Qui_sommes_nous/infos.php">Qui sommes nous</a>
-            <a class="navlink" href="FAQ/faq.php">FAQ</a>
-            <a class="navlink" href="Profil/profil.php">Profil</a>
-            <a class="navlink" href="Produits/panier.php">Panier</a>
-        </nav>
-    </header>
-    <?php }?>
+        <header>
+            <!-- Sidenav à mettre en navbar si écran mobile -->
+            <ul id="slide-out" class="sidenav">
+                <li><a class="waves-effect" href="index.php"><i class="material-icons">home</i>Accueil</a></li><br />
+                <li><a class="waves-effect" href="Produits/produits.php"><i class="material-icons">star_outline</i>Produits</a></li><br />
+                <li><a class="waves-effect" href="Contact/contact.php"><i class="material-icons">contact_page</i>Contact</a></li><br />
+                <li><a class="waves-effect" href="FAQ/faq.php"><i class="material-icons">contact_support</i>FAQ</a></li><br />
+                <li><a class="waves-effect" href="Profil/profil.php"><i class="material-icons">person</i>Profil</a></li><br />
+                <li><a class="waves-effect" href="Produits/panier.php"><i class="material-icons">shopping_cart</i>Panier</a></li><br />
+            </ul>
+            <a data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </header>
+    <?php }
+    ?>
 
 
-    
+
     <!-- Navbar pour un utilisateur qui n'est pas connecté-->
     <?php
-    if($id_droits == 0){
+    if ($id_droits == 0) {
     ?>
-    <header>
-        <nav class="navbar black">
-            <a class="navlink" href="index.php">Accueil</a>
-            <a class="navlink" href="Produit/produit.php">Produit</a>
-            <a class="navlink" href="Produits/produits.php">Produits</a>
-            <a class="navlink" href="Contact/contact.php">Contact</a>
-            <a class="navlink" href="Qui_sommes_nous/infos.php">Qui sommes nous</a>
-            <a class="navlink" href="FAQ/faq.php">FAQ</a>
-            <a class="navlink" href="Connexion/connexion.php">Connexion</a>
-        </nav>
-    </header>
-    <?php }?>
-
-
-
-
-
-
-    
+        <header>
+            <!-- Sidenav à mettre en navbar si écran mobile -->
+            <ul id="slide-out" class="sidenav">
+                <li><a class="waves-effect" href="index.php"><i class="material-icons">home</i>Accueil</a></li><br />
+                <li><a class="waves-effect" href="Produits/produits.php"><i class="material-icons">star_outline</i>Produits</a></li><br />
+                <li><a class="waves-effect" href="Contact/contact.php"><i class="material-icons">contact_page</i>Contact</a></li><br />
+                <li><a class="waves-effect" href="FAQ/faq.php"><i class="material-icons">contact_support</i>FAQ</a></li><br />
+                <li><a class="waves-effect" href="Connexion/connexion.php"><i class="material-icons">person</i>Connexion</a></li><br />
+                <li><a class="waves-effect" href="Produits/panier.php"><i class="material-icons">shopping_cart</i>Panier</a></li><br />
+            </ul>
+            <a data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </header>
+    <?php }
+    ?>

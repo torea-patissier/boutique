@@ -28,7 +28,7 @@ class connexion extends bdd {
 
         if($login !== $logcheck && password_verify($password, $passcheck) == FALSE){
 
-            echo '<p class="erreur_connexion">Identifiant ou mot de passe incorrect.</p>';
+            echo '<p class="container"><b>Identifiant ou mot de passe incorrect.</b></p><br />';
             return FALSE; 
 
         }

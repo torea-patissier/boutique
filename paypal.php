@@ -111,11 +111,6 @@ require_once('../Classes/panier.class.php');
     }).render('#paypal-button-container');
   }
 
- var ok = document.getElementById("paypal-button-container").onclick = function() {update()};
-
-function update() {
-  ok.innerHTML = alert('Coucou');
-}
 
 update();
 

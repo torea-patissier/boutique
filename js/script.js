@@ -1,23 +1,13 @@
-$(document).ready(function(){
-    $('.btn-navigation').click(function(){
-        $(this).find('.barre').toggleClass('white');
-        $('.navigation').toggleClass('isOpen');
-    })
-});
+document.addEventListener('DOMContentLoaded', function() {
+  // // Sidenav
+  var elems = document.querySelectorAll('.sidenav');
+  M.Sidenav.init(elems);
 
+  // Paralax
+  var yyy = document.querySelectorAll('.parallax');
+  M.Parallax.init(yyy);
 
-// Animation  pour le profil
-$(document).ready(function() {
-    M.updateTextFields();
-  });
-
-// FAQ
-
-
-// Sidebar
-$(document).ready(function(){
-    $('.btn-navigation').click(function(){
-        $(this).find('.barre').toggleClass('white');
-        $('.navigation').toggleClass('isOpen');
-    })
+  // Select
+  var aaa = document.querySelectorAll('select');
+  M.FormSelect.init(aaa);
 });

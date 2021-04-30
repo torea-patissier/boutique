@@ -24,10 +24,9 @@ $nbProduits = count($_SESSION['panier']['libelleProduit']);
 
 
 ?>
-<main>    
+<main class="container">    
     <table>
-    <h2>Résumé de votre commande :</h2>
-    <h3>Informations pour la livraison :</h3>
+    <h1>Informations pour la livraison :</h1>
     <?php
     $voirProfil->voirInfosProfil();
     $voirAdresse->voirAdressePrincipal();

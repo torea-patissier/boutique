@@ -147,30 +147,34 @@ class produits extends bdd
 
         $x = $req0->fetchAll();
         $r = $req->fetchAll();
-        foreach($x as $resultat0){
-            echo'<div class="container">';
-            echo'<div class="tableCommande">';
-            echo'<div class="row">';
-            echo'<div class="col s12">';
-            echo '<table class="striped"> <th> Commandé le ' . ' '  . $resultat0['date'] . ' | </th> 
-            <th> Réf n º: ' . $resultat0['n_commande'] . ' |</th>';
-            echo '<th>Total : ' . $resultat0['total'] . '€ </th> ';
-            echo '<tr>';
-
-            foreach($r as $resultat){
-                if($resultat['n_commande'] == $resultat0['n_commande']){
-                    echo '<td>' . $resultat['nom'] . ' x ' . $resultat['quantité'] .  '</td>  <br />';
-                    echo ' <td><br />' . $resultat['prix'] .  '  € <br /> <br /> </td> ' ;
-                ?>
-                <td><img src="../Images/<?php echo $resultat['nom'] ;?>.jpg"/><br /><br /></td></tr>
-                    <?php
+        if($x){
+            foreach($x as $resultat0){
+                echo'<div class="container">';
+                echo'<div class="tableCommande">';
+                echo'<div class="row">';
+                echo'<div class="col s12">';
+                echo '<table class="striped"> <th> Commandé le ' . ' '  . $resultat0['date'] . ' | </th> 
+                <th> Réf n º: ' . $resultat0['n_commande'] . ' |</th>';
+                echo '<th>Total : ' . $resultat0['total'] . '€ </th> ';
+                echo '<tr>';
+    
+                foreach($r as $resultat){
+                    if($resultat['n_commande'] == $resultat0['n_commande']){
+                        echo '<td>' . $resultat['nom'] . ' x ' . $resultat['quantité'] .  '</td>  <br />';
+                        echo ' <td><br />' . $resultat['prix'] .  '  € <br /> <br /> </td> ' ;
+                    ?>
+                    <td><img class="hide-on-small-only" src="../Images/<?php echo $resultat['nom'] ;?>.jpg"/><br /><br /></td></tr>
+                        <?php
+                   }
                }
-           }
-           echo '</table>';
-           echo "</div>";
-           echo "</div>";
-           echo "</div>";
-           echo "</div><br />";
+               echo '</table>';
+               echo "</div>";
+               echo "</div>";
+               echo "</div>";
+               echo "</div><br />";
+            }
+        }else{
+            header('location:http://localhost:8888/boutique/Profil/profil.php');
         }
     }
 }

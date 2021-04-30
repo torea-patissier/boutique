@@ -1,6 +1,13 @@
 <?php 
 require_once('bdd.class.php');
 class profil extends bdd{
+
+    // Fonction déco + redirection 
+    public function Deconnexion()
+    {
+        header("location:http://localhost:8888/boutique/index.php");
+        session_destroy();
+    }
     
     public function modifierProfil()
     {
@@ -23,9 +30,8 @@ class profil extends bdd{
             $options = ['cost' => 12,];
             $hash = password_hash($mdp, PASSWORD_BCRYPT, $options);
             $testpwd = preg_match("#[A-Z]#", $mdp) + preg_match("#[a-z]#", $mdp) + preg_match("#[0-9]#", $mdp) + preg_match("#[^a-zA-Z0-9]#", $mdp);
-            header("location:http://localhost:8888/boutique/profil/profil.php");
-
-
+            // header("location:http://localhost:8888/boutique/profil/profil.php");
+            header("Refresh: 0");
 
 //Modification du Nom en Bdd
 
@@ -127,12 +133,7 @@ class profil extends bdd{
         }
     }
 
-    // Fonction déco + redirection 
-    public function Deconnexion()
-    {
-        session_destroy();
-        header("location:http://localhost:8888/boutique/index.php");
-    }
+
 
     public function voirInfosProfil()
     {
