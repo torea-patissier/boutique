@@ -1,3 +1,8 @@
+
+/* body */
+
+
+
 /* Historique_commande */
 .tableCommande{
     
@@ -38,14 +43,12 @@ input{
 
 
 /* FAQ */
-
 textarea.txtareaFaq{
     height: 10%;
     resize: none;
 }
 
 /* Index */
-
 #ProduitsIndex{
     display:flex;
     flex-direction:row;
@@ -53,22 +56,31 @@ textarea.txtareaFaq{
     padding: 10px;
 }
 
-/* Contact */
+/* 404 */
+.body404{
 
+    background-image: url(../Images/barbu-triste.jpg);
+    background-position:0% 40%;
+   
+}
+
+/* Contact */
 #contactMain{
+
     background-image: url(../images/barbecontact.jpg);
     background-position:55% 0%;
 }
 
 /* Panier */
+ #faq02img{
 
-    /* #bodyPanier{
-        background-image: url(../images/barberpanier.jpg);
-        background-position:85% 60%;
+    background-image: url(../Images/barbedouche.jpg);
 
-    } */
+} 
 
 /* Footer */
 .page-footer{
+
     transform: translate(0%, 40%);
+
 }

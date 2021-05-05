@@ -7,6 +7,17 @@ include '../autoloader.php';
 $product = new produits;
 $erreur = false;
 
+if (isset($_POST['envoyerCommande']) && $_SESSION['user']['id']) {
+
+   $product->envoyerCommande($rand);
+   $product->envoyerTotal($total, $rand);
+   header("location:http://localhost:8888/boutique/Paiement/paiement.php");
+}else{
+   if (isset($_POST['envoyerCommande']) && !$_SESSION['user']['id']) {
+   header("location:http://localhost:8888/boutique/Connexion/connexion.php");
+   }
+}
+
 $rand = rand(0, 1000000);
 //(?) = alors // (:) = sinon
 // Si $POST action existe alors il devient POST sinon et vice versa pour GET
@@ -162,16 +173,7 @@ if (!$erreur) {
 <?php
 
 $total = montantGlobal();
-if (isset($_POST['envoyerCommande']) && $_SESSION['user']['id']) {
 
-   $product->envoyerCommande($rand);
-   $product->envoyerTotal($total, $rand);
-   header("location:http://localhost:8888/boutique/Paiement/paiement.php");
-}else{
-   if (isset($_POST['envoyerCommande']) && !$_SESSION['user']['id']) {
-   header("location:http://localhost:8888/boutique/Connexion/connexion.php");
-   }
-}
 
 require_once('../html_partials/footer.php');
 ?>

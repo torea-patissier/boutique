@@ -40,7 +40,7 @@ echo'</div>';
     </div>
 </div><br /><br /><br />
 
-<h1 class="center-align">Les nouveautés : </h1><br /><br />
+<h2 class="center-align">Les nouveautés : </h2><br /><br />
 
 <?php
 $index->lastArticles();

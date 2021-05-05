@@ -101,8 +101,8 @@ class adresses extends bdd
             $adresse = $res['adresse'];
             $code_postal = $res['code_postal'];
             $ville = $res['ville'];
+            echo '<i class="material-icons">home</i> <br />' . $code_postal . ' ' . $ville . '<br />' . '<br />';
             echo $adresse . '<br />';
-            echo $code_postal . ' ' . $ville . '<br />' . '<br />';
 
         }
 

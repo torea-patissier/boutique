@@ -5,7 +5,7 @@ include '../autoloader.php';
 $pageGestionCategorie = new gestion_categorie;
 
 if ($id_droits != 2) {
-    header('location:http://localhost:8888/boutique/index.php');
+    header('location:http://localhost:8888/boutique/Error/404.php');
     exit();
 }
 

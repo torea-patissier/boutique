@@ -24,7 +24,6 @@
     <div class="footer-copyright">
         <div class="container">
             © 2021 Tous droits réservé
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
     </div>
 </footer>

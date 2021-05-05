@@ -67,7 +67,7 @@ function modifierQteProduit($libelleProduit,$qteProduit){
    {
          if ($qteProduit > 0 && $qteProduit > 10)
          {
-            echo 'Vous pouvez commander au max 10 fois le même article';
+            echo '<div class="container"><b> Vous pouvez commander au max 10 fois le même article </b></div>';
 
          }if($qteProduit > 0 && $qteProduit <= 10){
 

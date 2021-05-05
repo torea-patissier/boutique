@@ -57,7 +57,7 @@ class faq extends bdd
 
             $id_categorie = $resultat0['id'];
             $categorie = $resultat0['nom'];
-            echo '<hr />' . '<b>Catégorie : ' . $categorie . '</b><br />' . '<br />' . '<br />';
+            echo '<hr />' . '<b> Catégorie : ' . $categorie . '</b><br />' . '<br />' . '<br />';
 
             //Boucle pour afficher les sous catégories
             foreach ($result2 as $resultat) {
@@ -67,7 +67,9 @@ class faq extends bdd
                 $nom = $resultat['nom'];
 
                 if ($id_categorie == $id_categoriee) {
-                    echo 'Sous catégorie : ' . '<a class="href_admin" href="../faq/faq02.php?id=' . $id_sous_categorie . '"><b>' . $nom . '</b></a>' . '<br />' . '<br />';
+
+                    echo 'Nom du produit : ' . '<a class="href_admin" href="../faq/faq02.php?id=' . $id_sous_categorie . '"><b>' . $nom . '</b></a>' . '<br />' . '<br />';
+
                 }
             }
         }
@@ -84,23 +86,38 @@ class faq extends bdd
         $result1 = $req->fetchAll();
         $result2 = $req2->fetchAll();
 
-        foreach ($result2 as $resultat) {
+        if($_SESSION){
+
+            foreach ($result2 as $resultat){
             
-            $id_question = $resultat['id'];
-            $question = $resultat['question'];
-            echo 'Question : ' . ' <a class="href_admin" href="../faq/faq03.php?id=' . $id_question . '">' . $question . '</a>' . '<br />';
+                $id_question = $resultat['id'];
+                $question = $resultat['question'];
+                $date = $resultat['dateQ'];
+                    if($_SESSION['user']['id_droits'] == 2){
 
-                foreach($result1 as $resultat){
+                        echo '<div class="container"> Question posé le : ' . $date . '<br/><b> <a class="href_admin" href="../faq/faq03.php?id=' . $id_question . '">' . $question . '</a></b></div>' . '<br />';
 
-                    $reponse = $resultat['reponse'];
-                    $id_reponse = $resultat['id_question'];
+                    }else{
 
-                        if($id_question == $id_reponse){
-                            
-                            // echo $id_question;
-                            echo  "Réponse : " . $reponse . '<br/>' . '<br/>';
+                        echo '<div class="container"> Question de : ' . ' ' . $question . '</div><br />';
+
+                    }
+                        foreach($result1 as $resultat){
+        
+                            $reponse = $resultat['reponse'];
+                            $id_reponse = $resultat['id_question'];
+        
+                                if($id_question == $id_reponse){
+                                    
+                                    // echo $id_question;
+                                    echo  "<div class='container'> Réponse : <b>" . $reponse . '</b></div><br/>' . '<br/>';
+                                }
                         }
-                }
+            }
+        }else{
+
+            header('location:http://localhost:8888/boutique/FAQ/faq.php');
+            
         }
     }
 
@@ -114,7 +131,7 @@ class faq extends bdd
 
         foreach ($result as $res) {
             $question = $res['question'];
-            echo $question;
+            echo '<b> Question : '.$question.'</b>';
         }
     }
 
@@ -132,17 +149,7 @@ class faq extends bdd
         $stmt->bindValue('id_question', $id_question, PDO::PARAM_INT);
         $stmt->execute();
         header("Refresh: 0;url=http://localhost:8888/boutique/faq/faq.php");
-
-
-        echo '<pre>';
-        var_dump($reponse);
-        var_dump($date);
-        var_dump($idUser);
-        var_dump($id_question);
-        echo '</pre>';
     }
 }
 
 // Afficher les réponses propres à chaques questions
-
-?>

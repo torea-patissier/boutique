@@ -27,17 +27,20 @@ $nbProduits = count($_SESSION['panier']['libelleProduit']);
 <main class="container">    
     <table>
     <h1>Informations pour la livraison :</h1>
+    <tr><td>
     <?php
     $voirProfil->voirInfosProfil();
+    ?>
+    </td><td>
+    <?php
     $voirAdresse->voirAdressePrincipal();
     ?>
-        <p>Délais de livraison estimé à 3 jours </p>
-
+   </td> </tr>
         <tr>
             <th>Nom de l'article </th><br />
             <th>Prix </th>
             <th>Quantité </th>
-            <th>Image </th>
+            <th class="hide-on-small-only">Image </th>
         </tr>
 
         <?php
@@ -53,7 +56,7 @@ $nbProduits = count($_SESSION['panier']['libelleProduit']);
                 }
                 ?>
                 <td> <?php echo $_SESSION['panier']['qteProduit'][$i]; ?></td><br />
-                <td><img src="../Images/<?php echo $_SESSION['panier']['libelleProduit'][$i];?>.jpg"/><br /></td>
+                <td><img class="hide-on-small-only" src="../Images/<?php echo $_SESSION['panier']['libelleProduit'][$i];?>.jpg"/><br /></td>
 
             </tr>
         <?php
@@ -66,9 +69,10 @@ $nbProduits = count($_SESSION['panier']['libelleProduit']);
             </td><br />
         </tr>
 
-    </table>
+    </table><br /><br />
     <?php require_once('../paypal.php'); ?>
 </main>
+    <!-- </body> -->
 
 <?php
 require_once('../html_partials/footer.php');
