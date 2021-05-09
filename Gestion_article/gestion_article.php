@@ -5,18 +5,22 @@ include "../Classes/gestion_article.class.php";
 $pageGestion = new GestionProduit;
 
 ?>
- <script>
-$(document).ready(function(){
-    $('select').formSelect();
-  });
-    </script>
+ 
     <main>
     <div class="container">
     <h1>Gestion Produits</h1>
     <br />
     <form action="" method="POST">
+    <div class="row">
+    <div class="col s12"> 
         <input class="btn black" type="submit" name="AjouterProduit" value="Ajouter Produit">
+    </div>
+    <br /><br /><br />
+
+    <div class="col s12"> 
         <input class="btn black" type="submit" name="tousProduits" value="Consulter Produits">
+    </div>
+    </div>
     </form>
     </div>
     <?php

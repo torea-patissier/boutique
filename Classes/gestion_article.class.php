@@ -183,7 +183,7 @@ class GestionProduit extends bdd{
 
             ?> 
             <br /><br /><br />
-            <img src="../StockageImg/<?php echo $s->nom;?>.jpg"/>
+            <img class="hide-on-small-only" src="../StockageImg/<?php echo $s->nom;?>.jpg"/>
             <div class="container">
             <div class="row">
             <form id='modifierArticle' class="col s12" action="" method="post">

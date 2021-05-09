@@ -143,3 +143,20 @@ h1,h2,h3{
     font-size: 25px;
     font-weight: 400;
 }
+
+.responsive{
+    display: flex;
+    flex-wrap: wrap;
+}
+.responsive > div{
+    list-style: none;
+    flex: 0 0 33.333333%;
+}
+
+.item{
+    width: 100%;
+
+}
+
+
+

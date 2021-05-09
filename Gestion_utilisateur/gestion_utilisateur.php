@@ -8,3 +8,4 @@ $pageModifUser->ShowIdDroits();
 echo'</main>';
 require_once('../html_partials/footer.php');
 ?>
+

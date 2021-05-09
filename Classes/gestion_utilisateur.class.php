@@ -9,9 +9,11 @@ class ModifUser extends bdd
         $stmt = $con->prepare('SELECT * FROM info_client');
         $stmt->execute();
         $result = $stmt->fetchAll();
-
-        echo '<table class="whole_table_admin">' . '<thead>';
-        echo '<th class="table_admin"> ID </th>';
+        ?>
+        <div class="container">
+        <?php
+        echo '<table class="responsive-table">' . '<thead>';
+        echo '<th class="table_admin">  ID </th>';
         echo '<th class="table_admin"> LOGIN </th>';
         echo '<th class="table_admin"> PASSWORD </th>';
         echo '<th class="table_admin"> NOM </th>';
@@ -40,6 +42,9 @@ class ModifUser extends bdd
 <?php
         }
         echo '</tbody>' . '</table>';
+        ?>
+        </div>
+        <?php
     }
 
 
