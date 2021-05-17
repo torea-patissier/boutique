@@ -147,9 +147,9 @@ class profil extends bdd{
             $prenom = $resultat['prenom'];
             $tel = $resultat['tel'];
             $mail = $resultat['email'];
-            echo '<i class="material-icons">person</i> <br />' . 'Mr,Mme : ' . $nom . ' ' . $prenom . '<br />' . '<br />';
-            echo '<i class="material-icons">phone</i> <br />' . 'Tel : ' . $tel . '<br />' . '<br />';
-            echo '<i class="material-icons">email</i> <br />' . 'Email : ' . $mail . '<br />' . '<br />';
+            echo '<i class="material-icons">person</i> <br />' . 'Mr,Mme : ' . $nom . ' ' . $prenom . '<br />';
+            echo '<i class="material-icons">phone</i> <br />' . 'Tel : ' . $tel . '<br />';
+            echo '<i class="material-icons">email</i> <br />' . 'Email : ' . $mail . '<br />';
         } 
     }
     // LES CLASSES CI DESSOUS POUR LES PLACEHOLDER DE PROFIL

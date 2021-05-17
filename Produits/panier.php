@@ -6,19 +6,22 @@ require_once('../Classes/panier.class.php');
 include '../autoloader.php';
 $product = new produits;
 $erreur = false;
+$rand = rand(0, 1000000);
+$total = montantGlobal();
 
 if (isset($_POST['envoyerCommande']) && $_SESSION['user']['id']) {
 
    $product->envoyerCommande($rand);
    $product->envoyerTotal($total, $rand);
+
    header("location:http://localhost:8888/boutique/Paiement/paiement.php");
+   
 }else{
    if (isset($_POST['envoyerCommande']) && !$_SESSION['user']['id']) {
    header("location:http://localhost:8888/boutique/Connexion/connexion.php");
    }
 }
 
-$rand = rand(0, 1000000);
 //(?) = alors // (:) = sinon
 // Si $POST action existe alors il devient POST sinon et vice versa pour GET
 $action = (isset($_POST['action']) ? $_POST['action'] : (isset($_GET['action']) ? $_GET['action'] : null));
@@ -111,8 +114,9 @@ if (!$erreur) {
                $nbProduits = count($_SESSION['panier']['libelleProduit']);
 
                if ($nbProduits <= 0) {
+                  
+                  echo 'Panier vide';
 
-                  header('location:http://localhost:8888/boutique/index.php');
                } else {
 
                   for ($i = 0; $i < $nbProduits; $i++) {
@@ -171,9 +175,5 @@ if (!$erreur) {
    </div>
 </main>
 <?php
-
-$total = montantGlobal();
-
-
 require_once('../html_partials/footer.php');
 ?>

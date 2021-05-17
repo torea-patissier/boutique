@@ -4,6 +4,10 @@ require_once('../html_partials/header.php');
 include '../autoloader.php';
 $pageProfil = new profil();
 
+if (!$_SESSION['user']) {
+    header('location:http://localhost:8888/boutique/index.php');
+    exit();
+}
 
 if (isset($_POST['deco'])) {
 

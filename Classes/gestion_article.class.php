@@ -3,8 +3,6 @@ require_once('../Classes/bdd.class.php');
 
 class gestion_article extends bdd{
 
-
-    // Selectionner la catégorie en Bdd
     function selectCategory()
     {
         $con = $this->connectDb(); // Connexion Db 
@@ -20,7 +18,7 @@ class gestion_article extends bdd{
         
         }
     }
-    // Selectionner la Sous-catégorie en Bdd
+
     function selectSCategory()
     {
         $con = $this->connectDb(); // Connexion Db 
@@ -36,180 +34,230 @@ class gestion_article extends bdd{
         
         }
     }
-    // Ajouter un produit en Bdd COMPREND LES IMAGES
+
     public function ajoutProduitBdd()
     {
-            $nomProduit = htmlspecialchars($_POST['nom_produit']);
-            $prixProduit = htmlspecialchars($_POST['prix_produit']);
-            $descriptionProduit = htmlspecialchars($_POST['description_produit']);
-            $idCategorie = htmlspecialchars($_POST['Categorie']);
-            $idSCategorie = htmlspecialchars($_POST['SCategorie']);
-            $stockProduit = htmlspecialchars($_POST['stock_produit']);
-            //Insérer une image correspond au nom du produit dans le formulaire
-            $img = $_FILES['img']['name'];
-            // Image temporaire stocké 
-            $img_tmp = $_FILES['img']['tmp_name'];
+        $nomProduit = htmlspecialchars($_POST['nom_produit']);
+        $prixProduit = htmlspecialchars($_POST['prix_produit']);
+        $descriptionProduit = htmlspecialchars($_POST['description_produit']);
+        $idCategorie = htmlspecialchars($_POST['Categorie']);
+        $idSCategorie = htmlspecialchars($_POST['SCategorie']);
+        $stockProduit = htmlspecialchars($_POST['stock_produit']);
+        
+        //Traitement de l'image
+        
+        $Img = $_FILES["Img"]["name"];
+        $img_Tmp = $_FILES["Img"]["tmp_name"];
 
-                if(!empty($img_tmp)){
+        if(!empty($img_Tmp)){
 
-                    $con = $this->connectDb();
-                    $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock)");
-                    $req->bindValue("nom", $nomProduit, PDO::PARAM_STR);
-                    $req->bindValue("prix", $prixProduit, PDO::PARAM_STR);
-                    $req->bindValue("description", $descriptionProduit, PDO::PARAM_STR);
-                    $req->bindValue("id_categorie", $idCategorie, PDO::PARAM_INT);
-                    $req->bindValue("id_sous_categorie", $idSCategorie, PDO::PARAM_INT);
-                    $req->bindValue("stock", $stockProduit, PDO::PARAM_INT);
-                    $req->execute();
-                    //Crée un array avec $image[0] et $img[1] l'extension
-                    $image = explode('.',$img); 
-                    //Extension
-                    $image_ext = end($image);
+            $img_Name = explode(".", $Img);
+            $img_Ext = end($img_Name);
 
+            if(in_array(strtolower($img_Ext),array("png", "jpg", "jpeg")) === false){
 
-                    if(in_array(strtolower($image_ext),array('png','jpg','jpeg'))===false){
-                        echo 'Veuillez rentrer une image au format png, jpg, jpeg';
-                    }else{
-                        $image_size = getimagesize($img_tmp);
-                        // Le print_r renvoi Array ( [0] => 2400 [1] => 1600 [2] => 2 [3] => width="2400" height="1600" [bits] => 8 [channels] => 3 [mime] => image/jpeg )
-                        // print_r($image_size);
+                echo "L'image insérée doit avoir pour extension : .png, .jpg, .jpeg";
 
-                        // Si l'image est au format JPG ou JPEG
-                        if($image_size['mime'] == 'image/jpeg'){
-                            // On attribut à la $image_src le format JPEG
-                            $image_src = imagecreatefromjpeg($img_tmp);
+            }else{
 
-                        // Si l'image est au format PNG
-                        }elseif($image_size['mime'] == 'image/png'){
+                $img_Size = getimagesize($img_Tmp);
 
-                            // On attribut à la $image_src le format PNG
-                            $image_src = imagecreatefrompng($img_tmp);
+                if($img_Size["mime"] == "image/jpeg"){
 
-                        }else{
-                            // Si c'est un autre format on renvoi false;
-                            $image_src = false;
-                            echo'Veuillez rentrer une image valide';
+                    $img_Src = imagecreatefromjpeg($img_Tmp);
 
-                        }
+                }else if ($img_Size["mime"] == "image/png"){
 
-                        // Redimension de l'image en 400x400
-                        if($image_src !== false){
+                    $img_Src = imagecreatefrompng($img_Tmp);
 
-                            $image_width = 200;
-
-                            if($image_size[0] == $image_width){
-
-                                $image_finale = $image_src;
-
-                            }else{
-
-                                $new_width[0] = $image_width;
-
-                                $new_height[1] = 200;
-
-                                $image_finale = imagecreatetruecolor($new_width[0],$new_height[1]);
-
-                                imagecopyresampled($image_finale,$image_src,0,0,0,0,$new_width[0],$new_height[1],$image_size[0],$image_size[1]);
-                            }
-                        }
-                        imagejpeg($image_finale,'../Images/' . $nomProduit . '.jpg');
-
-                    }
-                
                 }else{
 
-                    echo 'Veuillez rentrer une image <br /> <br />';
-                    return false;
+                    $img_Src = false;
+                    echo "Veuillez rentrer une image valide";
                 }
 
+                if($img_Src !== false){
 
+                    $img_Width = 1000;
+
+                    if($img_Size[0] == $img_Width){
+
+                        $img_Finale = $img_Src;
+
+                    }else{
+
+                        $new_Width[0] = $img_Width;
+
+                        $new_Height[1] = 1000;
+
+                        $img_Finale = imagecreatetruecolor($new_Width[0], $new_Height[1]);
+
+                        imagecopyresampled($img_Finale, $img_Src, 0, 0, 0, 0, $new_Width[0], $new_Height[1], $img_Size[0], $img_Size[1]);
+
+                    }
+
+                    imagejpeg($img_Finale, "../Images/" .addslashes($nomProduit). ".jpg");
+                }
+            }
+
+        }else{
+            echo "Veuillez insérer une image à votre Produit.";
+        }
+        
+        //Fin du traitement de l'image
+
+        // <!-- POUR AFFICHER L'IMAGE ON A JUSTE A FAIRE DANS NOTRE BOUCLE D'AFFICHAGE <img src="../Images/php echo $result->nomProduit; .jpg"/>
+
+        $con = $this->connectDb();
+        $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock)");
+        $req->bindValue("nom", $nomProduit, PDO::PARAM_STR);
+        $req->bindValue("prix", $prixProduit, PDO::PARAM_STR);
+        $req->bindValue("description", $descriptionProduit, PDO::PARAM_STR);
+        $req->bindValue("id_categorie", $idCategorie, PDO::PARAM_INT);
+        $req->bindValue("id_sous_categorie", $idSCategorie, PDO::PARAM_INT);
+        $req->bindValue("stock", $stockProduit, PDO::PARAM_INT);
+        
+        $req->execute();
     }
 
-    // Pour voir/ modifier/ supprimer un article en Bdd
-    public function viewModifyDeleteArticle()
+    public function viewAllProduits()
     {
-        // Connexion classique à la Bdd
         $con = $this->connectDb();
         $request = $con->prepare("SELECT * FROM produits");
         $request->execute();
-
-        // Permet d'afficher un lien pour modifier ou supprimer un article en Bdd 
-        // Plus sympa que la boucle FOR
+        echo "<br /><br /><br />";
+        echo "<div class='rox'>";
+        echo "<table class='responsive-table' ><thead>";
+        echo "<th>Image Produit</th>";
+        echo "<th>Nom Produit</th>";
+        echo "<th>Prix Produit</th>";
+        echo '<th class="hide-on-med-and-down">Description Produit</th>';
+        echo "<th>Id Catégorie</th>";
+        echo "<th>Id Sous Catégorie</th>";
+        echo "<th>N° en Stock</th>";
+        echo "</thead><tbody>";
         while($r = $request->fetch(PDO::FETCH_OBJ)){
-            echo $r->nom;
-            echo $r->prix;
-            echo $r->description;
-            echo $r->id;
+        
+        
+            echo "<tr>";
+            echo "<td><img src='../Images/" . addslashes($r->nom) .".jpg' width='100px' height='100px'/></td>";
+            echo "<td>" . $r->nom . "</td>";
+            echo "<td>" . $r->prix . "€</td>";
+            echo "<td class='hide-on-med-and-down'>" . $r->description . "</td>";
+            echo "<td>" . $r->id_categorie . "</td>";
+            echo "<td>" . $r->id_sous_categorie . "</td>";
+            echo "<td>" . $r->stock . "</td>";
+            echo "<td><a href='?show=" . $r->id . "'>Modifier</a><br/>";
+            echo "<a href='?action=delete&amp;id=" . $r->id . "'>Supprimer</a></td>";
+            echo "</tr>";
+        }
+        echo "</tbody></table></div>";
+    }
+
+    public function ModifierProduit()
+    {   
+            $id = $_GET["show"];
+            $con = $this->connectDb();
+            $product = htmlspecialchars($_GET['show']);
+            $request = $con->prepare("SELECT * FROM produits WHERE id = :id"); // Requête SQL
+            $request->bindValue("id", $id, PDO::PARAM_INT);
+            $request->execute(); // On execute
+
+            $s = $request->fetch(PDO::FETCH_OBJ);  // Résultat stocké dans la $S
+
             ?> 
-            <a href="?action=modify&amp;id=<?php echo $r->id; ?>">Modifier</a>
-            <a href="?action=delete&amp;id=<?php echo $r->id; ?>">Supprimer</a><br/><br />
-            <?php 
-        }
-        // Supprimer un article de la Bdd
-        if(isset($_GET['action'])&&($_GET['action']== 'delete')){
-            $id = $_GET['id'];
-            $req = $con->prepare("DELETE FROM produits WHERE id = '". $id ."' ");
-            $req->execute();
-            header("Location://localhost:8888/boutique/Gestion_article/gestion_article.php");
-        }
+            <br /><br /><br />
+                <div class="container">
+                    <div class="center-align">
+                        <img class="hide-on-small-only" src="../Images/<?php echo $s->nom;?>.jpg" width="500px" height="500px"/><br/><br/>
+                        <img class="hide-on-med-and-up" src="../Images/<?php echo $s->nom;?>.jpg" width="290px" height="290px"/><br/><br/>
+                    </div>
+            <div class="row">
+            <form id='modifierArticle' class="col s12" action="" method="post">
+                <div class="input-field col s12 m4 l4">
+                    <label>Titre :</label><br/><br />
+                    <input type="text" name="nom" value="<?php echo $s->nom;?>"><br/><br />
+                </div>
+                <div class="input-field col s12 m4 l4">
+                <label>Description :</label><br/><br />
+                <textarea name="description" rows="4" cols="50"><?php echo $s->description;?></textarea><br/><br />
+                </div>
 
+                <div class="input-field col s12 m4 l4">
+                <label>Prix :</label><br/><br />
+                <input type="text" name="prix" value="<?php echo $s->prix;?>"><br/><br />
+                </div>
 
-        // Modifier un article en Bdd si on appuie sur le bouton modifier
-        if(isset($_GET['action'])&&($_GET['action']== 'modify')){
+                <div class="input-field col s12 m4 l4">
+                <label>ID Categorie :</label><br/><br />
+                <input type="text" name="id_categorie" value="<?php echo $s->id_categorie;?>"><br/><br />
+                </div>
 
-            $id = $_GET['id'];
+                <div class="input-field col s12 m4 l4">
+                <label>ID Sous-catégorie :</label><br/><br />
+                <input type="text" name="id_sous_categorie" value="<?php echo $s->id_sous_categorie;?>"><br/><br />
+                </div>
+
+                <div class="input-field col s12 m4 l4">
+                <label>Stock :</label><br/><br />
+                <input type="text" name="stock" value="<?php echo $s->stock;?>"><br/><br />
+                </div><br/>
+
+                <input class="btn black center-align" type="submit" name="envoyer" value="Modifier"><br/><br />
+            </form>
+            </div>
+            </div>
+
+            <?php
             // Si on appuie sur modifier
             if(isset($_POST['envoyer'])){
                 
-                $nom = $_POST['nom'];
-                $description = $_POST['description'];
-                $prix = $_POST['prix'];
-                $id_categorie = $_POST['id_categorie'];
-                $id_sous_categorie = $_POST['id_sous_categorie'];
-                $stock = $_POST['stock'];
+
+                $nom = htmlspecialchars(addslashes($_POST['nom']));
+                $description = htmlspecialchars(addslashes($_POST['description']));
+                $prix = htmlspecialchars($_POST['prix']);
+                $id_categorie = htmlspecialchars($_POST['id_categorie']);
+                $id_sous_categorie = htmlspecialchars($_POST['id_sous_categorie']);
+                $stock = htmlspecialchars($_POST['stock']);
 
                 // Requête de modification
                 //UPDATE produits SET nom = 'coco', prix = 10, description = 'Oui', id_categorie = 21, id_sous_categorie = 22, stock = 23, chemin_image = 0 WHERE id = 36
 
-                $update = $con->prepare("UPDATE produits SET nom = '$nom', prix = $prix, description = '$description', id_categorie = $id_categorie, id_sous_categorie = $id_sous_categorie, stock = $stock WHERE id = '" . $id . "' ");
-                $update->execute(); 
-                header("location:gestion_article.php");
+                $update = $con->prepare("UPDATE produits SET nom = :nom, prix = :prix, description = :description, id_categorie = :id_categorie,
+                 id_sous_categorie = :id_sous_categorie, stock = :stock WHERE id = :id ");
+                $update->bindValue("nom", $nom, PDO::PARAM_STR);
+                $update->bindValue("prix", $prix, PDO::PARAM_INT);
+                $update->bindValue("description", $description, PDO::PARAM_STR);
+                $update->bindValue("id_categorie", $id_categorie, PDO::PARAM_INT);
+                $update->bindValue("id_sous_categorie", $id_sous_categorie, PDO::PARAM_INT);
+                $update->bindValue("stock", $stock, PDO::PARAM_INT);
+                $update->bindValue("id", $id, PDO::PARAM_INT);
+                $update->execute();
+
+                //REFRESH / HEADER LOCATION AVEC JAVASCRIPT
+                $pageGestion = new gestion_article;
+                echo '<script language="Javascript"> document.location.replace("http://localhost:8888/boutique/Gestion_article/gestion_article.php"); </script>';
+                $pageGestion -> viewAllProduits();
+
+
 
 
             }
+    }
 
-            
-            // Afficher le formulaire de modification avec les valeurs de la Bdd en VALUE
-            $select = $con->prepare("SELECT * FROM produits WHERE id = '" . $id . "' ");
-            $select->execute();
+    public function DeleteProduit(){
+        $con = $this->connectDb();
 
-            $data = $select->fetch(PDO::FETCH_OBJ); 
-
-            ?>
-            <form action="" method="post">
-            <label>Titre :</label><br/><br />
-            <input type="text" name="nom" value="<?php echo $data->nom;?>"><br/><br />
-
-            <label>Description :</label><br/><br />
-            <textarea name="description" rows="4" cols="50"><?php echo $data->description;?></textarea><br/><br />
-
-            <label>Prix :</label><br/><br />
-            <input type="text" name="prix" value="<?php echo $data->prix;?>"><br/><br />
-
-            <label>ID Categorie :</label><br/><br />
-            <input type="text" name="id_categorie" value="<?php echo $data->id_categorie;?>"><br/><br />
-
-            <label>ID Sous-catégorie :</label><br/><br />
-            <input type="text" name="id_sous_categorie" value="<?php echo $data->id_sous_categorie;?>"><br/><br />
-
-            <label>Stock :</label><br/><br />
-            <input type="text" name="stock" value="<?php echo $data->stock;?>"><br/><br />
-
-            <input type="submit" name="envoyer" value="Modifier"><br/><br />
-            </form>
-            <?php
-        }
+                // Supprimer un article de la Bdd
+                if(isset($_GET['action'])&&($_GET['action']== 'delete')){
+                    $id = htmlspecialchars($_GET['id']);
+                    $req = $con->prepare("DELETE FROM produits WHERE id = :id ");
+                    $req->bindValue("id", $id, PDO::PARAM_INT);
+                    $req->execute(); 
+                    header('location:http://localhost:8888/boutique/Gestion_article/gestion_article.php');
+                }
     }
 
 }
+
 ?>

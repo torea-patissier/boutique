@@ -1,7 +1,17 @@
+main{
+    min-height: 400px;
+}
 
-/* body */
+/* Produits */
+.divProduits{
+    display:flex;
+    flex-direction:row;  
+    flex-wrap: wrap;
 
-
+}
+.coco{
+    padding: 30px;
+}
 
 /* Historique_commande */
 .tableCommande{

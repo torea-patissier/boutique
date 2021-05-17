@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 require_once('../html_partials/header.php');
@@ -10,11 +9,8 @@ if ($id_droits != 2) {
 }
 
 echo'<main class="paginationArticles1">';
-?>
-<h1 class="container">Gestion des utilisateurs : </h1><br/><br/>
-<?php
-$pageModifUser = new gestion_utilisateur();
-$pageModifUser->ShowIdDroits();
+$pageModifUser = new modifier_utilisateur();
+$pageModifUser->ShowUtilisateur();
 echo'</main>';
 require_once('../html_partials/footer.php');
 ?>

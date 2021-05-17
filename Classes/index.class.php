@@ -66,7 +66,7 @@ class index extends bdd
                     $s = $request->fetch(PDO::FETCH_OBJ);  // Résultat stocké dans la $S
 
                 ?>
-                    <img src="Images/<?php echo $s->nom; ?>.jpg" /><br /><br />
+                    <img src="Images/<?php echo $s->nom; ?>.jpg"  width="200px" height="200px" /><br /><br />
                     <p>Nom : <?php echo $s->nom; ?> </p><br />
                     <h2>Description : <?php echo $s->description; ?></h2>
                     <h3> Prix :<?php echo $s->prix; ?>€</h3>
@@ -91,7 +91,7 @@ class index extends bdd
                         <!-- On récupère l'ID d'un article pour l'ajouter à show -->
                         <div class="hide-on-small-only">
                             <div id="pIndex">
-                                        <a href="Produits/produits.php?show=<?php echo $r->nom; ?>"><img src="Images/<?php echo $r->nom; ?>.jpg" /></a>
+                                        <a href="Produits/produits.php?show=<?php echo $r->nom; ?>"><img src="Images/<?php echo $r->nom; ?>.jpg"  width="200px" height="200px"/></a>
                                         <a href="Produits/produits.php?show=<?php echo $r->nom; ?>">
                                             <h3><?php echo $r->nom; ?></h3>
                                         </a>
@@ -134,7 +134,7 @@ class index extends bdd
                     $s = $request->fetch(PDO::FETCH_OBJ);  // Résultat stocké dans la $S
 
                 ?>
-                    <img src="Images/<?php echo $s->nom; ?>.jpg" /><br /><br />
+                    <img src="Images/<?php echo $s->nom; ?>.jpg"  width="200px" height="200px"/><br /><br />
                     <p>Nom : <?php echo $s->nom; ?> </p><br />
                     <h2>Description : <?php echo $s->description; ?></h2>
                     <h3> Prix :<?php echo $s->prix; ?>€</h3>
@@ -159,7 +159,7 @@ class index extends bdd
                         <!-- On récupère l'ID d'un article pour l'ajouter à show -->
                         <div class="hide-on-med-and-up">
                             <div class="center-align">
-                                        <a href="Produits/produits.php?show=<?php echo $r->nom; ?>"><img src="Images/<?php echo $r->nom; ?>.jpg" /></a>
+                                        <a href="Produits/produits.php?show=<?php echo $r->nom; ?>"><img src="Images/<?php echo $r->nom; ?>.jpg"  width="200px" height="200px"/></a>
                                         <a href="Produits/produits.php?show=<?php echo $r->nom; ?>">
                                             <h3><?php echo $r->nom; ?></h3>
                                         </a>

@@ -51,8 +51,8 @@ if (!isset($_SESSION['user'])) {
                 <li><a class="waves-effect" href="Contact/contact.php"><i class="material-icons">contact_page</i>Contact</a></li><br />
                 <li><a class="waves-effect" href="FAQ/faq.php"><i class="material-icons">contact_support</i>FAQ</a></li><br />
                 <li><a class="waves-effect" href="Profil/profil.php"><i class="material-icons">person</i>Profil</a></li><br />
-                <li><a class="waves-effect" href="Produits/panier.php"><i class="material-icons">shopping_cart</i>Panier</a></li><br />
-            </ul>
+                <li><a class="waves-effect" href="Produits/panier.php"><i class="material-icons">shopping_cart</i>Panier</a></li><br />                
+                </ul>
             <a data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </header>
     <?php }
@@ -72,8 +72,8 @@ if (!isset($_SESSION['user'])) {
                 <li><a class="waves-effect" href="Contact/contact.php"><i class="material-icons">contact_page</i>Contact</a></li><br />
                 <li><a class="waves-effect" href="FAQ/faq.php"><i class="material-icons">contact_support</i>FAQ</a></li><br />
                 <li><a class="waves-effect" href="Connexion/connexion.php"><i class="material-icons">person</i>Connexion</a></li><br />
-                <li><a class="waves-effect" href="Produits/panier.php"><i class="material-icons">shopping_cart</i>Panier</a></li><br />
-            </ul>
+                <li><a class="waves-effect" href="Produits/panier.php"><i class="material-icons">shopping_cart</i>Panier</a></li><br />                
+                </ul>
             <a data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </header>
     <?php }

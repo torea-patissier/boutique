@@ -4,11 +4,7 @@ require_once('../html_partials/header.php');
 include '../autoloader.php';
 $pageFaq = new faq;
 ?>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('select').formSelect();
-    });
-</script>
+
 <main class="container">
 
     <h4>Vous avez une question à poser ?</h4><br />

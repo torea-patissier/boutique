@@ -15,7 +15,7 @@
                     <div class="row">
 
                         <li><a class="grey-text text-lighten-3 col 6" href="https://www.facebook.com/CopenhagenGrooming"><i class="material-icons">facebook</i> <br />Réseaux</a></li>
-                        <li><a class="grey-text text-lighten-3 col 6" href="FAQ/faq.php"><i class="material-icons">local_shipping</i> <br />Livraison</a></li>
+                        <li><a class="grey-text text-lighten-3 col 6" href="Adresse/adresse.php"><i class="material-icons">local_shipping</i> <br />Livraison</a></li>
                     </div>
                 </ul>
             </div>

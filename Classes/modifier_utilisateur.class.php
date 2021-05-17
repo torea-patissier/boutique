@@ -18,13 +18,21 @@ class modifier_utilisateur extends bdd
             $id_droits = $value['id_droits'];
 ?>
             <form action="" method="POST">
+            <div class="container">
+            <div class="input-field col s4 m4 l4">
                 <label>Login</label><br />
                 <input type="text" name="login" value="<?php echo $login; ?>"><br />
+            </div>
+            <div class="input-field col s4 m4 l4">
                 <label>Mail</label><br />
                 <input type="text" name="email" value="<?php echo $email; ?>"><br />
+            </div>
+            <div class="input-field col s4 m4 l4">
                 <label>ID droit</label><br />
                 <input type="text" name="id_droits" value="<?php echo $id_droits; ?>"><br />
-                <input type="submit" name="modifier" value="Modifier">
+            </div>
+                <input class="btn black" type="submit" name="modifier" value="Modifier">
+            </div>
             </form>
 <?php
             if (isset($_POST['modifier'])) {

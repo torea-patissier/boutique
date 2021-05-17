@@ -14,10 +14,8 @@ class codes_promo extends bdd {
         $req -> execute();
         $result = $req->fetchAll();
 
-        var_dump($result);
-
         if (!empty($result)){
-            echo "Le Code Promo indiqué figure déjà dans votre base de données, veuillez le renommer.";
+            echo "<br/><b><div class='container'>Le Code Promo indiqué figure déjà dans votre base de données, veuillez le renommer.</div>";
             return false;
         }else{
 
@@ -71,9 +69,9 @@ class codes_promo extends bdd {
 
         $valeur = $result['valeur_code'];
 
-        $resultatF = $prix - 100 * $valeur;
+        $resultatF = $prix * (1 - $valeur / 100);
 
-        echo $resultatF;
+        echo '<br/><br/><h5><div class = "container">'.$resultatF.'</div></h5>';
 
 
     }

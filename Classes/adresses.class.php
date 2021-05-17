@@ -15,7 +15,7 @@ class adresses extends bdd
         $stmt->execute();
         $result = $stmt->fetchAll();
         if ($result != null) {
-            echo '<i>Pour modifier votre adresse actuelle vous devez supprimer l\'ancienne</i>';
+            echo '<i>Vous avez droit à une seule adresse de livraison</i>';
             return false;
         } else {
 
