@@ -16,7 +16,7 @@ $value = $_GET['id'];
     <form action="faq03.php?id=<?php echo $value; ?>" method="POST">
         <div class="row">
             <div class="col s12 m12 l12">
-                <textarea name="reponse" rows="10" cols="15"  placeholder="Répondre ici"></textarea><br /><br />
+                <textarea name="reponse" rows="30" cols="15"  placeholder="Répondre ici"></textarea><br /><br />
             </div>
         </div>
         <input class="btn black" type="submit" name="answer">

@@ -141,13 +141,14 @@ function MontantGlobal(){
 
    $total=0; // On initialise une var à 0
 
-   for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++)
-   {
-      $total += $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];
-      // Cette var += quantité d'un produit X prix du ou des produits ajouté dans le panier
+      for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++)
+      {
+         $total += $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];
+         // Cette var += quantité d'un produit X prix du ou des produits ajouté dans le panier
+      }
+      return $total;  // Retourne le résultat
    }
-   return $total;  // Retourne le résultat
-}
+
 
 
 /**

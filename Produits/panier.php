@@ -9,6 +9,7 @@ $erreur = false;
 $rand = rand(0, 1000000);
 $total = montantGlobal();
 
+
 if (isset($_POST['envoyerCommande']) && $_SESSION['user']['id']) {
 
    $product->envoyerCommande($rand);
@@ -115,7 +116,7 @@ if (!$erreur) {
 
                if ($nbProduits <= 0) {
                   
-                  echo 'Panier vide';
+                  echo '<b class="container red-text">Panier vide</b>';
 
                } else {
 
@@ -145,7 +146,10 @@ if (!$erreur) {
 
                   <tr>
                      <td>
-                        <p> Total : <?php echo montantGlobal(); ?> € </p>
+                        <p> Total : <?php 
+                           echo montantGlobal(); 
+                        ?>
+                        € </p>
                      </td>
                   </tr>
 
@@ -175,5 +179,9 @@ if (!$erreur) {
    </div>
 </main>
 <?php
+if(!$_SESSION['panier']['libelleProduit']){
+   header('location:http://localhost:8888/boutique/index.php');
+}
+
 require_once('../html_partials/footer.php');
 ?>

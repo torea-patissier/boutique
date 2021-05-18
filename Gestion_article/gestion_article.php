@@ -90,7 +90,7 @@ if (isset($_POST["upload"])) {
 
                     <p class="left-align">Chemin vers image du produit :</p>
                     <input type="file" name="Img"><br /><br />
-                    <input class="btn black" type="submit" name="upload" value="Télécharger">
+                    <input class="btn black" type="submit" name="upload" value="Valider">
                 </div>
             </div>
 
