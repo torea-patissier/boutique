@@ -23,4 +23,3 @@ $pageConnexion = new connexion();
     }
     require_once('../html_partials/footer.php');
 ?>
-?>

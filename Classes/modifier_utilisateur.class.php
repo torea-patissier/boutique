@@ -1,7 +1,7 @@
 <?php
 require_once('bdd.class.php');
 
-class ModifUser extends bdd
+class modifier_utilisateur extends bdd
 {
     public function ShowUtilisateur()
     {

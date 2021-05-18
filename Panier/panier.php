@@ -1,6 +1,7 @@
 <?php
 session_start();
-include_once("../Classes/panier.class.php");
+require_once('../html_partials/header.php');
+include '../autoloader.php';
 
 $erreur = false;
 
@@ -47,7 +48,7 @@ if (!$erreur){
       Case "refresh" :
          for ($i = 0 ; $i < count($QteArticle) ; $i++)
          {
-           modifierQteArticle($_SESSION['panier']['libelleProduit'][$i],round($QteArticle[$i]));
+            modifierQTeArticle($_SESSION['panier']['libelleProduit'][$i],round($QteArticle[$i]));
          }
          break;
 
@@ -75,8 +76,8 @@ echo '<?xml version="1.0" encoding="utf-8"?>';?>
         <td>Prix Unitaire</td>
         <td>Action</td>
     </tr>
-    <a href="panier.php?action=ajout&amp;l=LIBELLEPRODUIT&amp;q=QUANTITEPRODUIT&amp;p=PRIXPRODUIT" onclick="window.open(this.href, '', 
-'toolbar=no, location=no, directories=no, status=yes, scrollbars=yes, resizable=yes, copyhistory=no, width=600, height=350'); return false;">Ajouter au panier</a>
+
+
     <?php
     if (creationPanier())
     {
@@ -110,5 +111,5 @@ echo '<?xml version="1.0" encoding="utf-8"?>';?>
     ?>
 </table>
 </form>
-</body>
-</html>
+
+<?php require_once('../html_partials/footer.php'); ?>

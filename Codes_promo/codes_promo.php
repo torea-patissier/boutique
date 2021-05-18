@@ -1,8 +1,14 @@
 <?php 
 session_start();
-include "../Classes/codes_promo.class.php"; 
+include '../autoloader.php';
 require_once('../html_partials/header.php');
-$pageCPromo = new codePromo;
+$pageCPromo = new codes_promo;
+
+if ($id_droits != 2) {
+    header('location:http://localhost/boutique/Error/404.php');
+    exit();
+}
+
 ?>
 
 
@@ -11,7 +17,7 @@ $pageCPromo = new codePromo;
     <?php $pageCPromo->showCodePromo(); ?>
 
     <br /><br /><br />
-    <p>Ajouter noveau code promo</p>
+    <p>Ajouter nouveau code promo</p>
     <form action="codes_promo.php" method="POST">
     <div class="input-field col s4 m4 l4">
         <input type="text" name="code" placeholder="Nom du nouveau code">

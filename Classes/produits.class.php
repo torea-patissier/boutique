@@ -11,7 +11,7 @@ class produits extends bdd
         // ICI ON VERRA CE QUE CONTIENT UNE SEUL ARTICLE
         // Si on appuie sur show
         if(isset($_GET['show'])){
-
+            
             $product = $_GET['show'];             // GET stocké dans une variable
             $request = $con->prepare("SELECT * FROM produits WHERE nom = '" . $product . "' "); // Requête SQL
             $request->execute(); // On execute
@@ -19,114 +19,58 @@ class produits extends bdd
             $s = $request->fetch(PDO::FETCH_OBJ);  // Résultat stocké dans la $S
 
             ?>
-            <div class="container">
-            <div class="produit_s">
-            <img src="../StockageImg/<?php echo $s->nom;?>.jpg" width="500px" height="500px"/>
-            <p class="p_nom"><?php echo $s->nom;?>  </p>
-            <p class="p_description"><?php echo $s->description;?></p>
-            <p class="p_prix"><b><?php echo $s->prix;?>€</b></p>
-            
-            
-            
-            <?php
-
+            <div class="row ">
+            <div class="kiki col s12 center-align ">
+            <img class="hide-on-small-only" src="../Images/<?php echo $s->nom;?>.jpg"  width="500px" height="500px"/>
+            <img class="hide-on-med-and-up"src="../Images/<?php echo $s->nom;?>.jpg"  width="250px" height="250px"/>
+                <h2>Nom : <?php echo $s->nom;?></h2>
+                <h3 class="hide-on-med-and-down">Description : <br/><h5 class="hide-on-med-and-down"> <?php echo $s->description;?><h5></h3>
+                <h4> Prix :  <?php echo $s->prix;?> €</h4>                
+                <?php
+                
                 if($s->stock > 10){ // Si le stock > 10 on affiche le produit, sinon on affiche la rupture de stock
-            
-                   ?> 
+                    
+                    ?> 
                     <!-- l=titre // q=1 par défaut car on ajoute 1 quantité au panier // p=prix -->
-                    <a id="produits_ajoutPanier" class="waves-effect waves-light btn grey darken-4" href="panier.php?action=ajout&amp;l=<?php echo $s->nom;?>&amp;q=1&amp;p=<?php echo $s->prix;?>&amp;i=<?php echo $s->id?>">Ajouter au panier</a>
+                    <a class="btn black" href="panier.php?action=ajout&amp;l=<?php echo $s->nom;?>&amp;q=1&amp;p=<?php echo $s->prix;?>&amp;i=<?php echo $s->id?>">Ajouter au panier</a>
                     <!-- Dans ce href TOUT doit être collé -->
-                    </div>
-            </div>
                     <?php
                     }else{
-                
-                    echo ' <h3> Produit en rupture de stock </h3>';
-                }
+                        
+                        echo ' <h3> Produit en rupture de stock </h3>';
+                    }
+                    echo'</div></div>';
 
         }else{
             // ICI ON VERRA TOUS LES ARTICLES STOCKE EN BDD
-            ?><div class="responsive"><?php 
-
             
             while ($r = $request->fetch(PDO::FETCH_OBJ)) { // Boucle while pour récup les éléments de produits
-                ?>
-                <!-- //Debut Grand Affichage  -->
-                <?php
-                $lenght = 50;// Cette $ pour limiter a 50 caractères le nb de lettres affiché pour la description
-                $description = $r->description; // On stock dans une var 
-                $new_description = substr($description,0,$lenght).'...';
-                $descriptionFinale = wordwrap($new_description,100,'<br />',false); // ICI à chaque 100 caractères on revient à la ligne
-
-            ?>
-
 
                 
-                <!-- On récupère l'ID d'un article pour l'ajouter à show -->
-
-                    <div class="item">
-                    <a href="?show=<?php echo $r->nom;?>"> <img src="../StockageImg/<?php echo $r->nom;?>.jpg" width="250px" height=" 250px"/></a><br />
-                    <a href="?show=<?php echo $r->nom;?>"> <p class="pdt_nom_href"><?php echo $r->nom; ?></p></a>
-                    <p class="pdts_prix"><b> <?php echo $r->prix; ?>€<b/></h5>
-                    <br />
-
-
-
-                
-                <!-- HREF pour ajouter un produit au panier + redirection sur panier.php IL FAUT PRENDRE EN COMPTE QU'IL N Y A PAS D ESPACE -->
-            
-                <?php if($r->stock > 10){ // Si le stock > 10 on affiche le bouton d'ajout au panier, sinon on affiche la rupture de stock
-                    ?>
-                    <a class="btn black" href="panier.php?action=ajout&amp;l=<?php echo $r->nom;?>&amp;q=1&amp;p=<?php echo $r->prix;?>&amp;i=<?php echo $r->id?>">Ajouter au panier</a>
-                    </div>
-
-                    <br />
-                    <br />
-                    <br />
-                    <?php
-                }else{
-                    echo '<h3> Produit en rupture de stock </h3>';
-                }
-                ?>
-                </div>
-
-                <!-- //Fin grand Affichage -->
-
-                <!-- //Debut petit Affichage -->
-                <div class="hide-on-large-only">
-                <?php
-                $lenght = 50;// Cette $ pour limiter a 50 caractères le nb de lettres affiché pour la description
+                echo'<div class="row">';
+                echo'<div class="coco col s12 m3 l12">';
+                $lenght = 10;// Cette $ pour limiter a 50 caractères le nb de lettres affiché pour la description
                 $description = $r->description; // On stock dans une var 
                 $new_description = substr($description,0,$lenght).'...';
-                $descriptionFinale = wordwrap($new_description,100,'<br />',false); // ICI à chaque 100 caractères on revient à la ligne
+                $descriptionFinale = wordwrap($new_description,10,'<br />',false); // ICI à chaque 100 caractères on revient à la ligne
 
             ?>
-
-            
                 <!-- On récupère l'ID d'un article pour l'ajouter à show -->
-                <a href="?show=<?php echo $r->nom;?>"> <img src="../StockageImg/<?php echo $r->nom;?>.jpg" width="250px" height=" 250px"/></a><br />
-                <a href="?show=<?php echo $r->nom;?>"> <p class="pdt_nom_href"><?php echo $r->nom; ?></p></a>
-                <p class="pdts_prix"><b> <?php echo $r->prix; ?>€<b/></h5>
-                <br />
-
+                <a href="?show=<?php echo $r->nom;?>"> <img src="../Images/<?php echo $r->nom;?>.jpg" width="300px" height="300px"/></a><br />
+                <a href="?show=<?php echo $r->nom;?>"> <h2><?php echo $r->nom; ?></h2></a>
+                <h5> <?php echo $r->prix; ?>€</h5><br/>
                 <!-- HREF pour ajouter un produit au panier + redirection sur panier.php IL FAUT PRENDRE EN COMPTE QU'IL N Y A PAS D ESPACE -->
-            
+                
                 <?php if($r->stock > 10){ // Si le stock > 10 on affiche le produit, sinon on affiche la rupture de stock
                     ?>
                     <a class="btn black" href="panier.php?action=ajout&amp;l=<?php echo $r->nom;?>&amp;q=1&amp;p=<?php echo $r->prix;?>&amp;i=<?php echo $r->id?>">Ajouter au panier</a>
-                    <br />
-                    <br />
-                    <br />
+                    <br/><br/>
                     <?php
                 }else{
                     echo ' <h3> Produit en rupture de stock </h3>';
                 }
-                ?>
-                </div></div>
-                <?php
-                // Fin Petit Affichage
+                echo'</div></div><br/>';
             }
-            ?>  <?php
         }
     }
 
@@ -143,10 +87,10 @@ class produits extends bdd
             <?php
             while ($r = $request->fetch(PDO::FETCH_OBJ)) {
             ?>
-                <img src="../StockageImg/<?php echo $r->nom;?>.jpg"/><br />
-                <p class="p_nom"> <?php echo $r->nom; ?> </p>
-                <p class="p_description"> <?php echo $r->description; ?> </p>
-                <p class="p_prix"> <?php echo $r->prix; ?>€</p>
+                <img src="../Images/<?php echo $r->nom;?>.jpg"/><br />
+                <h2> <?php echo $r->nom; ?> </h2>
+                <h4> <?php echo $r->description; ?> </h4>
+                <h5> <?php echo $r->prix; ?>€</h5>
             <?php
             } ?>
         </div>
@@ -166,7 +110,6 @@ class produits extends bdd
             $req = $con->prepare("INSERT INTO commande(id_article, date, n_commande, id_client2) 
             VALUES ('$valIdProduit','$date','$rand','$id_client')");
             $req->execute();
-
         }
         // Dans celui-ci on va envoyer la quantité, l'id de quantité s'incrémente en  même temps que celui de id_article
         // On va pouvoir utiliser l'id pour récupérer la quantité et savoir quel quantité == quel article
@@ -182,14 +125,12 @@ class produits extends bdd
     
     // Fonction pour envoyer le total de la commande en Bdd
     public function envoyerTotal($total,$rand){
-
         $id_client = $_SESSION['user']['id'];
         $date = date('Y-m-d H:i:s'); 
         $con = $this->connectDb();
         $req = $con->prepare("INSERT INTO total(id_client, total, date, n_commande) VALUES 
         ('$id_client','$total','$date','$rand')");
         $req->execute();
-
     }
 
     public function afficherCommande()
@@ -206,30 +147,34 @@ class produits extends bdd
 
         $x = $req0->fetchAll();
         $r = $req->fetchAll();
-        foreach($x as $resultat0){
-            echo'<div class="container">';
-            echo'<div class="tableCommande">';
-            echo'<div class="row">';
-            echo'<div class="col s12">';
-            echo '<table class="striped"> <th> Commandé le ' . ' '  . $resultat0['date'] . ' | </th> 
-            <th> Réf n º: ' . $resultat0['n_commande'] . ' |</th>';
-            echo '<th>Total : ' . $resultat0['total'] . '€ </th> ';
-            echo '<tr>';
-
-            foreach($r as $resultat){
-                if($resultat['n_commande'] == $resultat0['n_commande']){
-                    echo '<td>' . $resultat['nom'] . ' x ' . $resultat['quantité'] .  '</td>  <br />';
-                    echo ' <td><br />' . $resultat['prix'] .  '  € <br /> <br /> </td> ' ;
-                ?>
-                <td><img src="../Images/<?php echo $resultat['nom'] ;?>.jpg"/><br /><br /></td></tr>
-                    <?php
+        if($x){
+            foreach($x as $resultat0){
+                echo'<div class="container">';
+                echo'<div class="tableCommande">';
+                echo'<div class="row">';
+                echo'<div class="col s12">';
+                echo '<table class="striped"> <th> Commandé le ' . ' '  . $resultat0['date'] . ' | </th> 
+                <th> Réf n º: ' . $resultat0['n_commande'] . ' |</th>';
+                echo '<th>Total : ' . $resultat0['total'] . '€ </th> ';
+                echo '<tr>';
+    
+                foreach($r as $resultat){
+                    if($resultat['n_commande'] == $resultat0['n_commande']){
+                        echo '<td>' . $resultat['nom'] . ' x ' . $resultat['quantité'] .  '</td>  <br />';
+                        echo ' <td><br />' . $resultat['prix'] .  '  € <br /> <br /> </td> ' ;
+                    ?>
+                    <td class="hide-on-small-only"><img  src="../Images/<?php echo $resultat['nom'] ;?>.jpg" width="400px" height="400px" /><br /><br /></td></tr>
+                        <?php
+                   }
                }
-           }
-           echo '</table>';
-           echo "</div>";
-           echo "</div>";
-           echo "</div>";
-           echo "</div><br />";
+               echo '</table>';
+               echo "</div>";
+               echo "</div>";
+               echo "</div>";
+               echo "</div><br />";
+            }
+        }else{
+            header('location:http://localhost/boutique/Profil/profil.php');
         }
     }
 }

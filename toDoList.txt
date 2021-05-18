@@ -6,8 +6,8 @@
 
 <---Déploiement sur PLESK--->
 
-
-CATEGORIES: !!!!!!FAIT!!!!!!!
+////////////////////////OK///////////////////////
+CATEGORIES:
 
 Tondeuse
 
@@ -16,8 +16,8 @@ Crèmes
 Barber growth roller
 
 ----
-
-SOUS-CATEGORIES: !!!!!!!!FAIT!!!!!!!
+////////////////////////OK///////////////////////
+SOUS-CATEGORIES:
 
 Tondeuse:
 Pièces détachés
@@ -36,12 +36,12 @@ Vidéo Youtube explicative sur le produit
 
 ----
 
-- Barre de recherche: 
+- Barre de recherche: OOOOOOOOOKKKKKKKKKKKK
 Trouve quelque chose selon le mot clé entrée et selon les ########
 
 ----
 
-- Contact: 
+- Contact:    /////////////////OK////////////////
 Adresse
 Mail
 Tel
@@ -49,12 +49,12 @@ MAP #Si on à le temps
 
 ----
 
-- Qui sommes nous
+- Qui sommes nous !!!!!!!!!!!!!!!RECUPERER LE TEXTE DU CMS SUR PC NUNO !!!!!!!!!!!!!!!!!!!!!!!
 TEXTE HISTOIRE DE LA PETITE BOUTIQUE
 
 ----
 
-- FAQ: !!!!!EN COURS!!!!!
+- FAQ: !!!!!!!!!!!!!OK!!!!!!!!!!!!!!!!!!
 Formulaire pour poser une question contenant aussi la réponse
 
 ----
@@ -66,7 +66,6 @@ Afficher TOUS LES PRODUITS EXISTANTS PAR ORDRE DECROISSANT
 ----
 
 - Produit:
-
 Nom
 Image (intégrer une image en Bdd selon le format jpg, png etc)
 Prix
@@ -76,8 +75,7 @@ Contient un formulaire qui permet d'ajouter un commentaire
 
 ----
 
-- Admin:  !!!!!!!!!!!!!!!!!!FAIT!!!!!!!!!!!!!!!!!!! MANQUE FACTURES ET COMMANDES PASSEES 
-
+- Admin:  ---------MANQUE FACTURES------------
 Gestion des produits avec Back Office
 Gestion des utilisateurs
 Gestion des codes promos #Optionnel
@@ -86,9 +84,8 @@ Gestion des catégories / Sous catégories
 ----
 
 Coté client:
-
-- Inscription: !!!!!OKKKK!!!!!!
-
+////////////////////////OK///////////////////////
+- Inscription:
 Nom
 Prénom
 Date de naissance
@@ -102,17 +99,16 @@ Captcha
 ====> Vous avez déjà un compte ==> Redirection Connexion
 
 ----
-
-- Connexion: !!!!!OKKK!!!!!!!
-
-Login 
+////////////////////////OK///////////////////////
+- Connexion:
+Login
 Password (Restriction MDP REGEX)
 MDP oublié -> #Si on à le temps           Envoi d'un nouveau mot de passe par Email 
 ====> Vous n'avez pas de compte ==> Redirection Inscription
 
 ----
-
-- Profil: !!!!!!A TERMINER!!!!!!
+////////////////////////OK///////////////////////
+- Profil:
 Modification des infos de l'utilisateur en Bdd
 Historique des commandes passés par l'utilisateur
 Adresse de livraison/Facturation
@@ -120,15 +116,16 @@ Consultation du panier
 
 ----
 
-- Page panier:!!!!!!!!!!!!!!!!!!!!!!!!!!A TESTER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
+- Page panier: ////////////////A TESTER///////////////////
 Permet de consulter le panier (prix,produits,quantités,total,frais d'expédition)
 Modifier/Supprimer les produits,quantités
 
 ----
 
 - Validation commande:
-Ajout de code promo #Optionnel ===> Dans ce cas recalcul du montant à payer
+
+Ajout de code promo #Optionnel ===> Dans ce cas recalcul du montant à payer ////////////////////////OK///////////////////////
+
 Résumé de la commande
 Détail de la Facturation
 Possibilité d'ajouter une autre adresse d'expédition

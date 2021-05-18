@@ -1,6 +1,6 @@
 <?php
 require_once('../Classes/bdd.class.php');
-class gestion extends bdd {
+class admin extends bdd {
         // Function pour s'inscrire
     public function pageArticles()
     {

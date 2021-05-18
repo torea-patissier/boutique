@@ -4,6 +4,20 @@ require_once('../html_partials/header.php');
 include '../autoloader.php';
 $pageProfil = new profil();
 
+if (!$_SESSION['user']) {
+    header('location:http://localhost/boutique/index.php');
+    exit();
+}
+
+if (isset($_POST['deco'])) {
+
+    $pageProfil->Deconnexion();
+}
+if (isset($_POST['modifier'])) {
+
+    $pageProfil->modifierProfil();
+}
+
 if (!isset($_SESSION['user'])) {
 
     header('location:http://localhost/boutique/index.php');
@@ -59,16 +73,6 @@ if (!isset($_SESSION['user'])) {
     <h6 class="left-align"><a class="col m6 s6"  href="http://localhost/boutique/Adresse/adresse.php"><i class="material-icons">local_shipping</i> <br /> Adresse de livraison </a></h6>
     <h6 class="right-align"><a class="col m6 s6" href="http://localhost/boutique/Historique_commande/historique_commande.php"><i class="material-icons">art_track</i> <br /> Historique des commandes</a></h6>
     </div>
-    <?php
-
-    if (isset($_POST['deco'])) {
-
-        $pageProfil->Deconnexion();
-    }
-    if (isset($_POST['modifier'])) {
-
-        $pageProfil->modifierProfil();
-    }
-    ?>
+    
 </main>
 <?php require_once('../html_partials/footer.php'); ?>

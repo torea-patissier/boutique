@@ -32,18 +32,18 @@ class inscription extends bdd {
                 if($user == $login){
 
                     // Si il existe déjà echo message d'erreur
-                    echo '<br/> <p class="erreur_inscription">Identifiant déjà existant.</p>';
+                    echo '<br/> <b><p class="container red-text">Identifiant déjà existant.</p></b>';
                     return false;
 
                     // Vérifier si les MDP sont les mêmes
                 }elseif($testpwd < 4){
 
-                    echo '<br />' . '<p class="erreur_inscription">Rappel : Votre mot de passe doit contenir au minimum 7 caractères, incluant une Majuscule, un chifre et un caractère spécial.</p>';
+                    echo '<br />' . '<b><p class="container red-text">Rappel : Votre mot de passe doit contenir au minimum 7 caractères, incluant une Majuscule, un chifre et un caractère spécial.</p></b>';
                     return false;
 
                 }elseif([$password] != [$confpassword]) {
 
-                    echo '<br />' . '<p class="erreur_inscription">Les mots de passe ne correspondent pas.</p>';
+                    echo '<br />' . '<b><p class="container red-text">Les mots de passe ne correspondent pas.</p></b>';
                     return false;
 
                 }else{ // Si oui on créer le compte en Db
@@ -60,7 +60,7 @@ class inscription extends bdd {
                     $infoUser->bindValue('droits', $chiffre, PDO::PARAM_INT);
                     $infoUser ->execute();
 
-                    header("connexion.php");
+                    header("location:http://localhost/boutique/Connexion/connexion.php");
                 }
             }
         }

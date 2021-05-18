@@ -1,7 +1,7 @@
 <?php
 require_once('../Classes/bdd.class.php');
 
-class GestionProduit extends bdd{
+class gestion_article extends bdd{
 
     function selectCategory()
     {
@@ -96,7 +96,7 @@ class GestionProduit extends bdd{
 
                     }
 
-                    imagejpeg($img_Finale, "../StockageImg/" .addslashes($nomProduit). ".jpg");
+                    imagejpeg($img_Finale, "../Images/" .addslashes($nomProduit). ".jpg");
                 }
             }
 
@@ -106,7 +106,7 @@ class GestionProduit extends bdd{
         
         //Fin du traitement de l'image
 
-        // <!-- POUR AFFICHER L'IMAGE ON A JUSTE A FAIRE DANS NOTRE BOUCLE D'AFFICHAGE <img src="../StockageImg/php echo $result->nomProduit; .jpg"/>
+        // <!-- POUR AFFICHER L'IMAGE ON A JUSTE A FAIRE DANS NOTRE BOUCLE D'AFFICHAGE <img src="../Images/php echo $result->nomProduit; .jpg"/>
 
         $con = $this->connectDb();
         $req = $con->prepare("INSERT INTO produits(nom, prix, description, id_categorie, id_sous_categorie, stock) values (:nom, :prix, :description, :id_categorie, :id_sous_categorie, :stock)");
@@ -125,15 +125,13 @@ class GestionProduit extends bdd{
         $con = $this->connectDb();
         $request = $con->prepare("SELECT * FROM produits");
         $request->execute();
-        // $result = $request -> fetchAll();
         echo "<br /><br /><br />";
-        echo "<div class='container'>";
+        echo "<div class='rox'>";
         echo "<table class='responsive-table' ><thead>";
         echo "<th>Image Produit</th>";
-        echo "<th>Id Produit</th>";
         echo "<th>Nom Produit</th>";
         echo "<th>Prix Produit</th>";
-        echo "<th>Description Produit</th>";
+        echo '<th class="hide-on-med-and-down">Description Produit</th>';
         echo "<th>Id Catégorie</th>";
         echo "<th>Id Sous Catégorie</th>";
         echo "<th>N° en Stock</th>";
@@ -142,32 +140,18 @@ class GestionProduit extends bdd{
         
         
             echo "<tr>";
-            echo "<td><img src='../StockageImg/" . addslashes($r->nom) .".jpg' width='100px' height='100px'/></td>";
-            echo "<td>" . $r->id . "</td>";
+            echo "<td><img src='../Images/" . addslashes($r->nom) .".jpg' width='100px' height='100px'/></td>";
             echo "<td>" . $r->nom . "</td>";
             echo "<td>" . $r->prix . "€</td>";
-            echo "<td>" . $r->description . "</td>";
+            echo "<td class='hide-on-med-and-down'>" . $r->description . "</td>";
             echo "<td>" . $r->id_categorie . "</td>";
             echo "<td>" . $r->id_sous_categorie . "</td>";
             echo "<td>" . $r->stock . "</td>";
-            echo "<td><a href='?show=" . $r->id . "'>Modifier Prdt.</a></td>";
-            echo "<td><a href='?action=delete&amp;id=" . $r->id . "'>Supprimer Prdt.</a></td>";
+            echo "<td><a href='?show=" . $r->id . "'>Modifier</a><br/>";
+            echo "<a href='?action=delete&amp;id=" . $r->id . "'>Supprimer</a></td>";
             echo "</tr>";
         }
         echo "</tbody></table></div>";
-        // Supprimer un article de la Bdd
-        if(isset($_GET['action'])&&($_GET['action']== 'delete')){
-            $id = htmlspecialchars($_GET['id']);
-            $req = $con->prepare("DELETE FROM produits WHERE id = :id ");
-            $req->bindValue("id", $id, PDO::PARAM_INT);
-            $req->execute();
-            // header("Location:http://localhost/boutique/Gestion_article/gestion_article.php");
-
-            //REFRESH / HEADER LOCATION AVEC JAVASCRIPT
-            echo '<script language="Javascript"> document.location.replace("gestion_article.php"); </script>';
-        }
-        
-
     }
 
     public function ModifierProduit()
@@ -183,40 +167,43 @@ class GestionProduit extends bdd{
 
             ?> 
             <br /><br /><br />
-            <img class="hide-on-small-only" src="../StockageImg/<?php echo $s->nom;?>.jpg"/>
-            <div class="container">
+                <div class="container">
+                    <div class="center-align">
+                        <img class="hide-on-small-only" src="../Images/<?php echo $s->nom;?>.jpg" width="500px" height="500px"/><br/><br/>
+                        <img class="hide-on-med-and-up" src="../Images/<?php echo $s->nom;?>.jpg" width="290px" height="290px"/><br/><br/>
+                    </div>
             <div class="row">
             <form id='modifierArticle' class="col s12" action="" method="post">
-                <div class="input-field col s4 m4 l4">
+                <div class="input-field col s12 m4 l4">
                     <label>Titre :</label><br/><br />
                     <input type="text" name="nom" value="<?php echo $s->nom;?>"><br/><br />
                 </div>
-                <div class="input-field col s4 m4 l4">
+                <div class="input-field col s12 m4 l4">
                 <label>Description :</label><br/><br />
                 <textarea name="description" rows="4" cols="50"><?php echo $s->description;?></textarea><br/><br />
                 </div>
 
-                <div class="input-field col s4 m4 l4">
+                <div class="input-field col s12 m4 l4">
                 <label>Prix :</label><br/><br />
                 <input type="text" name="prix" value="<?php echo $s->prix;?>"><br/><br />
                 </div>
 
-                <div class="input-field col s4 m4 l4">
+                <div class="input-field col s12 m4 l4">
                 <label>ID Categorie :</label><br/><br />
                 <input type="text" name="id_categorie" value="<?php echo $s->id_categorie;?>"><br/><br />
                 </div>
 
-                <div class="input-field col s4 m4 l4">
+                <div class="input-field col s12 m4 l4">
                 <label>ID Sous-catégorie :</label><br/><br />
                 <input type="text" name="id_sous_categorie" value="<?php echo $s->id_sous_categorie;?>"><br/><br />
                 </div>
 
-                <div class="input-field col s4 m4 l4">
+                <div class="input-field col s12 m4 l4">
                 <label>Stock :</label><br/><br />
                 <input type="text" name="stock" value="<?php echo $s->stock;?>"><br/><br />
-                </div>
+                </div><br/>
 
-                <input class="btn black" type="submit" name="envoyer" value="Modifier"><br/><br />
+                <input class="btn black center-align" type="submit" name="envoyer" value="Modifier"><br/><br />
             </form>
             </div>
             </div>
@@ -246,10 +233,9 @@ class GestionProduit extends bdd{
                 $update->bindValue("stock", $stock, PDO::PARAM_INT);
                 $update->bindValue("id", $id, PDO::PARAM_INT);
                 $update->execute();
-                // header("Location:http://localhost/boutique/Gestion_article/gestion_article.php");
 
                 //REFRESH / HEADER LOCATION AVEC JAVASCRIPT
-                $pageGestion = new GestionProduit;
+                $pageGestion = new gestion_article;
                 echo '<script language="Javascript"> document.location.replace("http://localhost/boutique/Gestion_article/gestion_article.php"); </script>';
                 $pageGestion -> viewAllProduits();
 
@@ -259,7 +245,19 @@ class GestionProduit extends bdd{
             }
     }
 
+    public function DeleteProduit(){
+        $con = $this->connectDb();
+
+                // Supprimer un article de la Bdd
+                if(isset($_GET['action'])&&($_GET['action']== 'delete')){
+                    $id = htmlspecialchars($_GET['id']);
+                    $req = $con->prepare("DELETE FROM produits WHERE id = :id ");
+                    $req->bindValue("id", $id, PDO::PARAM_INT);
+                    $req->execute(); 
+                    header('location:http://localhost/boutique/Gestion_article/gestion_article.php');
+                }
+    }
+
 }
 
 ?>
-

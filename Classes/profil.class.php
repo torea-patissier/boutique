@@ -1,6 +1,13 @@
 <?php 
 require_once('bdd.class.php');
 class profil extends bdd{
+
+    // Fonction déco + redirection 
+    public function Deconnexion()
+    {
+        header("location:http://localhost/boutique/index.php");
+        session_destroy();
+    }
     
     public function modifierProfil()
     {
@@ -23,9 +30,8 @@ class profil extends bdd{
             $options = ['cost' => 12,];
             $hash = password_hash($mdp, PASSWORD_BCRYPT, $options);
             $testpwd = preg_match("#[A-Z]#", $mdp) + preg_match("#[a-z]#", $mdp) + preg_match("#[0-9]#", $mdp) + preg_match("#[^a-zA-Z0-9]#", $mdp);
-            header("location:http://localhost/boutique/profil/profil.php");
-
-
+            // header("location:http://localhost/boutique/profil/profil.php");
+            header("Refresh: 0");
 
 //Modification du Nom en Bdd
 
@@ -127,12 +133,7 @@ class profil extends bdd{
         }
     }
 
-    // Fonction déco + redirection 
-    public function Deconnexion()
-    {
-        session_destroy();
-        header("location:http://localhost/boutique/index.php");
-    }
+
 
     public function voirInfosProfil()
     {
@@ -145,9 +146,10 @@ class profil extends bdd{
             $nom = $resultat['nom'];
             $prenom = $resultat['prenom'];
             $tel = $resultat['tel'];
-            echo 'Mr,Mme : ' . $nom . ' ' . $prenom . '<br />' . '<br />';
-            echo 'Tel : ' . $tel . '<br />' . '<br />';
-            echo 'Email : ' . $tel . '<br />' . '<br />';
+            $mail = $resultat['email'];
+            echo '<i class="material-icons">person</i> <br />' . 'Mr,Mme : ' . $nom . ' ' . $prenom . '<br />';
+            echo '<i class="material-icons">phone</i> <br />' . 'Tel : ' . $tel . '<br />';
+            echo '<i class="material-icons">email</i> <br />' . 'Email : ' . $mail . '<br />';
         } 
     }
     // LES CLASSES CI DESSOUS POUR LES PLACEHOLDER DE PROFIL
