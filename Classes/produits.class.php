@@ -36,7 +36,6 @@ class produits extends bdd
                     <!-- Dans ce href TOUT doit être collé -->
                     <?php
                     }else{
-                        
                         echo ' <h6 class="red-text"> Produit en rupture de stock </h6>';
                     }
                     echo'</div></div>';
