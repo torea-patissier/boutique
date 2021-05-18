@@ -1,0 +1,96 @@
+main{
+    min-height: 400px;
+}
+
+/* Produits */
+.divProduits{
+    display:flex;
+    flex-direction:row;  
+    flex-wrap: wrap;
+
+}
+.coco{
+    padding: 30px;
+}
+
+/* Historique_commande */
+.tableCommande{
+    
+    border-style: solid;
+    border-color:black;
+    border-width:0.5px; 
+
+}
+
+/* Profil */
+    
+a, .zonetxt_inscription::placeholder{
+    
+    color: black;
+}
+
+.labelProfil, .labelAdress{
+
+    color: black;
+    font-size:17px;
+    align-items:center;
+    text-align: center;
+}
+
+.zonetxt_profil::placeholder{
+
+    color: grey;
+}
+
+.material-icons{
+
+    font-size:2.2rem;
+}
+
+input{
+    color: black;
+}
+
+
+/* FAQ */
+textarea.txtareaFaq{
+    height: 10%;
+    resize: none;
+}
+
+/* Index */
+#ProduitsIndex{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    padding: 10px;
+}
+
+/* 404 */
+.body404{
+
+    background-image: url(../Images/barbu-triste.jpg);
+    background-position:0% 40%;
+   
+}
+
+/* Contact */
+#contactMain{
+
+    background-image: url(../images/barbecontact.jpg);
+    background-position:55% 0%;
+}
+
+/* Panier */
+ #faq02img{
+
+    background-image: url(../Images/barbedouche.jpg);
+
+} 
+
+/* Footer */
+.page-footer{
+
+    transform: translate(0%, 40%);
+
+}
