@@ -1,6 +1,8 @@
 <?php
 session_start();
+
 require_once('../html_partials/header.php');
+require_once('../Classes/panier.class.php');
 include '../autoloader.php';
 $pageProfil = new profil();
 
@@ -11,7 +13,9 @@ if (!$_SESSION['user']) {
 
 if (isset($_POST['deco'])) {
 
+    supprimePanier();
     $pageProfil->Deconnexion();
+
 }
 if (isset($_POST['modifier'])) {
 
