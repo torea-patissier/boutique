@@ -99,7 +99,7 @@ class faq extends bdd
 
                     }else{
 
-                        echo '<div class="container"> Question de : ' . ' ' . $question . '</div><br />';
+                        echo '<div class="container"> Question :  <b>' . ' ' . $question . '</b></div><br />';
 
                     }
                         foreach($result1 as $resultat){
@@ -110,7 +110,7 @@ class faq extends bdd
                                 if($id_question == $id_reponse){
                                     
                                     // echo $id_question;
-                                    echo  "<div class='container'> Réponse : <b>" . $reponse . '</b></div><br/>' . '<br/>';
+                                    echo  "<div class='container'> Réponse : <b><i>" . $reponse . '</i></b></div><br/>' . '<br/>';
                                 }
                         }
             }
