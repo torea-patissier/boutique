@@ -174,7 +174,7 @@ class produits extends bdd
                echo "</div><br />";
             }
         }else{
-            header('location:http://localhost:8888/boutique/Profil/profil.php');
+            header('location:http://localhost/boutique/Profil/profil.php');
         }
     }
 }

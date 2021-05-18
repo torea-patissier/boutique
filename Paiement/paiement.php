@@ -10,7 +10,7 @@ $voirProfil = new profil;
 if (!isset($_SESSION['user'])) {
 
 
-    header('location:http://localhost:8888/boutique/Connexion/connexion.php');
+    header('location:http://localhost/boutique/Connexion/connexion.php');
 
     exit();
 } else {

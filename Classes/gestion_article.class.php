@@ -236,7 +236,7 @@ class gestion_article extends bdd{
 
                 //REFRESH / HEADER LOCATION AVEC JAVASCRIPT
                 $pageGestion = new gestion_article;
-                echo '<script language="Javascript"> document.location.replace("http://localhost:8888/boutique/Gestion_article/gestion_article.php"); </script>';
+                echo '<script language="Javascript"> document.location.replace("http://localhost/boutique/Gestion_article/gestion_article.php"); </script>';
                 $pageGestion -> viewAllProduits();
 
 
@@ -254,7 +254,7 @@ class gestion_article extends bdd{
                     $req = $con->prepare("DELETE FROM produits WHERE id = :id ");
                     $req->bindValue("id", $id, PDO::PARAM_INT);
                     $req->execute(); 
-                    header('location:http://localhost:8888/boutique/Gestion_article/gestion_article.php');
+                    header('location:http://localhost/boutique/Gestion_article/gestion_article.php');
                 }
     }
 

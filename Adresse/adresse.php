@@ -6,13 +6,13 @@ echo '<main class="container">';
 $pageAdresse = new adresses();
 
 if (!$_SESSION['user']) {
-    header('location:http://localhost:8888/boutique/index.php');
+    header('location:http://localhost/boutique/index.php');
     exit();
 }
 
 ?>
 <br />
-    <a class="btn black" href="http://localhost:8888/boutique/profil/profil.php">Retour au profil</a><br /><br />
+    <a class="btn black" href="http://localhost/boutique/profil/profil.php">Retour au profil</a><br /><br />
     <h1>Adresse actuelle :</h1>
     <i class="material-icons">home</i> <br />
     <?= $pageAdresse->ShowAndDeleteAdress(); ?>

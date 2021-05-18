@@ -23,7 +23,7 @@ class gestion_categorie extends bdd
             $supp = $con->prepare("DELETE FROM categories WHERE id = :id ");
             $supp->bindValue('id', $id, PDO::PARAM_INT);
             $supp->execute();
-            header('location:http://localhost:8888/boutique/Gestion_categorie/gestion_categorie.php');
+            header('location:http://localhost/boutique/Gestion_categorie/gestion_categorie.php');
         }
     }
 
@@ -45,7 +45,7 @@ class gestion_categorie extends bdd
             $supp = $con->prepare("DELETE FROM sous_categories WHERE id = :id ");
             $supp->bindValue('id', $id, PDO::PARAM_INT);
             $supp->execute();
-            header('location:http://localhost:8888/boutique/Gestion_categorie/gestion_categorie.php');
+            header('location:http://localhost/boutique/Gestion_categorie/gestion_categorie.php');
         }
     }
 

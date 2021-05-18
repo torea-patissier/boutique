@@ -20,7 +20,7 @@ class faq extends bdd
         $stmt->bindValue('date', $date, PDO::PARAM_STR);
         $stmt->bindValue('id_sous_categorie', $idCategorie, PDO::PARAM_INT);
         $stmt->execute();
-        header("Refresh: 0;url=http://localhost:8888/boutique/faq/faq.php");
+        header("Refresh: 0;url=http://localhost/boutique/faq/faq.php");
     }
 
     // Sélectionner la sous catégorie pour la question posés
@@ -116,7 +116,7 @@ class faq extends bdd
             }
         }else{
 
-            header('location:http://localhost:8888/boutique/FAQ/faq.php');
+            header('location:http://localhost/boutique/FAQ/faq.php');
             
         }
     }
@@ -148,7 +148,7 @@ class faq extends bdd
         $stmt->bindValue('dateR', $date, PDO::PARAM_STR);
         $stmt->bindValue('id_question', $id_question, PDO::PARAM_INT);
         $stmt->execute();
-        header("Refresh: 0;url=http://localhost:8888/boutique/faq/faq.php");
+        header("Refresh: 0;url=http://localhost/boutique/faq/faq.php");
     }
 }
 

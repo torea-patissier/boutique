@@ -6,7 +6,7 @@ echo'<main>';
 $commande = new produits;
 
 if (!$_SESSION['user']) {
-    header('location:http://localhost:8888/boutique/index.php');
+    header('location:http://localhost/boutique/index.php');
     exit();
 }
 

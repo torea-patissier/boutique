@@ -4,7 +4,7 @@ require_once('../html_partials/header.php');
 include '../autoloader.php';
 
 if ($id_droits != 2) {
-    header('location:http://localhost:8888/boutique/Error/404.php');
+    header('location:http://localhost/boutique/Error/404.php');
     exit();
 }
 $pageGestionCategorie = new gestion_categorie;
@@ -12,12 +12,12 @@ $pageGestionCategorie = new gestion_categorie;
 if (isset($_POST["valider"])) {
     if (!empty($_POST["newCategorie"])) {
         $pageGestionCategorie->AjouterCategorieBdd();
-        header('location:http://localhost:8888/boutique/Gestion_categorie/gestion_categorie.php');
+        header('location:http://localhost/boutique/Gestion_categorie/gestion_categorie.php');
 
     }
     if (!empty($_POST["newSCategorie"])) {
         $pageGestionCategorie->AjouterSCategorieBdd();
-        header('location:http://localhost:8888/boutique/Gestion_categorie/gestion_categorie.php');
+        header('location:http://localhost/boutique/Gestion_categorie/gestion_categorie.php');
 
     }
 }

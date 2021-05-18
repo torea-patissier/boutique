@@ -59,7 +59,7 @@ class modifier_utilisateur extends bdd
                     $reqIdDroits->bindValue('id', $id, PDO::PARAM_INT);
                     $reqIdDroits->execute();
                 }
-                header("Refresh: 0;url=http://localhost:8888/boutique/Admin/admin.php");
+                header("Refresh: 0;url=http://localhost/boutique/Admin/admin.php");
             }
         }
     }

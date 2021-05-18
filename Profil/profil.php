@@ -5,7 +5,7 @@ include '../autoloader.php';
 $pageProfil = new profil();
 
 if (!$_SESSION['user']) {
-    header('location:http://localhost:8888/boutique/index.php');
+    header('location:http://localhost/boutique/index.php');
     exit();
 }
 
@@ -20,7 +20,7 @@ if (isset($_POST['modifier'])) {
 
 if (!isset($_SESSION['user'])) {
 
-    header('location:http://localhost:8888/boutique/index.php');
+    header('location:http://localhost/boutique/index.php');
 }
 
 ?>
@@ -70,8 +70,8 @@ if (!isset($_SESSION['user'])) {
     </form>
 
     <div class="row">
-    <h6 class="left-align"><a class="col m6 s6"  href="http://localhost:8888/boutique/Adresse/adresse.php"><i class="material-icons">local_shipping</i> <br /> Adresse de livraison </a></h6>
-    <h6 class="right-align"><a class="col m6 s6" href="http://localhost:8888/boutique/Historique_commande/historique_commande.php"><i class="material-icons">art_track</i> <br /> Historique des commandes</a></h6>
+    <h6 class="left-align"><a class="col m6 s6"  href="http://localhost/boutique/Adresse/adresse.php"><i class="material-icons">local_shipping</i> <br /> Adresse de livraison </a></h6>
+    <h6 class="right-align"><a class="col m6 s6" href="http://localhost/boutique/Historique_commande/historique_commande.php"><i class="material-icons">art_track</i> <br /> Historique des commandes</a></h6>
     </div>
     
 </main>

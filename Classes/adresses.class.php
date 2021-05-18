@@ -86,7 +86,7 @@ class adresses extends bdd
             $supp00 = $con->prepare("DELETE FROM adresse WHERE id = :id ");
             $supp00->bindValue('id', $id, PDO::PARAM_INT);
             $supp00->execute();
-            header('location:http://localhost:8888/boutique/Adresse/adresse.php');
+            header('location:http://localhost/boutique/Adresse/adresse.php');
         }
 
     }
@@ -117,7 +117,7 @@ class adresses extends bdd
         $resultat = $req->fetchAll();
         if($resultat == false){
             
-            header('location:http://localhost:8888/boutique/Adresse/adresse.php');
+            header('location:http://localhost/boutique/Adresse/adresse.php');
             exit();
         }
     }

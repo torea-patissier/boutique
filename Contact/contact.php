@@ -11,7 +11,7 @@ require_once('../html_partials/header.php');
                 Chez la petite boutique le client est roi et votre satisfaction est cruciale.<br />
                 Nous restons donc à votre disposition pour toutes questions concernant nos produits.<br /><br />
 
-                Dans la rubrique <a href="http://localhost:8888/boutique/faq/faq.php">FAQ</a> , un membre de notre équipe chargé du service client <br /> vous répondra dans les meilleurs délais.<br /><br />
+                Dans la rubrique <a href="http://localhost/boutique/faq/faq.php">FAQ</a> , un membre de notre équipe chargé du service client <br /> vous répondra dans les meilleurs délais.<br /><br />
 
                 Nous restons joignables :<br /><br />
 

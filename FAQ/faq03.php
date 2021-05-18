@@ -5,7 +5,7 @@ include '../autoloader.php';
 $pageFaq3 = new faq;
 
 if ($id_droits != 2) {
-    header('location:http://localhost:8888/boutique/faq/faq02.php');
+    header('location:http://localhost/boutique/faq/faq02.php');
     exit();
 }
 

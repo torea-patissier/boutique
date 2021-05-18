@@ -5,7 +5,7 @@ require_once('../html_partials/header.php');
 $pageCPromo = new codes_promo;
 
 if ($id_droits != 2) {
-    header('location:http://localhost:8888/boutique/Error/404.php');
+    header('location:http://localhost/boutique/Error/404.php');
     exit();
 }
 

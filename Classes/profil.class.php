@@ -5,7 +5,7 @@ class profil extends bdd{
     // Fonction déco + redirection 
     public function Deconnexion()
     {
-        header("location:http://localhost:8888/boutique/index.php");
+        header("location:http://localhost/boutique/index.php");
         session_destroy();
     }
     
@@ -30,7 +30,6 @@ class profil extends bdd{
             $options = ['cost' => 12,];
             $hash = password_hash($mdp, PASSWORD_BCRYPT, $options);
             $testpwd = preg_match("#[A-Z]#", $mdp) + preg_match("#[a-z]#", $mdp) + preg_match("#[0-9]#", $mdp) + preg_match("#[^a-zA-Z0-9]#", $mdp);
-            // header("location:http://localhost:8888/boutique/profil/profil.php");
             header("Refresh: 0");
 
 //Modification du Nom en Bdd
@@ -41,8 +40,6 @@ class profil extends bdd{
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
                 $_SESSION['nom'] = $nom;
-                echo '<br/><p class="modif_profil"> Nom modifié </p>';
-                var_dump($nom);
             }
 
 //Modification du Prénom en Bdd
@@ -53,8 +50,6 @@ class profil extends bdd{
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
                 $_SESSION['prenom'] = $prenom;
-                echo '<br/><p class="modif_profil"> Prénom modifié </p>';
-                var_dump($prenom);
             }
 
 //Modification de la date de naissance en Bdd
@@ -65,8 +60,6 @@ class profil extends bdd{
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
                 $_SESSION['date_de_naissance'] = $date_de_naissance;
-                echo '<br/><p class="modif_profil"> Date de naissance modifié </p>';
-                var_dump($date_de_naissance);
             }
  
 //Modifiation du n de Tel en Bdd           
@@ -77,8 +70,6 @@ class profil extends bdd{
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
                 $_SESSION['tel'] = $tel;
-                echo '<br/><p class="modif_profil"> Téléphone modifié </p>';
-                var_dump($tel);
             }
 
 //Modification du Login en Bdd
@@ -89,8 +80,6 @@ class profil extends bdd{
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
                 $_SESSION['login'] = $login;
-                echo '<br/><p class="modif_profil"> Login modifié </p>';
-                var_dump($login);
             }
 
 //Modification du Mot de passe en Bdd
@@ -112,8 +101,6 @@ class profil extends bdd{
                             $sql->bindValue('id', $id, PDO::PARAM_INT);
                             $sql->execute();
                             $_SESSION['password'] = $hash;
-                            echo '<br/><p class="modif_profil"> Mot de passe modifié </p>';
-                            var_dump($hash);
                         }
             }
         }
@@ -127,12 +114,10 @@ class profil extends bdd{
                 $sql->bindValue('id', $id, PDO::PARAM_INT);
                 $sql->execute();
                 $_SESSION['email'] = $email;
-                echo '<br/><p class="modif_profil"> E-mail modifié </p>';
 
             }
         }
     }
-
 
 
     public function voirInfosProfil()

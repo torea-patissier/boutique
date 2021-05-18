@@ -21,7 +21,7 @@ class connexion extends bdd {
                 $_SESSION['user'] = $result[$i];
                 var_dump($_SESSION['user']);
                 
-                header('location:http://localhost:8888/boutique/profil/profil.php');
+                header('location:http://localhost/boutique/profil/profil.php');
 
             }
         }

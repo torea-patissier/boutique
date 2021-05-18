@@ -15,11 +15,11 @@ if (isset($_POST['envoyerCommande']) && $_SESSION['user']['id']) {
    $product->envoyerCommande($rand);
    $product->envoyerTotal($total, $rand);
 
-   header("location:http://localhost:8888/boutique/Paiement/paiement.php");
+   header("location:http://localhost/boutique/Paiement/paiement.php");
    
 }else{
    if (isset($_POST['envoyerCommande']) && !$_SESSION['user']['id']) {
-   header("location:http://localhost:8888/boutique/Connexion/connexion.php");
+   header("location:http://localhost/boutique/Connexion/connexion.php");
    }
 }
 
@@ -180,7 +180,7 @@ if (!$erreur) {
 </main>
 <?php
 if(!$_SESSION['panier']['libelleProduit']){
-   header('location:http://localhost:8888/boutique/index.php');
+   header('location:http://localhost/boutique/index.php');
 }
 
 require_once('../html_partials/footer.php');

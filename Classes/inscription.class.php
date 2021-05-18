@@ -60,7 +60,7 @@ class inscription extends bdd {
                     $infoUser->bindValue('droits', $chiffre, PDO::PARAM_INT);
                     $infoUser ->execute();
 
-                    header("location:http://localhost:8888/boutique/Connexion/connexion.php");
+                    header("location:http://localhost/boutique/Connexion/connexion.php");
                 }
             }
         }
