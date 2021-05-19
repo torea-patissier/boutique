@@ -10,6 +10,12 @@ if ($id_droits != 2) {
 $pageGestion = new gestion_article;
 $pageGestion->DeleteProduit();
 
+if(isset($_POST['retourAdmin'])){
+
+header('location:http://localhost/boutique/Admin/admin.php');
+
+}
+
 ?>
 <main>
     <div class="container">
@@ -17,31 +23,41 @@ $pageGestion->DeleteProduit();
         <br />
         <form action="" method="POST">
             <div class="row">
-                <div class="col s12">
-                    <input class="btn black" type="submit" name="AjouterProduit" value="Ajouter Produit">
-                </div><br />
+
+                <div class="col s12 center-align">
+                <input class="btn black" type="submit" name="retourAdmin" value="Retour Admin">
+                </div>
+
                 <br /><br /><br />
 
-                <div class="col s12">
+                <div class="col s12 center-align">
+                    <input class="btn black" type="submit" name="AjouterProduit" value="Ajouter Produit">
+
+                </div><br />
+                <br /><br /><br />
+                <div class="col s12 center-align">
                     <input class="btn black" type="submit" name="tousProduits" value="Consulter Produits">
                 </div>
+
+                <br /><br /><br />
+
             </div>
         </form>
-    </div><br/><br/>
+    </div><br /><br />
     <?php
 
-if (isset($_GET['show'])) {
+    if (isset($_GET['show'])) {
 
-    $pageGestion->ModifierProduit();
-}
+        $pageGestion->ModifierProduit();
+    }
 
-if (isset($_POST["tousProduits"])) {
-    $pageGestion->viewAllProduits();
-}
+    if (isset($_POST["tousProduits"])) {
+        $pageGestion->viewAllProduits();
+    }
 
-if (isset($_POST["upload"])) {
-    $pageGestion->ajoutProduitBdd();
-}
+    if (isset($_POST["upload"])) {
+        $pageGestion->ajoutProduitBdd();
+    }
 
 
     if (isset($_POST["AjouterProduit"])) {

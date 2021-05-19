@@ -22,6 +22,11 @@ if (isset($_POST["valider"])) {
     }
 }
 
+if (isset($_POST['retourAdmin'])) {
+    header('location:http://localhost/boutique/Admin/admin.php');
+}
+
+
 ?>
 <main>
     <?php
@@ -54,7 +59,11 @@ if (isset($_POST["valider"])) {
                 </div>
             </div>
             <input class="btn black" type="submit" name="valider" value="Ajouter">
+            <input class="btn black" type="submit" name="retourAdmin" value="Retour Admin">
         </div><br/>
+
+
+
 
     </form>
 </main>
