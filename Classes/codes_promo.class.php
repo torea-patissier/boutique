@@ -45,7 +45,7 @@ class codes_promo extends bdd {
 
     public function supprimerCodePromo()
     {
-        $codePromo = $_POST["code_supp"];
+        $codePromo = htmlspecialchars($_POST["code_supp"]);
 
         $con = $this->connectDb();
         $req = $con->prepare("DELETE FROM `code_promo` WHERE `code` = :code");
@@ -58,8 +58,8 @@ class codes_promo extends bdd {
 
     public function testCode(){
 
-        $prix = $_POST["prix"];
-        $code = $_POST["code_test"];
+        $prix = htmlspecialchars($_POST["prix"]);
+        $code = htmlspecialchars($_POST["code_test"]);
 
         $con = $this->connectDb();
         $req = $con->prepare("SELECT valeur_code FROM code_promo where code = :code");
